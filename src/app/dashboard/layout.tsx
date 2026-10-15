@@ -4,12 +4,13 @@
 import Link from "next/link";
 
 const links = [
-  { name: "accordion", href: "accordion" },
-  { name: "alert", href: "alert" },
-  { name: "button", href: "button" },
+  { name: "Accordion", href: "accordion" },
+  { name: "Alert", href: "alert" },
+  { name: "Button", href: "button" },
   { name: "Alert dialog", href: "alert-dialog" },
   { name: "Dialog", href: "dialog" },
-];
+  { name: "Badge", href: "badge" },
+].sort((a,b) => a.name.localeCompare(b.name));
 
 export default function DashboardLayout({
   children,
