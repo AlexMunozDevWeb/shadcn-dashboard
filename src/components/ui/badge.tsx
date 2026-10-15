@@ -21,8 +21,13 @@ const badgeVariants = cva(
         info: "border-transparent bg-blue-500 text-white shadow hover:bg-blue-500/80",
         success: "border-transparent bg-emerald-500 text-white shadow hover:bg-emerald-500/80"
       },
+      capitalize: {
+        true: "capitalize",
+        false: "normal-case",
+      },
     },
     defaultVariants: {
+      capitalize: true,
       variant: "default",
     },
   }
@@ -31,6 +36,7 @@ const badgeVariants = cva(
 function Badge({
   className,
   variant = "default",
+  capitalize = true,
   render,
   ...props
 }: useRender.ComponentProps<"span"> & VariantProps<typeof badgeVariants>) {
@@ -38,7 +44,7 @@ function Badge({
     defaultTagName: "span",
     props: mergeProps<"span">(
       {
-        className: cn(badgeVariants({ variant }), className),
+        className: cn(badgeVariants({ capitalize, variant }), className),
       },
       props
     ),

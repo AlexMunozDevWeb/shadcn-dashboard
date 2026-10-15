@@ -8,7 +8,7 @@ export default function Page() {
       <Badge variant="secondary">Badge</Badge>
       <Badge variant="outline">Badge</Badge>
       <Badge variant="info">Badge</Badge>
-      <Badge variant="success">Badge</Badge>
+      <Badge capitalize={true} variant="success">badge</Badge>
     </div>
   );
 }
