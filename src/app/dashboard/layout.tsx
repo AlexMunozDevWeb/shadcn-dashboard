@@ -5,17 +5,18 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
 
 const links = [
-  { name: "Accordion", href: "accordion" },
-  { name: "Alert", href: "alert" },
-  { name: "Alert dialog", href: "alert-dialog" },
-  { name: "Button", href: "button" },
-  { name: "Dialog", href: "dialog" },
-  { name: "Badge", href: "badge" },
-  { name: "Calendar", href: "calendar" },
-  { name: "Avatar", href: "avatar" },
-  { name: "Card", href: "card" },
-  { name: "Carousel", href: "carousel" },
-  { name: "Checkbox", href: "checkbox" },
+  { name: "accordion", href: "accordion" },
+  { name: "alert", href: "alert" },
+  { name: "alert dialog", href: "alert-dialog" },
+  { name: "button", href: "button" },
+  { name: "dialog", href: "dialog" },
+  { name: "badge", href: "badge" },
+  { name: "calendar", href: "calendar" },
+  { name: "avatar", href: "avatar" },
+  { name: "card", href: "card" },
+  { name: "carousel", href: "carousel" },
+  { name: "checkbox", href: "checkbox" },
+  { name: "command", href: "command" },
 ].sort((a, b) => a.name.localeCompare(b.name));
 
 export default function DashboardLayout({
