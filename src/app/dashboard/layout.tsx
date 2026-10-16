@@ -13,6 +13,7 @@ const links = [
   { name: "Badge", href: "badge" },
   { name: "Calendar", href: "calendar" },
   { name: "Avatar", href: "avatar" },
+  { name: "Card", href: "card" },
 ].sort((a, b) => a.name.localeCompare(b.name));
 
 export default function DashboardLayout({
