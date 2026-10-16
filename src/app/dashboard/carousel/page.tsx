@@ -8,7 +8,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
-import Autoplay from "embla-carousel-autoplay";
+// import Autoplay from "embla-carousel-autoplay";
 
 export default function CarouselDemo() {
   return (
@@ -37,7 +37,8 @@ export default function CarouselDemo() {
       </Carousel>
       <Carousel
         className="w-full max-w-[12rem] sm:max-w-xs"
-        plugins={[Autoplay({ delay: 1000 })]}
+        // plugins={[Autoplay({ delay: 1000 })]}
+        autoplay={1000}
         opts={{
           loop: true,
         }}
