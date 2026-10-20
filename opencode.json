@@ -1,0 +1,19 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "stitch": {
+      "type": "local",
+      "command": ["npx", "@_davideast/stitch-mcp", "proxy"],
+      "enabled": true,
+      "environment": {
+        "STITCH_API_KEY": "{env:STITCH_API_KEY}",
+        "STITCH_DEFAULT_PROJECT": "17751846024577192128"
+      }
+    },
+    "context7": {
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp",
+      "enabled": true
+    }
+  }
+}
