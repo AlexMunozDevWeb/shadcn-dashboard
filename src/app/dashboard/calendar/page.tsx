@@ -1,58 +1,23 @@
-"use client";
+import { Suspense } from "react";
 
-import { useState } from "react";
-import { es } from "date-fns/locale";
-import { Calendar } from "@/components/ui/calendar";
+import { Skeleton } from "@/components/ui/skeleton";
 
-export default function CalendarDemo() {
-  const [date, setDate] = useState<Date | undefined>(new Date());
-  const [multipleDates, setMultipleDates] = useState<Date[] | undefined>([
-    new Date(),
-  ]);
+import CalendarDemo from "./calendar-demo";
 
-  const smallDate = date?.toLocaleString("es-ES", {
-    weekday: "long",
-    day: "numeric",
-    month: "long",
-  });
-
+function CalendarFallback() {
   return (
-    <div className="flex-co sm:flex sm:flex-wrap gap-4">
-      <Calendar
-        mode="single"
-        selected={date}
-        onSelect={setDate}
-        className="rounded-lg border"
-        captionLayout="dropdown"
-        locale={es}
-        disabled={(date) => date.getDay() === 0 || date.getDay() === 6}
-      />
-      <Calendar
-        mode="single"
-        selected={date}
-        onSelect={setDate}
-        className="rounded-lg border"
-        captionLayout="dropdown"
-        locale={es}
-        disabled={(date) => date > new Date()}
-      />
-      <Calendar
-        mode="multiple"
-        selected={multipleDates}
-        onSelect={setMultipleDates}
-        className="rounded-lg border"
-        captionLayout="dropdown"
-        locale={es}
-      />
-
-      <div>
-        <h1 className="text-3xl">Information</h1>
-        <div className="border-b"></div>
-        <p>{smallDate}</p>
-        <p>
-          {multipleDates?.map((date) => date.toLocaleDateString()).join(", ")}
-        </p>
-      </div>
+    <div className="flex flex-wrap gap-4">
+      {Array.from({ length: 3 }).map((_, index) => (
+        <Skeleton key={index} className="h-64 w-72 rounded-lg border" />
+      ))}
     </div>
+  );
+}
+
+export default function CalendarPage() {
+  return (
+    <Suspense fallback={<CalendarFallback />}>
+      <CalendarDemo />
+    </Suspense>
   );
 }
