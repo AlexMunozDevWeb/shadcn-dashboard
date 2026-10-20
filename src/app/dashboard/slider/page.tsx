@@ -22,7 +22,11 @@ export default function SliderDemo() {
       <span>Range value: {rangeValue.join(",")}</span>
       <Slider
         value={rangeValue}
-        onValueChange={setRangeValue}
+        onValueChange={(value) =>
+          setRangeValue(
+            Array.isArray(value) ? [...value] : [value] as number[]
+          )
+        }
         max={100}
         step={1}
         className="w-full max-w-xs"
