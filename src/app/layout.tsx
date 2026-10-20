@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 
 import { Toaster as SonnerToaster } from "@/components/ui/sonner";
+import { Toaster } from "@/components/ui/toast";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -21,6 +22,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className={cn(fontSans.variable)}>
         {children}
         <SonnerToaster richColors />
+        <Toaster />
       </body>
     </html>
   );
