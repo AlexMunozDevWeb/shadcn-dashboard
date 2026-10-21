@@ -80,6 +80,7 @@ export const navItems: NavItem[] = [
       { name: "Command Palette", href: "/dashboard/command" },
       { name: "Menubar", href: "/dashboard/menubar" },
       { name: "Context Menu", href: "/dashboard/context-menu" },
+      { name: "Data Table", href: "/dashboard/data-table" },
     ],
   },
   {
@@ -107,7 +108,8 @@ export default function SidebarLinks() {
         const active = item.href !== "#" && pathname === item.href;
         const hasChildren = Boolean(item.children && item.children.length > 0);
         const childIsActive =
-          hasChildren && item.children?.some((child) => child.href === pathname);
+          hasChildren &&
+          item.children?.some((child) => child.href === pathname);
 
         const inner = (
           <div className="flex w-full items-center justify-between">
@@ -133,12 +135,12 @@ export default function SidebarLinks() {
               <summary
                 className={cn(
                   "relative flex cursor-pointer list-none items-center gap-3.5 rounded-lg px-4 py-2.5 text-xs md:text-sm font-semibold tracking-wider uppercase transition-all duration-200 select-none [&::-webkit-details-marker]:hidden",
-                  childIsActive
-                    ? "font-semibold"
-                    : "hover:bg-white/5",
+                  childIsActive ? "font-semibold" : "hover:bg-white/5",
                 )}
                 style={{
-                  color: childIsActive ? activeAccentHex : sidebarConfig.textMuted,
+                  color: childIsActive
+                    ? activeAccentHex
+                    : sidebarConfig.textMuted,
                 }}
               >
                 {inner}
@@ -157,7 +159,9 @@ export default function SidebarLinks() {
                             : "opacity-75 hover:opacity-100",
                         )}
                         style={{
-                          color: isCurrentChild ? activeAccentHex : sidebarConfig.textMuted,
+                          color: isCurrentChild
+                            ? activeAccentHex
+                            : sidebarConfig.textMuted,
                           backgroundColor: isCurrentChild
                             ? "rgba(255, 255, 255, 0.06)"
                             : "transparent",
@@ -180,9 +184,7 @@ export default function SidebarLinks() {
             aria-current={active ? "page" : undefined}
             className={cn(
               "relative flex items-center gap-3.5 rounded-lg px-4 py-2.5 text-xs md:text-sm font-semibold tracking-wider uppercase transition-all duration-200",
-              active
-                ? "nav-item-active py-3"
-                : "hover:bg-white/5",
+              active ? "nav-item-active py-3" : "hover:bg-white/5",
             )}
             style={{
               color: active ? activeAccentHex : sidebarConfig.textMuted,
