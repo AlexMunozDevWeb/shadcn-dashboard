@@ -1,10 +1,23 @@
 "use client";
 
 import { createColumnHelper } from "@tanstack/react-table";
-
 import { type DataTableFeatures } from "./data-table-features";
-import { Payment } from "@/data/payment";
+
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { MoreHorizontal } from "lucide-react";
+import { toast } from "sonner";
+
+import { Payment } from "@/data/payment";
 import { type BadgeVariant, type PaymentStatus, statusVariants } from "@/types";
 
 // Use `accessor` for data columns and `display` for columns without one.
@@ -40,5 +53,40 @@ export const columns = columnHelper.columns([
   }),
   columnHelper.accessor("email", {
     header: "Email",
+  }),
+  columnHelper.display({
+    id: "actions",
+    cell: ({ row }) => {
+      const payment = row.original;
+
+      return (
+        <DropdownMenu>
+          <DropdownMenuTrigger
+            render={<Button variant="ghost" className="h-8 w-8 p-0" />}
+          >
+            <span className="sr-only">Open menu</span>
+            <MoreHorizontal className="h-4 w-4" />
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuGroup>
+              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+              <DropdownMenuItem
+                onClick={() => {
+                  navigator.clipboard.writeText(payment.id);
+                  toast("Payment ID copied to clipboard", {
+                    position: "top-right",
+                  });
+                }}
+              >
+                Copy payment ID
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>View customer</DropdownMenuItem>
+              <DropdownMenuItem>View payment details</DropdownMenuItem>
+            </DropdownMenuGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      );
+    },
   }),
 ]);
