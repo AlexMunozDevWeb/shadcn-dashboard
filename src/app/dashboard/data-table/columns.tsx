@@ -14,8 +14,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { MoreHorizontal } from "lucide-react";
 import { toast } from "sonner";
+
+import { ArrowDown, ArrowUp, ArrowUpDown, MoreHorizontal } from "lucide-react";
 
 import { Payment } from "@/data/payment";
 import { type BadgeVariant, type PaymentStatus, statusVariants } from "@/types";
@@ -23,12 +24,45 @@ import { type BadgeVariant, type PaymentStatus, statusVariants } from "@/types";
 // Use `accessor` for data columns and `display` for columns without one.
 const columnHelper = createColumnHelper<DataTableFeatures, Payment>();
 
+const SortIcon = ({
+  column,
+}: {
+  column: { getIsSorted: () => "asc" | "desc" | false };
+}) => {
+  const sorted = column.getIsSorted();
+
+  if (sorted === "asc") return <ArrowUp className="ml-2 h-4 w-4" />;
+  if (sorted === "desc") return <ArrowDown className="ml-2 h-4 w-4" />;
+
+  return <ArrowUpDown className="ml-2 h-4 w-4" />;
+};
+
 export const columns = columnHelper.columns([
   columnHelper.accessor("clientName", {
-    header: "Client Name",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Client Name
+          <SortIcon column={column} />
+        </Button>
+      );
+    },
   }),
   columnHelper.accessor("status", {
-    header: "Status",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Status
+          <SortIcon column={column} />
+        </Button>
+      );
+    },
     cell: ({ row }) => {
       const status = row.getValue<PaymentStatus>("status");
       const variant: BadgeVariant = statusVariants[status] ?? "default";
@@ -40,7 +74,17 @@ export const columns = columnHelper.columns([
     },
   }),
   columnHelper.accessor("amount", {
-    header: () => <div className="text-right">Amount</div>,
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Amount
+          <SortIcon column={column} />
+        </Button>
+      );
+    },
     cell: ({ row }) => {
       const amount = parseFloat(row.getValue("amount"));
       const formatted = new Intl.NumberFormat("es-ES", {
@@ -52,7 +96,17 @@ export const columns = columnHelper.columns([
     },
   }),
   columnHelper.accessor("email", {
-    header: "Email",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Email
+          <SortIcon column={column} />
+        </Button>
+      );
+    },
   }),
   columnHelper.display({
     id: "actions",
