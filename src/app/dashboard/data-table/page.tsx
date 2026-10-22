@@ -11,7 +11,6 @@ export default async function Page() {
   return (
     <div>
       <DataTable columns={columns} data={data} />
-      {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
     </div>
   );
 }

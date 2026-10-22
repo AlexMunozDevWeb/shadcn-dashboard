@@ -1,8 +1,20 @@
 "use client";
 
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { CheckCircle2, AlertTriangle, Info, Sparkles, TrendingUp, TrendingDown, Clock } from "lucide-react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  AlertTriangle,
+  Sparkles,
+  TrendingUp,
+  TrendingDown,
+  Clock,
+} from "lucide-react";
 
 export default function BadgePage() {
   return (
@@ -12,7 +24,8 @@ export default function BadgePage() {
           Badges &amp; Status Indicators
         </h1>
         <p className="text-xs sm:text-sm md:text-sm text-paper-muted">
-          Tactile status pills and contextual micro-badges from the Stitch design system.
+          Tactile status pills and contextual micro-badges from the Stitch
+          design system.
         </p>
       </div>
 
@@ -22,7 +35,8 @@ export default function BadgePage() {
           <CardHeader>
             <CardTitle>Semantic Status Pills</CardTitle>
             <CardDescription>
-              Color-coded status indicators with gentle pastel tint fills and crisp borders.
+              Color-coded status indicators with gentle pastel tint fills and
+              crisp borders.
             </CardDescription>
           </CardHeader>
           <CardContent className="flex flex-wrap gap-2.5 items-center">
@@ -41,7 +55,8 @@ export default function BadgePage() {
           <CardHeader>
             <CardTitle>Analytical Delta Chips</CardTitle>
             <CardDescription>
-              Numeric badges with directional indicators for KPI trends and real-time delta tracking.
+              Numeric badges with directional indicators for KPI trends and
+              real-time delta tracking.
             </CardDescription>
           </CardHeader>
           <CardContent className="flex flex-wrap gap-2.5 items-center">
