@@ -63,7 +63,7 @@ export default function DataTable<TData extends RowData>({
   const [currentStatus, setCurrentStatus] = useState<string | null>(null);
 
   const [columnVisibility, setColumnVisibility] =
-    React.useState<ColumnVisibilityState>({});
+    useState<ColumnVisibilityState>({});
 
   const table = useTable({
     features,
@@ -71,15 +71,17 @@ export default function DataTable<TData extends RowData>({
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
+    onColumnVisibilityChange: setColumnVisibility,
     state: {
       sorting,
       columnFilters,
+      columnVisibility,
     },
   });
 
   return (
     <div className="overflow-hidden rounded-md border">
-      <div className="flex justify-between py-4 mx-4">
+      <div className="flex justify-start py-4 mx-4 gap-4">
         <Input
           placeholder="Filter emails..."
           value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
@@ -114,7 +116,34 @@ export default function DataTable<TData extends RowData>({
             </SelectGroup>
           </SelectContent>
         </Select>
+        <DropdownMenu>
+          <DropdownMenuTrigger
+            render={<Button variant="outline" className="ml-auto" />}
+          >
+            Columns
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            {table
+              .getAllColumns()
+              .filter((column) => column.getCanHide())
+              .map((column) => {
+                return (
+                  <DropdownMenuCheckboxItem
+                    key={column.id}
+                    className="capitalize"
+                    checked={column.getIsVisible()}
+                    onCheckedChange={(value) =>
+                      column.toggleVisibility(!!value)
+                    }
+                  >
+                    {column.id}
+                  </DropdownMenuCheckboxItem>
+                );
+              })}
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
+
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
