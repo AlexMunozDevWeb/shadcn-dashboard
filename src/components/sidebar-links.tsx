@@ -100,6 +100,7 @@ export const navItems: NavItem[] = [
 export default function SidebarLinks() {
   const pathname = usePathname();
   const { activeAccentHex, sidebarConfig } = usePaperTheme();
+  const isDashboardHome = pathname === "/dashboard";
 
   return (
     <nav className="custom-scroll mt-4 max-h-[calc(100vh-215px)] space-y-1.5 overflow-y-auto px-3">
@@ -109,6 +110,7 @@ export default function SidebarLinks() {
         const hasChildren = Boolean(item.children && item.children.length > 0);
         const childIsActive =
           hasChildren &&
+          !isDashboardHome &&
           item.children?.some((child) => child.href === pathname);
 
         const inner = (
@@ -147,7 +149,8 @@ export default function SidebarLinks() {
               </summary>
               <ul className="mt-1 space-y-1 pl-11">
                 {item.children?.map((child) => {
-                  const isCurrentChild = pathname === child.href;
+                  const isCurrentChild =
+                    !isDashboardHome && pathname === child.href;
                   return (
                     <li key={child.name}>
                       <Link

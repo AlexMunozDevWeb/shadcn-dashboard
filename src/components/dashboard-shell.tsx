@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { cn } from "@/lib/utils";
 import {
   BarChart3,
@@ -22,14 +22,37 @@ import SidebarLinks, { navItems } from "@/components/sidebar-links";
 import SettingsFab from "@/components/settings-fab";
 import { usePaperTheme } from "./theme-provider";
 
-function ReactMark({ className, color }: { className?: string; color?: string }) {
+function ReactMark({
+  className,
+  color,
+}: {
+  className?: string;
+  color?: string;
+}) {
   return (
-    <svg viewBox="0 0 24 24" className={className} aria-hidden style={{ fill: color || "#51cbce" }}>
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      aria-hidden
+      style={{ fill: color || "#51cbce" }}
+    >
       <circle cx="12" cy="12" r="2.05" />
       <g fill="none" stroke={color || "#51cbce"} strokeWidth="1.2">
         <ellipse cx="12" cy="12" rx="11" ry="4.2" />
-        <ellipse cx="12" cy="12" rx="11" ry="4.2" transform="rotate(60 12 12)" />
-        <ellipse cx="12" cy="12" rx="11" ry="4.2" transform="rotate(120 12 12)" />
+        <ellipse
+          cx="12"
+          cy="12"
+          rx="11"
+          ry="4.2"
+          transform="rotate(60 12 12)"
+        />
+        <ellipse
+          cx="12"
+          cy="12"
+          rx="11"
+          ry="4.2"
+          transform="rotate(120 12 12)"
+        />
       </g>
     </svg>
   );
@@ -37,7 +60,8 @@ function ReactMark({ className, color }: { className?: string; color?: string })
 
 function DrawerNav({ onClose }: { onClose: () => void }) {
   const pathname = usePathname();
-  const { activeAccentHex, sidebarConfig } = usePaperTheme();
+  const { activeAccentHex } = usePaperTheme();
+  const isDashboardHome = pathname === "/dashboard";
 
   return (
     <nav className="flex-1 space-y-1 overflow-y-auto px-3 py-4">
@@ -45,8 +69,6 @@ function DrawerNav({ onClose }: { onClose: () => void }) {
         const Icon = item.icon;
         const active = item.href !== "#" && pathname === item.href;
         const hasChildren = Boolean(item.children && item.children.length > 0);
-        const childIsActive =
-          hasChildren && item.children?.some((child) => child.href === pathname);
 
         if (hasChildren) {
           return (
@@ -59,7 +81,8 @@ function DrawerNav({ onClose }: { onClose: () => void }) {
               </span>
               <div className="space-y-1 pl-2">
                 {item.children?.map((child) => {
-                  const currentChild = pathname === child.href;
+                  const currentChild =
+                    !isDashboardHome && pathname === child.href;
                   return (
                     <Link
                       key={child.name}
@@ -73,7 +96,10 @@ function DrawerNav({ onClose }: { onClose: () => void }) {
                       )}
                       style={
                         currentChild
-                          ? { backgroundColor: activeAccentHex, color: "#ffffff" }
+                          ? {
+                              backgroundColor: activeAccentHex,
+                              color: "#ffffff",
+                            }
                           : undefined
                       }
                     >
@@ -155,13 +181,19 @@ function TabletRail() {
             return (
               <Link
                 key={item.name}
-                href={item.href === "#" && item.children?.[0]?.href ? item.children[0].href : item.href}
+                href={
+                  item.href === "#" && item.children?.[0]?.href
+                    ? item.children[0].href
+                    : item.href
+                }
                 title={item.name}
                 aria-label={item.name}
                 aria-current={active ? "page" : undefined}
                 className={cn(
                   "flex h-10 w-full items-center justify-center rounded-lg transition-all",
-                  active ? "shadow-sm" : "opacity-75 hover:opacity-100 hover:bg-white/5",
+                  active
+                    ? "shadow-sm"
+                    : "opacity-75 hover:opacity-100 hover:bg-white/5",
                 )}
                 style={
                   active
@@ -263,14 +295,13 @@ function BottomTab({
   );
 }
 
-export default function DashboardShell({ children }: { children: React.ReactNode }) {
+export default function DashboardShell({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const pathname = usePathname();
-  const { activeAccentHex, sidebarConfig, sidebarTheme } = usePaperTheme();
-
-  useEffect(() => {
-    setDrawerOpen(false);
-  }, [pathname]);
+  const { activeAccentHex, sidebarConfig } = usePaperTheme();
 
   return (
     <div className="flex min-h-screen overflow-x-hidden bg-paper">
@@ -290,7 +321,10 @@ export default function DashboardShell({ children }: { children: React.ReactNode
             style={{ borderColor: sidebarConfig.border }}
           >
             <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-md">
-              <ReactMark className="h-6 w-6 animate-spin-slow" color={activeAccentHex} />
+              <ReactMark
+                className="h-6 w-6 animate-spin-slow"
+                color={activeAccentHex}
+              />
             </div>
             <div>
               <span
@@ -353,7 +387,10 @@ export default function DashboardShell({ children }: { children: React.ReactNode
             className="flex items-center justify-center gap-2 text-[11px] font-medium"
             style={{ color: sidebarConfig.textMuted }}
           >
-            <CheckCircle2 className="h-3.5 w-3.5" style={{ color: activeAccentHex }} />
+            <CheckCircle2
+              className="h-3.5 w-3.5"
+              style={{ color: activeAccentHex }}
+            />
             <span>Paper PRO v2.1.0</span>
           </div>
         </div>
@@ -389,10 +426,11 @@ export default function DashboardShell({ children }: { children: React.ReactNode
             style={{ borderColor: sidebarConfig.border }}
           >
             <div className="flex items-center space-x-2.5">
-              <div
-                className="flex h-8 w-8 items-center justify-center rounded-full bg-white shadow-sm"
-              >
-                <ReactMark className="h-5 w-5 animate-spin-slow" color={activeAccentHex} />
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white shadow-sm">
+                <ReactMark
+                  className="h-5 w-5 animate-spin-slow"
+                  color={activeAccentHex}
+                />
               </div>
               <span
                 className="text-xs font-bold tracking-wider uppercase font-heading"
@@ -422,10 +460,16 @@ export default function DashboardShell({ children }: { children: React.ReactNode
               CF
             </div>
             <div className="min-w-0">
-              <p className="truncate text-xs font-bold font-heading" style={{ color: sidebarConfig.text }}>
+              <p
+                className="truncate text-xs font-bold font-heading"
+                style={{ color: sidebarConfig.text }}
+              >
                 Chet Faker
               </p>
-              <span className="text-[10px] font-semibold tracking-wider uppercase" style={{ color: activeAccentHex }}>
+              <span
+                className="text-[10px] font-semibold tracking-wider uppercase"
+                style={{ color: activeAccentHex }}
+              >
                 Administrator
               </span>
             </div>
@@ -494,7 +538,9 @@ export default function DashboardShell({ children }: { children: React.ReactNode
                 className="hidden h-9 w-9 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-500 shadow-paper-sm transition duration-200 hover:scale-105 sm:flex"
                 aria-label="Settings"
                 onClick={() => {
-                  const fabBtn = document.querySelector('aside button[aria-label="Configuración de diseño"]') as HTMLButtonElement;
+                  const fabBtn = document.querySelector(
+                    'aside button[aria-label="Configuración de diseño"]',
+                  ) as HTMLButtonElement;
                   if (fabBtn) fabBtn.click();
                 }}
               >
@@ -546,7 +592,11 @@ export default function DashboardShell({ children }: { children: React.ReactNode
             <span className="text-accent-coral font-bold" aria-hidden>
               ♥
             </span>{" "}
-            by <span className="font-bold text-gray-700 font-heading">Creative Tim</span> &amp; Antigravity for a better web.
+            by{" "}
+            <span className="font-bold text-gray-700 font-heading">
+              Creative Tim
+            </span>{" "}
+            &amp; Antigravity for a better web.
           </div>
         </footer>
       </div>
