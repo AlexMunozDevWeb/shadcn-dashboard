@@ -19,8 +19,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-import { features, type DataTableFeatures } from "./data-table-features";
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -40,6 +38,10 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+
+import { features, type DataTableFeatures } from "./data-table-features";
+
+import { Payment } from "@/data/payment";
 
 interface DataTableProps<TData extends RowData> {
   columns: ColumnDef<DataTableFeatures, TData>[];
@@ -61,6 +63,8 @@ export default function DataTable<TData extends RowData>({
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [currentStatus, setCurrentStatus] = useState<string | null>(null);
+  const [rowSelection, setRowSelection] = useState({});
+  const isDeleteActive = Object.keys(rowSelection).length > 0;
 
   const [columnVisibility, setColumnVisibility] =
     useState<ColumnVisibilityState>({});
@@ -72,76 +76,95 @@ export default function DataTable<TData extends RowData>({
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     onColumnVisibilityChange: setColumnVisibility,
+    onRowSelectionChange: setRowSelection,
     state: {
       sorting,
       columnFilters,
       columnVisibility,
+      rowSelection,
     },
   });
 
   return (
     <div className="overflow-hidden rounded-md border">
-      <div className="flex justify-start py-4 mx-4 gap-4">
-        <Input
-          placeholder="Filter emails..."
-          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
-          onChange={(event) => {
-            setCurrentStatus("all");
-            table.getColumn("status")?.setFilterValue(undefined);
-            table.getColumn("email")?.setFilterValue(event.target.value);
-          }}
-          className="max-w-sm"
-        />
-        <Select
-          items={items}
-          value={currentStatus}
-          onValueChange={(value) => {
-            setCurrentStatus(value);
-            table
-              .getColumn("status")
-              ?.setFilterValue(value === "all" ? undefined : value);
-          }}
-        >
-          <SelectTrigger className="w-full max-w-48">
-            <SelectValue placeholder="Status" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectLabel>Status</SelectLabel>
-              {items.map((item) => (
-                <SelectItem key={item.value} value={item.value}>
-                  {item.label}
-                </SelectItem>
-              ))}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-        <DropdownMenu>
-          <DropdownMenuTrigger
-            render={<Button variant="outline" className="ml-auto" />}
+      <div className="flex justify-between py-4 mx-4 gap-4">
+        <div className="flex gap-4 w-3xl">
+          <Input
+            placeholder="Filter emails..."
+            value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
+            onChange={(event) => {
+              setCurrentStatus("all");
+              table.getColumn("status")?.setFilterValue(undefined);
+              table.getColumn("email")?.setFilterValue(event.target.value);
+            }}
+            className="max-w-sm"
+          />
+          <Select
+            items={items}
+            value={currentStatus}
+            onValueChange={(value) => {
+              setCurrentStatus(value);
+              table
+                .getColumn("status")
+                ?.setFilterValue(value === "all" ? undefined : value);
+            }}
           >
-            Columns
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            {table
-              .getAllColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                );
-              })}
-          </DropdownMenuContent>
-        </DropdownMenu>
+            <SelectTrigger className="w-full max-w-48">
+              <SelectValue placeholder="Status" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectLabel>Status</SelectLabel>
+                {items.map((item) => (
+                  <SelectItem key={item.value} value={item.value}>
+                    {item.label}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </div>
+        <div className="flex gap-4 flex self-end">
+          {isDeleteActive && (
+            <Button
+              variant="destructive"
+              onClick={() => {
+                const ids = table.getSelectedRowModel().rows.map((row) => {
+                  return (row.original as Payment).clientName;
+                });
+                console.log(ids);
+              }}
+            >
+              Delete
+            </Button>
+          )}
+          <DropdownMenu>
+            <DropdownMenuTrigger
+              render={<Button variant="outline" className="ml-auto" />}
+            >
+              Columns
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              {table
+                .getAllColumns()
+                .filter((column) => column.getCanHide())
+                .map((column) => {
+                  return (
+                    <DropdownMenuCheckboxItem
+                      key={column.id}
+                      className="capitalize"
+                      checked={column.getIsVisible()}
+                      onCheckedChange={(value) =>
+                        column.toggleVisibility(!!value)
+                      }
+                    >
+                      {column.id}
+                    </DropdownMenuCheckboxItem>
+                  );
+                })}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </div>
 
       <Table>
@@ -183,7 +206,11 @@ export default function DataTable<TData extends RowData>({
           )}
         </TableBody>
       </Table>
-      <div className="flex items-center justify-end space-x-2 py-4 mx-4">
+      <div className="flex items-center justify-between space-x-2 py-4 mx-4">
+        <div className="flex-1 text-sm text-muted-foreground">
+          {table.getFilteredSelectedRowModel().rows.length} of{" "}
+          {table.getFilteredRowModel().rows.length} row(s) selected.
+        </div>
         <Button
           variant="outline"
           size="sm"
@@ -201,6 +228,26 @@ export default function DataTable<TData extends RowData>({
           Next
         </Button>
       </div>
+      <Select
+        onValueChange={(value) => {
+          table.setPageSize(+value);
+        }}
+      >
+        <SelectTrigger className="w-[180px] p-5 ml-2 mb-2">
+          <SelectValue placeholder="10 Rows"></SelectValue>
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            <SelectLabel>Row per page</SelectLabel>
+            <SelectItem value="10">10</SelectItem>
+            <SelectItem value="20">20</SelectItem>
+            <SelectItem value="30">30</SelectItem>
+            <SelectItem value="40">40</SelectItem>
+            <SelectItem value="50">50</SelectItem>
+            <SelectItem value="100">100</SelectItem>
+          </SelectGroup>
+        </SelectContent>
+      </Select>
     </div>
   );
 }
