@@ -90,7 +90,7 @@ export default function DataTable<TData extends RowData>({
       <div className="flex justify-between py-4 mx-4 gap-4">
         <div className="flex gap-4 w-3xl">
           <Input
-            placeholder="Filter emails..."
+            placeholder="Filter anything..."
             value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
             onChange={(event) => {
               setCurrentStatus("all");

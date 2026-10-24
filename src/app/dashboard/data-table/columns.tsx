@@ -27,6 +27,20 @@ import { type BadgeVariant, type PaymentStatus, statusVariants } from "@/types";
 // Use `accessor` for data columns and `display` for columns without one.
 const columnHelper = createColumnHelper<DataTableFeatures, Payment>();
 
+const myCustomFilterFn: FilterFn<Payment> = (
+  row: Row<Payment>,
+  columnId: string,
+  filterValue: string,
+) => {
+  filterValue = filterValue.toLowerCase();
+  const filterParts = filterValue.split(" ");
+  const rowValues =
+    `${row.original.clientName} ${row.original.clientName} ${row.original.status}`.toLowerCase();
+  console.log(rowValues);
+
+  return filterParts.every((part) => rowValues.includes(part));
+};
+
 const SortIcon = ({
   column,
 }: {
@@ -121,6 +135,7 @@ export const columns = columnHelper.columns([
     },
   }),
   columnHelper.accessor("email", {
+    filterFn: myCustomFilterFn,
     header: ({ column }) => {
       return (
         <Button
