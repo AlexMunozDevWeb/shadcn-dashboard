@@ -138,91 +138,6 @@ function DrawerNav({ onClose }: { onClose: () => void }) {
   );
 }
 
-function TabletRail() {
-  const pathname = usePathname();
-  const { activeAccentHex, sidebarConfig } = usePaperTheme();
-
-  return (
-    <aside
-      className="z-30 hidden min-h-screen w-20 flex-shrink-0 flex-col justify-between shadow-xl transition-all duration-300 md:flex lg:hidden"
-      style={{
-        backgroundColor: sidebarConfig.bg,
-        borderRight: `1px solid ${sidebarConfig.border}`,
-        color: sidebarConfig.text,
-      }}
-    >
-      <div>
-        <div
-          className="flex h-16 items-center justify-center border-b"
-          style={{ borderColor: sidebarConfig.border }}
-        >
-          <div
-            className="flex h-9 w-9 items-center justify-center rounded-full font-bold text-white shadow-sm"
-            style={{ backgroundColor: activeAccentHex }}
-          >
-            <ReactMark className="h-5 w-5 animate-spin-slow" color="#ffffff" />
-          </div>
-        </div>
-        <div
-          className="flex items-center justify-center border-b px-2 py-4"
-          style={{ borderColor: sidebarConfig.border }}
-        >
-          <span
-            className="text-xs font-bold tracking-wider uppercase font-heading"
-            style={{ color: sidebarConfig.text }}
-          >
-            CF
-          </span>
-        </div>
-        <nav className="mt-4 space-y-2 px-2">
-          {navItems.map((item) => {
-            const Icon = item.icon;
-            const active = item.href !== "#" && pathname === item.href;
-            return (
-              <Link
-                key={item.name}
-                href={
-                  item.href === "#" && item.children?.[0]?.href
-                    ? item.children[0].href
-                    : item.href
-                }
-                title={item.name}
-                aria-label={item.name}
-                aria-current={active ? "page" : undefined}
-                className={cn(
-                  "flex h-10 w-full items-center justify-center rounded-lg transition-all",
-                  active
-                    ? "shadow-sm"
-                    : "opacity-75 hover:opacity-100 hover:bg-white/5",
-                )}
-                style={
-                  active
-                    ? {
-                        backgroundColor: activeAccentHex,
-                        color: "#ffffff",
-                      }
-                    : { color: sidebarConfig.textMuted }
-                }
-              >
-                <Icon className="h-4.5 w-4.5" />
-              </Link>
-            );
-          })}
-        </nav>
-      </div>
-      <div
-        className="border-t p-4 text-center"
-        style={{ borderColor: sidebarConfig.border }}
-      >
-        <CheckCircle2
-          className="mx-auto h-3.5 w-3.5"
-          style={{ color: activeAccentHex }}
-        />
-      </div>
-    </aside>
-  );
-}
-
 const bottomTabs = [
   { name: "Dashboard", href: "/dashboard", icon: Gauge },
   { name: "Widgets", href: "/dashboard/shadcn", icon: BarChart3 },
@@ -395,8 +310,6 @@ export default function DashboardShell({
           </div>
         </div>
       </aside>
-
-      <TabletRail />
 
       {/* Mobile Drawer */}
       <div
