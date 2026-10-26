@@ -70,6 +70,7 @@ export const navItems: NavItem[] = [
       { name: "Input OTP", href: "/dashboard/input-opt" },
       { name: "Combobox", href: "/dashboard/combobox" },
       { name: "Carousels", href: "/dashboard/carousel" },
+      { name: "Form", href: "/dashboard/form" },
     ],
   },
   {
