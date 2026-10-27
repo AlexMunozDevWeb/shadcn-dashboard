@@ -22,42 +22,6 @@ import SidebarLinks, { navItems } from "@/components/sidebar-links";
 import SettingsFab from "@/components/settings-fab";
 import { usePaperTheme } from "./theme-provider";
 
-function ReactMark({
-  className,
-  color,
-}: {
-  className?: string;
-  color?: string;
-}) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      className={className}
-      aria-hidden
-      style={{ fill: color || "#51cbce" }}
-    >
-      <circle cx="12" cy="12" r="2.05" />
-      <g fill="none" stroke={color || "#51cbce"} strokeWidth="1.2">
-        <ellipse cx="12" cy="12" rx="11" ry="4.2" />
-        <ellipse
-          cx="12"
-          cy="12"
-          rx="11"
-          ry="4.2"
-          transform="rotate(60 12 12)"
-        />
-        <ellipse
-          cx="12"
-          cy="12"
-          rx="11"
-          ry="4.2"
-          transform="rotate(120 12 12)"
-        />
-      </g>
-    </svg>
-  );
-}
-
 function DrawerNav({ onClose }: { onClose: () => void }) {
   const pathname = usePathname();
   const { activeAccentHex } = usePaperTheme();
@@ -237,29 +201,21 @@ export default function DashboardShell({
         <div>
           {/* Brand header */}
           <div
-            className="flex items-center gap-3 px-6 py-5 border-b"
+            className="flex flex-col items-center gap-1 px-6 py-5 border-b"
             style={{ borderColor: sidebarConfig.border }}
           >
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-md">
-              <ReactMark
-                className="h-6 w-6 animate-spin-slow"
-                color={activeAccentHex}
-              />
-            </div>
-            <div>
-              <span
-                className="block text-sm font-bold tracking-wider uppercase font-heading"
-                style={{ color: sidebarConfig.text }}
-              >
-                Creative Tim
-              </span>
-              <span
-                className="block text-[11px] font-medium tracking-tight"
-                style={{ color: sidebarConfig.textMuted }}
-              >
-                Paper Dashboard PRO
-              </span>
-            </div>
+            <span
+              className="block text-sm font-bold tracking-wider uppercase font-heading"
+              style={{ color: sidebarConfig.text }}
+            >
+              Dashboard Admin
+            </span>
+            <span
+              className="block text-[11px] font-medium tracking-tight"
+              style={{ color: sidebarConfig.textMuted }}
+            >
+              Next.js
+            </span>
           </div>
 
           {/* User profile section */}
@@ -344,12 +300,6 @@ export default function DashboardShell({
             style={{ borderColor: sidebarConfig.border }}
           >
             <div className="flex items-center space-x-2.5">
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white shadow-sm">
-                <ReactMark
-                  className="h-5 w-5 animate-spin-slow"
-                  color={activeAccentHex}
-                />
-              </div>
               <span
                 className="text-xs font-bold tracking-wider uppercase font-heading"
                 style={{ color: sidebarConfig.text }}
