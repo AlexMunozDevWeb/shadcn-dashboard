@@ -31,7 +31,8 @@ const initialStatCards = [
     meta: "Update Now",
     metaIcon: RotateCw,
     Icon: Globe,
-    iconBg: "bg-amber-50 text-[#fbc658]",
+    iconBg:
+      "bg-amber-50 text-accent-yellow dark:bg-amber-950/60 dark:text-amber-300",
     borderHover: "hover:border-amber-200",
   },
   {
@@ -41,7 +42,8 @@ const initialStatCards = [
     meta: "Last day",
     metaIcon: Calendar,
     Icon: CreditCard,
-    iconBg: "bg-emerald-50 text-[#6bd098]",
+    iconBg:
+      "bg-emerald-50 text-accent-mint dark:bg-emerald-950/60 dark:text-emerald-300",
     borderHover: "hover:border-emerald-200",
   },
   {
@@ -51,7 +53,8 @@ const initialStatCards = [
     meta: "In the last hour",
     metaIcon: Clock,
     Icon: Share2,
-    iconBg: "bg-orange-50 text-[#ef8157]",
+    iconBg:
+      "bg-orange-50 text-accent-coral dark:bg-orange-950/60 dark:text-orange-300",
     borderHover: "hover:border-orange-200",
   },
   {
@@ -61,7 +64,8 @@ const initialStatCards = [
     meta: "Update now",
     metaIcon: RotateCw,
     Icon: Heart,
-    iconBg: "bg-cyan-50 text-[#51cbce]",
+    iconBg:
+      "bg-cyan-50 text-accent-teal dark:bg-cyan-950/60 dark:text-cyan-300",
     borderHover: "hover:border-cyan-200",
   },
 ];
@@ -146,7 +150,7 @@ const defaultTasks = [
     id: 1,
     title: 'Sign contract for "What conference organizes af?"',
     meta: "Completed 2h ago",
-    metaClass: "text-gray-400 font-normal",
+    metaClass: "text-muted-foreground font-normal",
     done: true,
   },
   {
@@ -161,7 +165,7 @@ const defaultTasks = [
     title:
       "Flooded: One year later, assessing what was lost and what was found",
     meta: "Yesterday",
-    metaClass: "text-gray-400 font-normal",
+    metaClass: "text-muted-foreground font-normal",
     done: true,
   },
   {
@@ -197,7 +201,7 @@ export default function DashboardPage() {
               done: !t.done,
               meta: !t.done ? "Just now" : "Pending",
               metaClass: !t.done
-                ? "text-gray-400 font-normal"
+                ? "text-muted-foreground font-normal"
                 : "text-amber-600 font-semibold",
             }
           : t,
@@ -244,11 +248,11 @@ export default function DashboardPage() {
             <div
               key={card.id}
               className={cn(
-                "group relative rounded-xl border border-gray-100/80 bg-white p-5 md:p-6 shadow-paper transition-all duration-300 hover:-translate-y-1 hover:shadow-paper-hover",
+                "group relative rounded-xl border border-border bg-card p-5 md:p-6 shadow-paper transition-all duration-300 hover:-translate-y-1 hover:shadow-paper-hover",
                 card.borderHover,
               )}
             >
-              <div className="flex items-center justify-between border-b border-gray-100 pb-4">
+              <div className="flex items-center justify-between border-b border-border pb-4">
                 <div
                   className={cn(
                     "flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full p-3 shadow-xs transition-transform duration-300 group-hover:scale-105",
@@ -263,7 +267,7 @@ export default function DashboardPage() {
                   </p>
                   <h3
                     className={cn(
-                      "text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold tracking-tight text-gray-800 font-heading transition-opacity duration-300",
+                      "text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold tracking-tight text-foreground font-heading transition-opacity duration-300",
                       isRefreshing && "opacity-50",
                     )}
                   >
@@ -275,11 +279,11 @@ export default function DashboardPage() {
                 <button
                   type="button"
                   onClick={handleRefreshStats}
-                  className="flex items-center gap-1.5 transition-colors hover:text-gray-700"
+                  className="flex items-center gap-1.5 transition-colors hover:text-foreground"
                 >
                   <MetaIcon
                     className={cn(
-                      "h-3.5 w-3.5 md:h-4 md:w-4 text-gray-400 transition-transform",
+                      "h-3.5 w-3.5 md:h-4 md:w-4 text-muted-foreground transition-transform",
                       isRefreshing && "animate-spin text-accent-teal",
                     )}
                   />
@@ -287,7 +291,7 @@ export default function DashboardPage() {
                     {card.meta}
                   </span>
                 </button>
-                <span className="text-[10px] sm:text-xs md:text-xs text-gray-400 opacity-0 transition-opacity group-hover:opacity-100 font-heading uppercase">
+                <span className="text-[10px] sm:text-xs md:text-xs text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100 font-heading uppercase">
                   Details &rarr;
                 </span>
               </div>
@@ -299,15 +303,15 @@ export default function DashboardPage() {
       {/* 2. Charts Section with Responsive Typography */}
       <section className="grid grid-cols-1 gap-5 sm:gap-6 lg:grid-cols-3">
         {/* Chart 1: Total Earnings */}
-        <div className="flex flex-col justify-between rounded-xl border border-gray-100/80 bg-white p-5 sm:p-6 md:p-7 shadow-paper transition-all duration-300 hover:shadow-paper-hover">
+        <div className="flex flex-col justify-between rounded-xl border border-border bg-card p-5 sm:p-6 md:p-7 shadow-paper transition-all duration-300 hover:shadow-paper-hover">
           <div>
             <div className="mb-1 flex items-center justify-between">
-              <h2 className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold tracking-tight text-gray-800 font-heading">
+              <h2 className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold tracking-tight text-foreground font-heading">
                 {hoveredMonth !== null
                   ? earningsData[hoveredMonth].amount
                   : "$34,657"}
               </h2>
-              <span className="flex items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-1 text-xs md:text-sm font-bold text-accent-mint border border-emerald-200">
+              <span className="flex items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-1 text-xs md:text-sm font-bold text-accent-mint border border-emerald-200 dark:border-emerald-900 dark:bg-emerald-950 dark:text-emerald-300">
                 <TrendingUp className="h-3.5 w-3.5" />
                 +18%
               </span>
@@ -335,7 +339,7 @@ export default function DashboardPage() {
                     x2="350"
                     y1={y}
                     y2={y}
-                    stroke="#f0f0f0"
+                    stroke="var(--border)"
                     strokeWidth="1"
                     strokeDasharray="3 3"
                   />
@@ -404,8 +408,8 @@ export default function DashboardPage() {
             </div>
           </div>
 
-          <div className="mt-4 flex items-center justify-between border-t border-gray-100 pt-5">
-            <span className="text-xs sm:text-sm md:text-sm lg:text-base font-bold text-gray-700 font-heading">
+          <div className="mt-4 flex items-center justify-between border-t border-border pt-5">
+            <span className="text-xs sm:text-sm md:text-sm lg:text-base font-bold text-foreground font-heading">
               Financial Statistics
             </span>
             <button
@@ -414,7 +418,7 @@ export default function DashboardPage() {
               onClick={() =>
                 alert("Financial telemetry updated from primary ledger.")
               }
-              className="flex h-7 w-7 md:h-8 md:w-8 items-center justify-center rounded-full bg-emerald-50 text-accent-mint transition duration-200 hover:bg-accent-mint hover:text-white"
+              className="flex h-7 w-7 md:h-8 md:w-8 items-center justify-center rounded-full bg-emerald-50 text-accent-mint transition duration-200 hover:bg-accent-mint hover:text-white dark:bg-emerald-950 dark:hover:text-primary-foreground"
             >
               <Plus className="h-3.5 w-3.5 md:h-4 md:w-4" />
             </button>
@@ -422,15 +426,15 @@ export default function DashboardPage() {
         </div>
 
         {/* Chart 2: Total Subscriptions */}
-        <div className="flex flex-col justify-between rounded-xl border border-gray-100/80 bg-white p-5 sm:p-6 md:p-7 shadow-paper transition-all duration-300 hover:shadow-paper-hover">
+        <div className="flex flex-col justify-between rounded-xl border border-border bg-card p-5 sm:p-6 md:p-7 shadow-paper transition-all duration-300 hover:shadow-paper-hover">
           <div>
             <div className="mb-1 flex items-center justify-between">
-              <h2 className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold tracking-tight text-gray-800 font-heading">
+              <h2 className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold tracking-tight text-foreground font-heading">
                 {hoveredHour !== null
                   ? subscriptionData[hoveredHour].count
                   : 169}
               </h2>
-              <span className="flex items-center gap-1 rounded-full bg-orange-50 px-2.5 py-1 text-xs md:text-sm font-bold text-accent-coral border border-orange-200">
+              <span className="flex items-center gap-1 rounded-full bg-orange-50 px-2.5 py-1 text-xs md:text-sm font-bold text-accent-coral border border-orange-200 dark:border-orange-900 dark:bg-orange-950 dark:text-orange-300">
                 <TrendingDown className="h-3.5 w-3.5" />
                 -14%
               </span>
@@ -464,7 +468,7 @@ export default function DashboardPage() {
                     x2="350"
                     y1={y}
                     y2={y}
-                    stroke="#f0f0f0"
+                    stroke="var(--border)"
                     strokeWidth="1"
                     strokeDasharray="3 3"
                   />
@@ -533,15 +537,15 @@ export default function DashboardPage() {
             </div>
           </div>
 
-          <div className="mt-4 flex items-center justify-between border-t border-gray-100 pt-5">
-            <span className="text-xs sm:text-sm md:text-sm lg:text-base font-bold text-gray-700 font-heading">
+          <div className="mt-4 flex items-center justify-between border-t border-border pt-5">
+            <span className="text-xs sm:text-sm md:text-sm lg:text-base font-bold text-foreground font-heading">
               View all members
             </span>
             <button
               type="button"
               aria-label="Play playback"
               onClick={() => alert("Replaying 7-day subscription lifecycle...")}
-              className="flex h-7 w-7 md:h-8 md:w-8 items-center justify-center rounded-full bg-orange-50 text-accent-coral transition duration-200 hover:bg-accent-coral hover:text-white"
+              className="flex h-7 w-7 md:h-8 md:w-8 items-center justify-center rounded-full bg-orange-50 text-accent-coral transition duration-200 hover:bg-accent-coral hover:text-white dark:bg-orange-950 dark:hover:text-primary-foreground"
             >
               <Play className="h-3 w-3 md:h-3.5 md:w-3.5 fill-current ml-0.5" />
             </button>
@@ -549,18 +553,18 @@ export default function DashboardPage() {
         </div>
 
         {/* Chart 3: Email Statistics */}
-        <div className="flex flex-col justify-between rounded-xl border border-gray-100/80 bg-white p-5 sm:p-6 md:p-7 shadow-paper transition-all duration-300 hover:shadow-paper-hover">
+        <div className="flex flex-col justify-between rounded-xl border border-border bg-card p-5 sm:p-6 md:p-7 shadow-paper transition-all duration-300 hover:shadow-paper-hover">
           <div>
             <div className="mb-3 flex items-center justify-between">
               <div>
-                <h2 className="text-lg sm:text-xl md:text-2xl lg:text-2xl font-bold tracking-tight text-gray-800 font-heading">
+                <h2 className="text-lg sm:text-xl md:text-2xl lg:text-2xl font-bold tracking-tight text-foreground font-heading">
                   Email Statistics
                 </h2>
                 <p className="text-[10px] sm:text-xs md:text-xs lg:text-sm font-bold tracking-wider text-paper-muted uppercase font-heading">
                   Last Campaign Performance
                 </p>
               </div>
-              <span className="flex items-center gap-1.5 rounded-full bg-cyan-50 px-2.5 py-1 text-xs md:text-sm font-bold text-accent-teal border border-cyan-200">
+              <span className="flex items-center gap-1.5 rounded-full bg-cyan-50 px-2.5 py-1 text-xs md:text-sm font-bold text-accent-teal border border-cyan-200 dark:border-cyan-900 dark:bg-cyan-950 dark:text-cyan-300">
                 <span className="h-1.5 w-1.5 rounded-full bg-accent-teal animate-pulse" />
                 Live
               </span>
@@ -577,7 +581,7 @@ export default function DashboardPage() {
                   cy="50"
                   r="38"
                   fill="transparent"
-                  stroke="#f4f3ef"
+                  stroke="var(--background)"
                   strokeWidth="12"
                 />
 
@@ -625,7 +629,7 @@ export default function DashboardPage() {
               </svg>
 
               <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-                <span className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold tracking-tight text-gray-800 font-heading">
+                <span className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold tracking-tight text-foreground font-heading">
                   {donutHover === "Opened"
                     ? "62%"
                     : donutHover === "Bounced"
@@ -634,13 +638,13 @@ export default function DashboardPage() {
                         ? "15%"
                         : "62%"}
                 </span>
-                <span className="text-[10px] sm:text-[11px] md:text-xs font-bold tracking-wider text-gray-400 uppercase font-heading">
+                <span className="text-[10px] sm:text-[11px] md:text-xs font-bold tracking-wider text-muted-foreground uppercase font-heading">
                   {donutHover || "Open Rate"}
                 </span>
               </div>
             </div>
 
-            <div className="mt-2 flex items-center justify-center gap-4 text-xs sm:text-sm md:text-sm font-semibold text-gray-600">
+            <div className="mt-2 flex items-center justify-center gap-4 text-xs sm:text-sm md:text-sm font-semibold text-muted-foreground">
               {[
                 { label: "Opened", color: "bg-accent-teal" },
                 { label: "Bounced", color: "bg-accent-coral" },
@@ -664,15 +668,15 @@ export default function DashboardPage() {
             </div>
           </div>
 
-          <div className="mt-4 flex items-center justify-between border-t border-gray-100 pt-5">
-            <span className="text-xs sm:text-sm md:text-sm lg:text-base font-bold text-gray-700 font-heading">
+          <div className="mt-4 flex items-center justify-between border-t border-border pt-5">
+            <span className="text-xs sm:text-sm md:text-sm lg:text-base font-bold text-foreground font-heading">
               Campaign Sent 2 Days Ago
             </span>
             <button
               type="button"
               aria-label="Refresh campaign"
               onClick={() => alert("Checking incoming webhook deliveries...")}
-              className="flex h-7 w-7 md:h-8 md:w-8 items-center justify-center rounded-full bg-cyan-50 text-accent-teal transition duration-200 hover:bg-accent-teal hover:text-white"
+              className="flex h-7 w-7 md:h-8 md:w-8 items-center justify-center rounded-full bg-cyan-50 text-accent-teal transition duration-200 hover:bg-accent-teal hover:text-white dark:bg-cyan-950 dark:hover:text-primary-foreground"
             >
               <RotateCw className="h-3.5 w-3.5 md:h-4 md:w-4" />
             </button>
@@ -683,10 +687,10 @@ export default function DashboardPage() {
       {/* 3. Global Sales & Interactive Tasks Section */}
       <section className="grid grid-cols-1 gap-5 sm:gap-6 lg:grid-cols-3">
         {/* Global Sales Card (2 Cols) */}
-        <div className="lg:col-span-2 rounded-xl border border-gray-100/80 bg-white p-5 sm:p-6 md:p-7 shadow-paper transition-all duration-300 hover:shadow-paper-hover">
+        <div className="lg:col-span-2 rounded-xl border border-border bg-card p-5 sm:p-6 md:p-7 shadow-paper transition-all duration-300 hover:shadow-paper-hover">
           <div className="mb-5 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold tracking-tight text-gray-800 font-heading">
+              <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold tracking-tight text-foreground font-heading">
                 Global Sales by Top Locations
               </h3>
               <p className="text-xs sm:text-sm md:text-sm text-paper-muted font-medium">
@@ -716,22 +720,22 @@ export default function DashboardPage() {
                       setSelectedCountry(isSelected ? null : country.id)
                     }
                     className={cn(
-                      "flex cursor-pointer items-center justify-between rounded-lg px-3 py-2 md:py-2.5 text-xs sm:text-sm md:text-sm lg:text-base font-medium transition-all duration-200 border-b border-gray-100 last:border-b-0",
+                      "flex cursor-pointer items-center justify-between rounded-lg px-3 py-2 md:py-2.5 text-xs sm:text-sm md:text-sm lg:text-base font-medium transition-all duration-200 border-b border-border last:border-b-0",
                       isSelected
                         ? "bg-accent-teal/10 font-bold text-accent-teal"
-                        : "text-gray-700 hover:bg-gray-50",
+                        : "text-foreground hover:bg-muted",
                     )}
                   >
                     <div className="flex items-center gap-3">
                       <span className="text-base sm:text-lg md:text-lg">
                         {country.flag}
                       </span>
-                      <span className="font-semibold text-gray-800 font-heading">
+                      <span className="font-semibold text-foreground font-heading">
                         {country.name}
                       </span>
                     </div>
                     <div className="flex items-center gap-6">
-                      <span className="text-gray-500 font-mono">
+                      <span className="text-muted-foreground font-mono">
                         {country.total}
                       </span>
                       <span
@@ -739,7 +743,7 @@ export default function DashboardPage() {
                         style={
                           isSelected
                             ? { color: activeAccentHex }
-                            : { color: "#252422" }
+                            : { color: "var(--foreground)" }
                         }
                       >
                         {country.share}
@@ -751,7 +755,7 @@ export default function DashboardPage() {
             </div>
 
             {/* Vector Heatmap Visual View */}
-            <div className="group relative flex min-h-[240px] md:min-h-[270px] flex-col items-center justify-center overflow-hidden rounded-xl border border-gray-200/80 bg-[#fcfbf9] p-5 shadow-inner">
+            <div className="group relative flex min-h-[240px] md:min-h-[270px] flex-col items-center justify-center overflow-hidden rounded-xl border border-border bg-muted/50 p-5 shadow-inner">
               <div
                 className="pointer-events-none absolute inset-0 opacity-20"
                 style={{
@@ -768,38 +772,38 @@ export default function DashboardPage() {
                 <svg viewBox="0 0 380 180" className="w-full h-full opacity-85">
                   <path
                     d="M 50,45 Q 80,35 110,48 Q 120,70 100,85 Q 70,80 50,45 Z"
-                    fill="#e5e4de"
-                    stroke="#d1cfc7"
+                    fill="var(--map-land)"
+                    stroke="var(--map-border)"
                     strokeWidth="1"
                   />
                   <path
                     d="M 115,95 Q 140,95 145,130 Q 130,165 115,140 Q 105,115 115,95 Z"
-                    fill="#e5e4de"
-                    stroke="#d1cfc7"
+                    fill="var(--map-land)"
+                    stroke="var(--map-border)"
                     strokeWidth="1"
                   />
                   <path
                     d="M 175,40 Q 220,35 240,55 Q 225,75 185,70 Q 165,55 175,40 Z"
-                    fill="#e5e4de"
-                    stroke="#d1cfc7"
+                    fill="var(--map-land)"
+                    stroke="var(--map-border)"
                     strokeWidth="1"
                   />
                   <path
                     d="M 185,78 Q 225,80 230,120 Q 200,145 185,115 Z"
-                    fill="#e5e4de"
-                    stroke="#d1cfc7"
+                    fill="var(--map-land)"
+                    stroke="var(--map-border)"
                     strokeWidth="1"
                   />
                   <path
                     d="M 245,45 Q 310,35 340,65 Q 330,95 270,90 Q 235,70 245,45 Z"
-                    fill="#e5e4de"
-                    stroke="#d1cfc7"
+                    fill="var(--map-land)"
+                    stroke="var(--map-border)"
                     strokeWidth="1"
                   />
                   <path
                     d="M 295,120 Q 330,115 340,145 Q 310,160 295,140 Z"
-                    fill="#e5e4de"
-                    stroke="#d1cfc7"
+                    fill="var(--map-land)"
+                    stroke="var(--map-border)"
                     strokeWidth="1"
                   />
 
@@ -836,7 +840,7 @@ export default function DashboardPage() {
                 </svg>
               </div>
 
-              <p className="relative mt-2 text-xs sm:text-sm md:text-sm lg:text-base font-bold tracking-wider text-gray-700 uppercase font-heading">
+              <p className="relative mt-2 text-xs sm:text-sm md:text-sm lg:text-base font-bold tracking-wider text-foreground uppercase font-heading">
                 {selectedCountry
                   ? `Active Focus: ${initialCountries.find((c) => c.id === selectedCountry)?.name}`
                   : "Vector Heatmap View"}
@@ -851,14 +855,14 @@ export default function DashboardPage() {
                 <button
                   type="button"
                   onClick={() => setMapZoom((z) => Math.min(z + 0.2, 1.8))}
-                  className="flex items-center rounded-md border border-gray-200 bg-white px-3 py-1 text-[11px] sm:text-xs md:text-sm font-bold text-gray-700 shadow-xs transition hover:border-accent-teal hover:text-accent-teal font-heading"
+                  className="flex items-center rounded-md border border-border bg-card px-3 py-1 text-[11px] sm:text-xs md:text-sm font-bold text-foreground shadow-xs transition hover:border-accent-teal hover:text-accent-teal font-heading"
                 >
                   <Plus className="mr-1 h-3 w-3 md:h-3.5 md:w-3.5" /> Zoom In
                 </button>
                 <button
                   type="button"
                   onClick={() => setMapZoom((z) => Math.max(z - 0.2, 0.8))}
-                  className="flex items-center rounded-md border border-gray-200 bg-white px-3 py-1 text-[11px] sm:text-xs md:text-sm font-bold text-gray-700 shadow-xs transition hover:border-accent-teal hover:text-accent-teal font-heading"
+                  className="flex items-center rounded-md border border-border bg-card px-3 py-1 text-[11px] sm:text-xs md:text-sm font-bold text-foreground shadow-xs transition hover:border-accent-teal hover:text-accent-teal font-heading"
                 >
                   <Minus className="mr-1 h-3 w-3 md:h-3.5 md:w-3.5" /> Zoom Out
                 </button>
@@ -866,7 +870,7 @@ export default function DashboardPage() {
                   <button
                     type="button"
                     onClick={() => setMapZoom(1)}
-                    className="text-[10px] sm:text-xs text-gray-400 hover:text-gray-700 font-semibold"
+                    className="text-[10px] sm:text-xs text-muted-foreground hover:text-foreground font-semibold"
                   >
                     Reset
                   </button>
@@ -877,11 +881,11 @@ export default function DashboardPage() {
         </div>
 
         {/* Tasks and Activity Card (1 Col) */}
-        <div className="flex flex-col justify-between rounded-xl border border-gray-100/80 bg-white p-5 sm:p-6 md:p-7 shadow-paper transition-all duration-300 hover:shadow-paper-hover">
+        <div className="flex flex-col justify-between rounded-xl border border-border bg-card p-5 sm:p-6 md:p-7 shadow-paper transition-all duration-300 hover:shadow-paper-hover">
           <div>
             <div className="mb-4 flex items-center justify-between">
               <div>
-                <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold tracking-tight text-gray-800 font-heading">
+                <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold tracking-tight text-foreground font-heading">
                   Tasks
                 </h3>
                 <p className="text-xs sm:text-sm md:text-sm text-paper-muted font-medium">
@@ -892,7 +896,7 @@ export default function DashboardPage() {
                 type="button"
                 aria-label="Add task trigger"
                 onClick={() => setShowAddTask((prev) => !prev)}
-                className="flex h-8 w-8 md:h-9 md:w-9 cursor-pointer items-center justify-center rounded-full bg-gray-100 text-gray-600 transition hover:bg-gray-200"
+                className="flex h-8 w-8 md:h-9 md:w-9 cursor-pointer items-center justify-center rounded-full bg-muted text-muted-foreground transition hover:bg-muted"
               >
                 <Plus className="h-4 w-4 md:h-4.5 md:w-4.5" />
               </button>
@@ -909,11 +913,11 @@ export default function DashboardPage() {
                   value={newTaskInput}
                   onChange={(e) => setNewTaskInput(e.target.value)}
                   autoFocus
-                  className="h-8 md:h-9 flex-1 rounded-md border border-gray-200 bg-white px-2.5 text-xs sm:text-sm text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-accent-teal"
+                  className="h-8 md:h-9 flex-1 rounded-md border border-border bg-card px-2.5 text-xs sm:text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-accent-teal"
                 />
                 <button
                   type="submit"
-                  className="rounded-md bg-accent-teal px-2.5 py-1 text-xs sm:text-sm font-bold text-white shadow-xs"
+                  className="rounded-md bg-accent-teal px-2.5 py-1 text-xs sm:text-sm font-bold text-white dark:text-primary-foreground shadow-xs"
                 >
                   Add
                 </button>
@@ -922,7 +926,7 @@ export default function DashboardPage() {
 
             <div className="space-y-3.5 pt-1">
               {tasks.length === 0 ? (
-                <div className="py-6 text-center text-xs sm:text-sm text-gray-400">
+                <div className="py-6 text-center text-xs sm:text-sm text-muted-foreground">
                   <CheckCircle2 className="mx-auto mb-1 h-6 w-6 text-accent-mint" />
                   All tasks completed!
                 </div>
@@ -940,8 +944,8 @@ export default function DashboardPage() {
                       className={cn(
                         "mt-0.5 flex h-4.5 w-4.5 md:h-5 md:w-5 shrink-0 items-center justify-center rounded-[4px] border transition-all duration-200",
                         task.done
-                          ? "border-transparent bg-accent-teal text-white shadow-xs"
-                          : "border-gray-300 bg-white hover:border-accent-teal",
+                          ? "border-transparent bg-accent-teal text-white dark:text-primary-foreground shadow-xs"
+                          : "border-input bg-card hover:border-accent-teal",
                       )}
                       style={
                         task.done
@@ -962,8 +966,8 @@ export default function DashboardPage() {
                         className={cn(
                           "transition-all",
                           task.done
-                            ? "font-medium text-gray-400 line-through"
-                            : "font-semibold text-gray-800 leading-snug",
+                            ? "font-medium text-muted-foreground line-through"
+                            : "font-semibold text-foreground leading-snug",
                         )}
                       >
                         {task.title}
@@ -982,7 +986,7 @@ export default function DashboardPage() {
                       type="button"
                       aria-label="Delete task"
                       onClick={() => removeTask(task.id)}
-                      className="opacity-0 transition-opacity hover:text-accent-coral group-hover:opacity-100 text-gray-400 p-0.5"
+                      className="opacity-0 transition-opacity hover:text-accent-coral group-hover:opacity-100 text-muted-foreground p-0.5"
                     >
                       <X className="h-3.5 w-3.5 md:h-4 md:w-4" />
                     </button>
@@ -992,9 +996,9 @@ export default function DashboardPage() {
             </div>
           </div>
 
-          <div className="mt-4 flex items-center justify-between border-t border-gray-100 pt-4 text-xs sm:text-sm text-paper-muted">
+          <div className="mt-4 flex items-center justify-between border-t border-border pt-4 text-xs sm:text-sm text-paper-muted">
             <span className="flex items-center gap-1.5 text-[11px] sm:text-xs md:text-sm">
-              <History className="h-3 w-3 md:h-3.5 md:w-3.5 text-gray-400" />
+              <History className="h-3 w-3 md:h-3.5 md:w-3.5 text-muted-foreground" />
               Updated 3 minutes ago
             </span>
             <button

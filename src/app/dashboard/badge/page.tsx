@@ -20,7 +20,7 @@ export default function BadgePage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-gray-800 font-heading">
+        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-foreground font-heading">
           Badges &amp; Status Indicators
         </h1>
         <p className="text-xs sm:text-sm md:text-sm text-paper-muted">

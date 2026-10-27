@@ -1,6 +1,13 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
+import { ThemeProvider as NextThemesProvider, useTheme } from "next-themes";
 
 export type SidebarTheme = "dark" | "slate" | "white";
 export type AccentTheme = "teal" | "blue" | "mint" | "yellow" | "coral";
@@ -72,15 +79,26 @@ const ThemeContext = createContext<ThemeContextType>({
   sidebarConfig: sidebarThemeMap.dark,
 });
 
-export function ThemeProvider({ children }: { children: React.ReactNode }) {
+function PaperThemeContextProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const { resolvedTheme } = useTheme();
   const [sidebarTheme, setSidebarThemeState] = useState<SidebarTheme>("dark");
   const [accentTheme, setAccentThemeState] = useState<AccentTheme>("teal");
 
   useEffect(() => {
     try {
-      const savedSidebar = localStorage.getItem("paper_sidebar_theme") as SidebarTheme;
-      const savedAccent = localStorage.getItem("paper_accent_theme") as AccentTheme;
+      const savedSidebar = localStorage.getItem(
+        "paper_sidebar_theme",
+      ) as SidebarTheme;
+      const savedAccent = localStorage.getItem(
+        "paper_accent_theme",
+      ) as AccentTheme;
       if (savedSidebar && sidebarThemeMap[savedSidebar]) {
+        // Restore persisted options after hydration to keep server markup stable.
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setSidebarThemeState(savedSidebar);
       }
       if (savedAccent && accentHexMap[savedAccent]) {
@@ -106,7 +124,19 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   };
 
   const activeAccentHex = accentHexMap[accentTheme];
-  const sidebarConfig = sidebarThemeMap[sidebarTheme];
+  const selectedSidebarConfig = sidebarThemeMap[sidebarTheme];
+  const sidebarConfig = useMemo(
+    () =>
+      resolvedTheme === "dark" && sidebarTheme !== "white"
+        ? {
+            ...selectedSidebarConfig,
+            bg: sidebarTheme === "dark" ? "#111416" : "#15191f",
+            border: sidebarTheme === "dark" ? "#24292c" : "#262d37",
+            headerBorder: sidebarTheme === "dark" ? "#24292c" : "#262d37",
+          }
+        : selectedSidebarConfig,
+    [resolvedTheme, selectedSidebarConfig, sidebarTheme],
+  );
 
   useEffect(() => {
     const root = document.documentElement;
@@ -132,6 +162,19 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     >
       {children}
     </ThemeContext.Provider>
+  );
+}
+
+export function ThemeProvider({ children }: { children: React.ReactNode }) {
+  return (
+    <NextThemesProvider
+      attribute="class"
+      defaultTheme="light"
+      enableSystem={false}
+      storageKey="paper_color_theme"
+    >
+      <PaperThemeContextProvider>{children}</PaperThemeContextProvider>
+    </NextThemesProvider>
   );
 }
 

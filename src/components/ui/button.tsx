@@ -1,6 +1,6 @@
-import { Button as ButtonPrimitive } from "@base-ui/react/button"
-import { cva, type VariantProps } from "class-variance-authority"
-import { cn } from "cn"
+import { Button as ButtonPrimitive } from "@base-ui/react/button";
+import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "cn";
 
 const buttonVariants = cva(
   "group/button inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-clip-padding text-xs sm:text-sm md:text-sm font-semibold tracking-wide whitespace-nowrap transition-all duration-200 outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 font-heading",
@@ -11,21 +11,25 @@ const buttonVariants = cva(
         false: "normal-case",
       },
       variant: {
-        default: "bg-primary text-primary-foreground shadow-sm hover:bg-primary/90 hover:-translate-y-0.5 active:translate-y-0",
+        default:
+          "bg-primary text-primary-foreground shadow-sm hover:bg-primary/90 hover:-translate-y-0.5 active:translate-y-0",
         outline:
-          "border-border bg-white text-gray-700 shadow-xs hover:border-primary hover:text-primary hover:-translate-y-0.5 active:translate-y-0 dark:border-input dark:bg-input/30",
+          "border-border bg-card text-card-foreground shadow-xs hover:border-primary hover:text-primary hover:-translate-y-0.5 active:translate-y-0",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-[#dedcd6] hover:-translate-y-0.5 active:translate-y-0 shadow-xs",
-        ghost:
-          "hover:bg-muted hover:text-foreground active:translate-y-px",
+          "bg-secondary text-secondary-foreground hover:bg-secondary/80 hover:-translate-y-0.5 active:translate-y-0 shadow-xs",
+        ghost: "hover:bg-muted hover:text-foreground active:translate-y-px",
         destructive:
-          "bg-destructive text-white shadow-sm hover:bg-destructive/90 hover:-translate-y-0.5 active:translate-y-0",
+          "bg-destructive text-white dark:text-primary-foreground shadow-sm hover:bg-destructive/90 hover:-translate-y-0.5 active:translate-y-0",
         link: "text-primary underline-offset-4 hover:underline",
-        success: "bg-accent-mint text-white shadow-sm hover:bg-emerald-600 hover:-translate-y-0.5 active:translate-y-0",
-        warning: "bg-accent-yellow text-white shadow-sm hover:bg-amber-500 hover:-translate-y-0.5 active:translate-y-0",
-        info: "bg-accent-blue text-white shadow-sm hover:bg-cyan-600 hover:-translate-y-0.5 active:translate-y-0",
-        coral: "bg-accent-coral text-white shadow-sm hover:bg-orange-600 hover:-translate-y-0.5 active:translate-y-0",
-        paper: "bg-white text-gray-800 shadow-paper border border-gray-100 hover:shadow-paper-hover hover:-translate-y-0.5 active:translate-y-0",
+        success:
+          "bg-accent-mint text-white dark:text-primary-foreground shadow-sm hover:bg-emerald-600 hover:-translate-y-0.5 active:translate-y-0",
+        warning:
+          "bg-accent-yellow text-white dark:text-primary-foreground shadow-sm hover:bg-amber-500 hover:-translate-y-0.5 active:translate-y-0",
+        info: "bg-accent-blue text-white dark:text-primary-foreground shadow-sm hover:bg-cyan-600 hover:-translate-y-0.5 active:translate-y-0",
+        coral:
+          "bg-accent-coral text-white dark:text-primary-foreground shadow-sm hover:bg-orange-600 hover:-translate-y-0.5 active:translate-y-0",
+        paper:
+          "bg-card text-card-foreground shadow-paper border border-border hover:shadow-paper-hover hover:-translate-y-0.5 active:translate-y-0",
       },
       size: {
         default:
@@ -46,8 +50,8 @@ const buttonVariants = cva(
       variant: "default",
       size: "default",
     },
-  }
-)
+  },
+);
 
 function Button({
   className,
@@ -62,7 +66,7 @@ function Button({
       className={cn(buttonVariants({ capitalize, variant, size, className }))}
       {...props}
     />
-  )
+  );
 }
 
-export { Button, buttonVariants }
+export { Button, buttonVariants };

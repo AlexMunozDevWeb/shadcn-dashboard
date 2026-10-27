@@ -27,11 +27,12 @@ export default function ButtonPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-gray-800 font-heading">
+        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-foreground font-heading">
           Buttons &amp; Interactive Triggers
         </h1>
         <p className="text-xs sm:text-sm md:text-sm text-paper-muted">
-          Paper Tactile button hierarchy with crisp typography, hover elevation lift, and micro-press transitions.
+          Paper Tactile button hierarchy with crisp typography, hover elevation
+          lift, and micro-press transitions.
         </p>
       </div>
 
@@ -41,7 +42,8 @@ export default function ButtonPage() {
           <CardHeader>
             <CardTitle>Color Variants</CardTitle>
             <CardDescription>
-              Stitch Paper Tactile palette: Primary Teal, Coral Orange, Mint Green, Radiant Yellow, and Sky Blue.
+              Stitch Paper Tactile palette: Primary Teal, Coral Orange, Mint
+              Green, Radiant Yellow, and Sky Blue.
             </CardDescription>
           </CardHeader>
           <CardContent className="flex flex-wrap gap-3">
@@ -65,7 +67,8 @@ export default function ButtonPage() {
           <CardHeader>
             <CardTitle>Buttons with Glyphs</CardTitle>
             <CardDescription>
-              Structured action buttons paired with leading or trailing Lucide icons.
+              Structured action buttons paired with leading or trailing Lucide
+              icons.
             </CardDescription>
           </CardHeader>
           <CardContent className="flex flex-wrap gap-3">
@@ -102,7 +105,8 @@ export default function ButtonPage() {
           <CardHeader>
             <CardTitle>Scale &amp; Dimensions</CardTitle>
             <CardDescription>
-              From compact table micro-triggers (xs) to dominant hero call-to-actions (lg).
+              From compact table micro-triggers (xs) to dominant hero
+              call-to-actions (lg).
             </CardDescription>
           </CardHeader>
           <CardContent className="flex flex-wrap items-center gap-4">
@@ -120,7 +124,7 @@ export default function ButtonPage() {
               <ChevronRight className="ml-2 h-4 w-4" />
             </Button>
 
-            <div className="h-6 w-px bg-gray-200" />
+            <div className="h-6 w-px bg-border" />
 
             {/* Circular icon buttons */}
             <Button size="icon-xs" variant="outline" aria-label="Micro Action">
@@ -133,7 +137,7 @@ export default function ButtonPage() {
               <Send className="h-4 w-4" />
             </Button>
             <Button size="icon-lg" variant="paper" aria-label="Large Action">
-              <ArrowRight className="h-4 w-4 text-gray-700" />
+              <ArrowRight className="h-4 w-4 text-foreground" />
             </Button>
           </CardContent>
         </Card>

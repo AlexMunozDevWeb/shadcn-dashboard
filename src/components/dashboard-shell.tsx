@@ -98,7 +98,7 @@ function DrawerNav({ onClose }: { onClose: () => void }) {
                         currentChild
                           ? {
                               backgroundColor: activeAccentHex,
-                              color: "#ffffff",
+                              color: "var(--primary-foreground)",
                             }
                           : undefined
                       }
@@ -125,7 +125,10 @@ function DrawerNav({ onClose }: { onClose: () => void }) {
             )}
             style={
               active
-                ? { backgroundColor: activeAccentHex, color: "#ffffff" }
+                ? {
+                    backgroundColor: activeAccentHex,
+                    color: "var(--primary-foreground)",
+                  }
                 : undefined
             }
           >
@@ -150,7 +153,7 @@ function BottomNav() {
   const { activeAccentHex } = usePaperTheme();
 
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-gray-200/80 bg-white/95 px-4 py-2 shadow-bottom-nav backdrop-blur-md md:hidden">
+    <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-border/80 bg-background/95 px-4 py-2 shadow-bottom-nav backdrop-blur-md md:hidden">
       <div className="mx-auto flex max-w-md items-center justify-around">
         {bottomTabs.slice(0, 2).map((tab) => (
           <BottomTab
@@ -165,7 +168,7 @@ function BottomNav() {
           <button
             type="button"
             aria-label="Acción rápida"
-            className="-mt-4 flex h-11 w-11 items-center justify-center rounded-full text-white shadow-lg transition duration-200 hover:scale-105 active:scale-95"
+            className="-mt-4 flex h-11 w-11 items-center justify-center rounded-full text-white dark:text-primary-foreground shadow-lg transition duration-200 hover:scale-105 active:scale-95"
             style={{ backgroundColor: activeAccentHex }}
           >
             <Plus className="h-5 w-5" />
@@ -200,7 +203,9 @@ function BottomTab({
       aria-current={active ? "page" : undefined}
       className={cn(
         "flex flex-1 flex-col items-center justify-center py-1 transition active:scale-95",
-        active ? "font-semibold" : "text-gray-400 hover:text-gray-600",
+        active
+          ? "font-semibold"
+          : "text-muted-foreground hover:text-foreground",
       )}
       style={active ? { color: accentColor } : undefined}
     >
@@ -219,7 +224,7 @@ export default function DashboardShell({
   const { activeAccentHex, sidebarConfig } = usePaperTheme();
 
   return (
-    <div className="flex min-h-screen overflow-x-hidden bg-paper">
+    <div className="flex min-h-screen overflow-x-hidden bg-background">
       {/* Desktop sidebar */}
       <aside
         className="z-30 hidden min-h-screen w-64 flex-shrink-0 flex-col justify-between shadow-xl transition-all duration-300 lg:flex"
@@ -264,7 +269,7 @@ export default function DashboardShell({
           >
             <div className="flex items-center gap-3">
               <div
-                className="flex h-9 w-9 items-center justify-center rounded-full font-bold text-xs text-white shadow-sm ring-2 ring-offset-1"
+                className="flex h-9 w-9 items-center justify-center rounded-full font-bold text-xs text-white dark:text-primary-foreground shadow-sm ring-2 ring-offset-1 ring-offset-background"
                 style={{
                   backgroundColor: activeAccentHex,
                 }}
@@ -395,7 +400,7 @@ export default function DashboardShell({
       {/* Main Content Area */}
       <div className="flex min-w-0 flex-1 flex-col overflow-y-auto pb-16 md:pb-0">
         {/* Top Navbar */}
-        <header className="flex h-20 items-center justify-between border-b border-[#e3e1dc] bg-transparent px-4 sm:px-8">
+        <header className="flex h-20 items-center justify-between border-b border-border bg-transparent px-4 sm:px-8">
           <div className="flex items-center gap-4">
             <button
               type="button"
@@ -403,12 +408,12 @@ export default function DashboardShell({
               aria-controls="sidebar-drawer"
               aria-expanded={drawerOpen}
               onClick={() => setDrawerOpen((open) => !open)}
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-gray-700 shadow-paper-sm transition duration-200 hover:scale-105 active:scale-95 lg:hidden"
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-card text-card-foreground shadow-paper-sm transition duration-200 hover:scale-105 active:scale-95 lg:hidden"
             >
               <Menu className="h-4 w-4" />
             </button>
             <div>
-              <h1 className="text-base sm:text-xl md:text-2xl lg:text-2xl font-bold tracking-tight text-[#252422] font-heading">
+              <h1 className="text-base sm:text-xl md:text-2xl lg:text-2xl font-bold tracking-tight text-foreground font-heading">
                 Paper Dashboard PRO React
               </h1>
               <p className="hidden text-xs sm:text-xs md:text-sm lg:text-sm font-medium text-paper-muted sm:block">
@@ -424,12 +429,12 @@ export default function DashboardShell({
                 type="search"
                 placeholder="Search..."
                 aria-label="Search"
-                className="h-9 w-full rounded-full border border-gray-200 bg-white pr-9 pl-4 text-xs text-gray-700 shadow-xs placeholder:text-gray-400 focus:outline-none focus:ring-2"
+                className="h-9 w-full rounded-full border border-input bg-card pr-9 pl-4 text-xs text-foreground shadow-xs placeholder:text-muted-foreground focus:outline-none focus:ring-2"
                 style={{
                   outlineColor: activeAccentHex,
                 }}
               />
-              <Search className="pointer-events-none absolute top-1/2 right-3.5 h-3.5 w-3.5 -translate-y-1/2 text-gray-400" />
+              <Search className="pointer-events-none absolute top-1/2 right-3.5 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
             </div>
 
             <div className="flex items-center gap-2.5">
@@ -437,18 +442,18 @@ export default function DashboardShell({
               <div className="relative">
                 <button
                   type="button"
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-500 shadow-paper-sm transition duration-200 hover:scale-105"
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card text-muted-foreground shadow-paper-sm transition duration-200 hover:scale-105"
                   aria-label="Notifications"
                 >
                   <Bell className="h-4 w-4" />
                 </button>
-                <span className="absolute -top-0.5 right-0 h-2.5 w-2.5 rounded-full bg-accent-coral ring-2 ring-white" />
+                <span className="absolute -top-0.5 right-0 h-2.5 w-2.5 rounded-full bg-accent-coral ring-2 ring-background" />
               </div>
 
               {/* Settings gear */}
               <button
                 type="button"
-                className="hidden h-9 w-9 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-500 shadow-paper-sm transition duration-200 hover:scale-105 sm:flex"
+                className="hidden h-9 w-9 items-center justify-center rounded-full border border-border bg-card text-muted-foreground shadow-paper-sm transition duration-200 hover:scale-105 sm:flex"
                 aria-label="Settings"
                 onClick={() => {
                   const fabBtn = document.querySelector(
@@ -461,7 +466,7 @@ export default function DashboardShell({
               </button>
 
               {/* User badge */}
-              <div className="hidden items-center gap-2.5 border-l border-gray-300 pl-3 md:flex">
+              <div className="hidden items-center gap-2.5 border-l border-border pl-3 md:flex">
                 <div
                   className="flex h-8 w-8 items-center justify-center rounded-full text-xs font-bold text-white shadow-sm"
                   style={{ backgroundColor: activeAccentHex }}
@@ -469,14 +474,14 @@ export default function DashboardShell({
                   CF
                 </div>
                 <div className="text-left">
-                  <span className="block text-xs md:text-sm font-bold text-gray-800 leading-tight font-heading">
+                  <span className="block text-xs md:text-sm font-bold text-foreground leading-tight font-heading">
                     Chet Faker
                   </span>
-                  <span className="block text-[10px] md:text-xs font-medium text-gray-500">
+                  <span className="block text-[10px] md:text-xs font-medium text-muted-foreground">
                     Administrator
                   </span>
                 </div>
-                <ChevronDown className="h-3 w-3 text-gray-400" />
+                <ChevronDown className="h-3 w-3 text-muted-foreground" />
               </div>
             </div>
           </div>
@@ -486,7 +491,7 @@ export default function DashboardShell({
         <main className="flex-1 space-y-8 p-4 sm:p-8">{children}</main>
 
         {/* Footer */}
-        <footer className="flex flex-col items-center justify-between gap-3 border-t border-[#e3e1dc] bg-transparent px-4 py-5 text-xs md:text-sm text-gray-600 sm:flex-row sm:px-8">
+        <footer className="flex flex-col items-center justify-between gap-3 border-t border-border bg-transparent px-4 py-5 text-xs md:text-sm text-muted-foreground sm:flex-row sm:px-8">
           <div className="mb-2 flex items-center gap-6 sm:mb-0">
             {["Creative Tim", "Blog", "Licenses"].map((label) => (
               <a
@@ -500,13 +505,13 @@ export default function DashboardShell({
               </a>
             ))}
           </div>
-          <div className="text-center sm:text-right text-[11px] sm:text-xs md:text-sm text-gray-500 font-medium">
+          <div className="text-center sm:text-right text-[11px] sm:text-xs md:text-sm text-muted-foreground font-medium">
             © 2026, crafted with{" "}
             <span className="text-accent-coral font-bold" aria-hidden>
               ♥
             </span>{" "}
             by{" "}
-            <span className="font-bold text-gray-700 font-heading">
+            <span className="font-bold text-foreground font-heading">
               Creative Tim
             </span>{" "}
             &amp; Antigravity for a better web.

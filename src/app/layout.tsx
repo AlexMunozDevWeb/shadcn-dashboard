@@ -36,7 +36,7 @@ export default function RootLayout({
         className={cn(
           fontInter.variable,
           fontMontserrat.variable,
-          "min-h-screen bg-paper text-foreground antialiased selection:bg-accent-teal/20 selection:text-foreground",
+          "min-h-screen bg-background text-foreground antialiased selection:bg-accent-teal/20 selection:text-foreground",
         )}
       >
         <ThemeProvider>
