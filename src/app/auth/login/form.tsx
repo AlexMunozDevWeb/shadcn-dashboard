@@ -22,6 +22,7 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
+import { AuthTextField } from "../components/auth-text-field";
 
 const loginSchema = z.object({
   email: z
@@ -154,36 +155,16 @@ export default function LoginForm() {
             noValidate
           >
             {/* Email Address */}
-            <div className="space-y-1.5">
-              <Label
-                htmlFor="email"
-                className="block font-heading text-xs font-bold tracking-wide uppercase text-foreground"
-              >
-                Email Address
-              </Label>
-              <div
-                className={`relative flex items-center rounded-lg border bg-card/60 shadow-xs transition-all focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20 ${
-                  errors.email
-                    ? "border-destructive ring-1 ring-destructive/30"
-                    : "border-input"
-                }`}
-              >
-                <Mail className="ml-3.5 size-4 text-muted-foreground shrink-0" />
-                <input
-                  {...register("email")}
-                  id="email"
-                  type="email"
-                  autoComplete="email"
-                  placeholder="name@example.com"
-                  className="w-full bg-transparent px-3 py-2.5 font-sans text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
-                />
-              </div>
-              {errors.email && (
-                <p className="text-xs text-destructive mt-1 font-medium">
-                  {errors.email.message}
-                </p>
-              )}
-            </div>
+            <AuthTextField
+              label="Email Address"
+              id="email"
+              type="email"
+              autoComplete="email"
+              placeholder="name@example.com"
+              registration={register("email")}
+              error={errors.email?.message}
+              icon={Mail}
+            />
 
             {/* Password */}
             <div className="space-y-1.5">

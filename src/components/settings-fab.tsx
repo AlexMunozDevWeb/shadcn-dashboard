@@ -16,7 +16,7 @@ import {
   accentHexMap,
   usePaperTheme,
 } from "./theme-provider";
-import { cn } from "@/lib/utils";
+import { cn } from "@/modules/lib/utils";
 import { Switch } from "@/components/ui/switch";
 
 const sidebarOptions: { id: SidebarTheme; label: string; color: string }[] = [

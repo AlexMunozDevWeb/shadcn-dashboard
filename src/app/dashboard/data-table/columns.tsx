@@ -25,8 +25,12 @@ import { toast } from "sonner";
 
 import { ArrowDown, ArrowUp, ArrowUpDown, MoreHorizontal } from "lucide-react";
 
-import { Payment } from "@/data/payment";
-import { type BadgeVariant, type PaymentStatus, statusVariants } from "@/types";
+import { Payment } from "@/modules/data/payment";
+import {
+  type BadgeVariant,
+  type PaymentStatus,
+  statusVariants,
+} from "@/modules/types";
 
 // Use `accessor` for data columns and `display` for columns without one.
 const columnHelper = createColumnHelper<DataTableFeatures, Payment>();

@@ -21,7 +21,7 @@ import {
   TrendingUp,
   X,
 } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/modules/lib/utils";
 import { usePaperTheme } from "@/components/theme-provider";
 
 const initialStatCards = [

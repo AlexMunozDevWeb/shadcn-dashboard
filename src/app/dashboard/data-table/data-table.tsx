@@ -41,7 +41,7 @@ import {
 
 import { features, type DataTableFeatures } from "./data-table-features";
 
-import { Payment } from "@/data/payment";
+import { Payment } from "@/modules/data/payment";
 
 interface DataTableProps<TData extends RowData> {
   columns: ColumnDef<DataTableFeatures, TData>[];

@@ -5,151 +5,20 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
-import type { UseFormRegisterReturn } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { toast } from "sonner";
-import {
-  ArrowRight,
-  Eye,
-  EyeOff,
-  Lock,
-  type LucideIcon,
-  Mail,
-  ShieldCheck,
-  User,
-  Zap,
-} from "lucide-react";
+import { ArrowRight, Mail, ShieldCheck, User, Zap } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
-
-const ROLES = ["Developer", "Designer", "Manager"] as const;
-
-const registerSchema = z.object({
-  firstName: z
-    .string()
-    .trim()
-    .min(1, "First name is required.")
-    .min(2, "First name must have at least 2 characters."),
-  lastName: z
-    .string()
-    .trim()
-    .min(1, "Last name is required.")
-    .min(2, "Last name must have at least 2 characters."),
-  email: z
-    .string()
-    .trim()
-    .min(1, "Work email is required.")
-    .email("Please enter a valid email address."),
-  password: z
-    .string()
-    .min(1, "Password is required.")
-    .min(8, "Password must have at least 8 characters."),
-  role: z.enum(ROLES, {
-    message: "Please select your primary role.",
-  }),
-  terms: z.boolean().refine((val) => val === true, {
-    message: "You must accept the terms of service and privacy policy.",
-  }),
-});
-
-type RegisterFormData = z.infer<typeof registerSchema>;
-
-type RegisterTextFieldProps = {
-  label: string;
-  id: string;
-  type: "text" | "email";
-  placeholder: string;
-  registration: UseFormRegisterReturn;
-  error?: string;
-  icon?: LucideIcon;
-  autoComplete?: string;
-};
-
-function RegisterTextField({
-  label,
-  id,
-  type,
-  placeholder,
-  registration,
-  error,
-  icon: Icon,
-  autoComplete,
-}: RegisterTextFieldProps) {
-  return (
-    <div className="space-y-1.5">
-      <Label
-        htmlFor={id}
-        className="block font-heading text-xs font-bold tracking-wide uppercase text-foreground"
-      >
-        {label}
-      </Label>
-      <div
-        className={`relative flex items-center rounded-lg border bg-card/60 shadow-xs transition-all focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20 ${
-          error
-            ? "border-destructive ring-1 ring-destructive/30"
-            : "border-input"
-        }`}
-      >
-        {Icon && (
-          <Icon className="ml-3.5 size-4 shrink-0 text-muted-foreground" />
-        )}
-        <input
-          {...registration}
-          id={id}
-          type={type}
-          autoComplete={autoComplete}
-          placeholder={placeholder}
-          className={`w-full bg-transparent py-2.5 font-sans text-sm text-foreground placeholder:text-muted-foreground focus:outline-none ${
-            Icon ? "px-3" : "px-3.5"
-          }`}
-        />
-      </div>
-      {error && (
-        <p className="mt-1 text-xs font-medium text-destructive">{error}</p>
-      )}
-    </div>
-  );
-}
-
-function calculatePasswordStrength(password: string): {
-  score: number;
-  label: string;
-  colorClass: string;
-} {
-  if (!password || password.length === 0) {
-    return { score: 0, label: "None", colorClass: "text-muted-foreground" };
-  }
-  let score = 0;
-  if (password.length >= 6) score++;
-  if (
-    password.length >= 8 &&
-    /[A-Z]/.test(password) &&
-    /[0-9]/.test(password)
-  ) {
-    score++;
-  }
-  if (password.length >= 10 && /[^A-Za-z0-9]/.test(password)) {
-    score++;
-  }
-
-  // Ensure minimum 1 when typing
-  score = Math.max(1, score);
-
-  if (score === 1) {
-    return { score: 1, label: "Weak", colorClass: "text-destructive" };
-  }
-  if (score === 2) {
-    return { score: 2, label: "Medium", colorClass: "text-accent-yellow" };
-  }
-  return { score: 3, label: "Strong", colorClass: "text-accent-mint" };
-}
+import { AuthTextField } from "../components/auth-text-field";
+import { RegisterPasswordField } from "../components/register-password-field";
+import { ROLES, registerSchema } from "./schema";
+import type { RegisterFormData } from "./schema";
 
 export default function RegisterForm() {
   const router = useRouter();
-  const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const {
@@ -171,9 +40,7 @@ export default function RegisterForm() {
     },
   });
 
-  const watchedPassword = watch("password") || "";
   const selectedRole = watch("role");
-  const strength = calculatePasswordStrength(watchedPassword);
 
   const onSubmit = async (data: RegisterFormData) => {
     setIsLoading(true);
@@ -273,7 +140,7 @@ export default function RegisterForm() {
           >
             {/* First Name & Last Name */}
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-              <RegisterTextField
+              <AuthTextField
                 label="First Name"
                 id="first-name"
                 type="text"
@@ -282,7 +149,7 @@ export default function RegisterForm() {
                 error={errors.firstName?.message}
                 icon={User}
               />
-              <RegisterTextField
+              <AuthTextField
                 label="Last Name"
                 id="last-name"
                 type="text"
@@ -293,7 +160,7 @@ export default function RegisterForm() {
             </div>
 
             {/* Work Email */}
-            <RegisterTextField
+            <AuthTextField
               label="Work Email"
               id="work-email"
               type="email"
@@ -305,89 +172,11 @@ export default function RegisterForm() {
             />
 
             {/* Password */}
-            <div className="space-y-1.5">
-              <Label
-                htmlFor="password"
-                className="block font-heading text-xs font-bold tracking-wide uppercase text-foreground"
-              >
-                Password
-              </Label>
-              <div
-                className={`relative flex items-center rounded-lg border bg-card/60 shadow-xs transition-all focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20 ${
-                  errors.password
-                    ? "border-destructive ring-1 ring-destructive/30"
-                    : "border-input"
-                }`}
-              >
-                <Lock className="ml-3.5 size-4 text-muted-foreground shrink-0" />
-                <input
-                  {...register("password")}
-                  id="password"
-                  type={showPassword ? "text" : "password"}
-                  autoComplete="new-password"
-                  placeholder="••••••••••••"
-                  className="w-full bg-transparent px-3 py-2.5 font-sans text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword((prev) => !prev)}
-                  aria-label={showPassword ? "Hide password" : "Show password"}
-                  className="mr-3 text-muted-foreground transition-colors hover:text-foreground focus:outline-none"
-                >
-                  {showPassword ? (
-                    <EyeOff className="size-4" />
-                  ) : (
-                    <Eye className="size-4" />
-                  )}
-                </button>
-              </div>
-
-              {/* Password Strength Indicator */}
-              <div className="mt-2 space-y-1.5">
-                <div className="flex items-center justify-between text-xs font-heading">
-                  <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-                    Password Strength
-                  </span>
-                  <span
-                    className={`text-[11px] font-bold uppercase tracking-wider ${strength.colorClass}`}
-                  >
-                    {strength.label}
-                  </span>
-                </div>
-                <div className="grid h-1.5 w-full grid-cols-3 gap-1.5">
-                  <div
-                    className={`h-full rounded-full transition-all duration-300 ${
-                      strength.score >= 1
-                        ? strength.score === 1
-                          ? "bg-destructive"
-                          : strength.score === 2
-                            ? "bg-accent-yellow"
-                            : "bg-accent-mint"
-                        : "bg-muted"
-                    }`}
-                  />
-                  <div
-                    className={`h-full rounded-full transition-all duration-300 ${
-                      strength.score >= 2
-                        ? strength.score === 2
-                          ? "bg-accent-yellow"
-                          : "bg-accent-mint"
-                        : "bg-muted"
-                    }`}
-                  />
-                  <div
-                    className={`h-full rounded-full transition-all duration-300 ${
-                      strength.score >= 3 ? "bg-accent-mint" : "bg-muted"
-                    }`}
-                  />
-                </div>
-              </div>
-              {errors.password && (
-                <p className="mt-1 text-xs font-medium text-destructive">
-                  {errors.password.message}
-                </p>
-              )}
-            </div>
+            <RegisterPasswordField
+              control={control}
+              registration={register("password")}
+              error={errors.password?.message}
+            />
 
             {/* Role / Workspace Selector */}
             <div className="space-y-1.5 pt-1">
