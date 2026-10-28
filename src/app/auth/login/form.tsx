@@ -22,7 +22,7 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
-import { AuthTextField } from "../components/auth-text-field";
+import { AuthTextField } from "@/modules/auth/components/auth-text-field";
 
 const loginSchema = z.object({
   email: z

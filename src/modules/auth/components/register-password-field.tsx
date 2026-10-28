@@ -5,7 +5,7 @@ import { Eye, EyeOff, Lock } from "lucide-react";
 import type { Control, UseFormRegisterReturn } from "react-hook-form";
 import { useWatch } from "react-hook-form";
 import { Label } from "@/components/ui/label";
-import type { RegisterFormData } from "../register/schema";
+import type { RegisterFormData } from "../../../app/auth/register/schema";
 
 type RegisterPasswordFieldProps = {
   control: Control<RegisterFormData>;
