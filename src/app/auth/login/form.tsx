@@ -1,4 +1,4 @@
-"use cliente";
+"use client";
 
 import { toast } from "sonner";
 import Link from "next/link";
@@ -300,7 +300,7 @@ export default function LoginForm() {
           <div className="mt-6 text-center text-xs sm:text-sm text-muted-foreground">
             Don&apos;t have an account?{" "}
             <Link
-              href="/dashboard/form"
+              href="/auth/register"
               className="font-semibold text-accent-coral transition-colors hover:underline ml-1"
             >
               Sign up

@@ -1,7 +1,7 @@
 import { LayoutDashboard, User } from "lucide-react";
 import Link from "next/link";
 
-export default function LoginHeader() {
+export default function AuthHeader() {
   return (
     <header className="fixed top-0 left-0 z-40 w-full border-b border-border/40 bg-background/90 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-8">
