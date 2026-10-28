@@ -1,6 +1,6 @@
 "use client";
-import { Badge } from "@/components/ui/badge";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Badge } from "@/modules/components//ui/badge";
+import { Checkbox } from "@/modules/components//ui/checkbox";
 import {
   Field,
   FieldDescription,
@@ -8,7 +8,7 @@ import {
   FieldLabel,
   FieldLegend,
   FieldSet,
-} from "@/components/ui/field";
+} from "@/modules/components//ui/field";
 import { useState } from "react";
 
 export default function CheckboxGroup() {

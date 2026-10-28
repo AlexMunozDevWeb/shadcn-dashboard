@@ -6,7 +6,7 @@ import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/modules/components//ui/button";
 import {
   Card,
   CardContent,
@@ -14,7 +14,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "@/modules/components//ui/card";
 import {
   Field,
   FieldContent,
@@ -25,8 +25,11 @@ import {
   FieldLegend,
   FieldSet,
   FieldTitle,
-} from "@/components/ui/field";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+} from "@/modules/components//ui/field";
+import {
+  RadioGroup,
+  RadioGroupItem,
+} from "@/modules/components//ui/radio-group";
 
 const plans = [
   {

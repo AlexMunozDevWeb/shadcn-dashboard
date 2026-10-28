@@ -4,8 +4,8 @@ import {
   CardTitle,
   CardDescription,
   CardFooter,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+} from "@/modules/components//ui/card";
+import { Button } from "@/modules/components//ui/button";
 import Image from "next/image";
 
 const getData = async () => {

@@ -13,7 +13,7 @@ import {
   MenubarSubContent,
   MenubarSubTrigger,
   MenubarTrigger,
-} from "@/components/ui/menubar";
+} from "@/modules/components//ui/menubar";
 
 export default function MenubarDemo() {
   return (

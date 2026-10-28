@@ -4,7 +4,7 @@ import * as React from "react";
 
 import { ChevronRightIcon } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/modules/components//ui/button";
 import {
   Card,
   CardAction,
@@ -13,10 +13,13 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+} from "@/modules/components//ui/card";
+import { Input } from "@/modules/components//ui/input";
+import { Label } from "@/modules/components//ui/label";
+import {
+  ToggleGroup,
+  ToggleGroupItem,
+} from "@/modules/components//ui/toggle-group";
 
 const spacingOptions = [
   {

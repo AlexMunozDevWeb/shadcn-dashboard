@@ -1,5 +1,5 @@
-import { Card, CardFooter, CardHeader } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Card, CardFooter, CardHeader } from "@/modules/components//ui/card";
+import { Skeleton } from "@/modules/components//ui/skeleton";
 
 export default function Loading() {
   const data = "123456789".split("");

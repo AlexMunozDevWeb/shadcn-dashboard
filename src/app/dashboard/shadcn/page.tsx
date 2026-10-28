@@ -1,8 +1,8 @@
 import * as React from "react";
 import { Suspense } from "react";
 
-import ShowcaseIndex from "@/components/showcase-index";
-import { Skeleton } from "@/components/ui/skeleton";
+import ShowcaseIndex from "@/modules/components//showcase-index";
+import { Skeleton } from "@/modules/components//ui/skeleton";
 
 import AccordionDemo from "../accordion/page";
 import AlertDemo from "../alert/page";

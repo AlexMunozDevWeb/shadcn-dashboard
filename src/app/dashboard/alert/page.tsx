@@ -1,14 +1,13 @@
-
-import { CheckIcon, RocketIcon, InfoIcon } from "lucide-react"
+import { CheckIcon, RocketIcon, InfoIcon } from "lucide-react";
 import {
   Alert,
   AlertDescription,
   AlertTitle,
-} from "@/components/ui/alert"
+} from "@/modules/components/ui/alert";
 
 export default function PageDemo() {
   return (
-     <div className="grid w-full max-w-md items-start gap-4">
+    <div className="grid w-full max-w-md items-start gap-4">
       <Alert>
         <RocketIcon />
         <AlertTitle>Payment successful</AlertTitle>

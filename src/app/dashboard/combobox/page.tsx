@@ -10,8 +10,8 @@ import {
   ComboboxItem,
   ComboboxLabel,
   ComboboxList,
-} from "@/components/ui/combobox";
-import { InputGroupAddon } from "@/components/ui/input-group";
+} from "@/modules/components//ui/combobox";
+import { InputGroupAddon } from "@/modules/components//ui/input-group";
 
 import { GlobeIcon } from "lucide-react";
 

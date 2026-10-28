@@ -1,5 +1,5 @@
 "use client";
-import { Slider } from "@/components/ui/slider";
+import { Slider } from "@/modules/components//ui/slider";
 import { useState } from "react";
 
 export default function SliderDemo() {
@@ -24,7 +24,7 @@ export default function SliderDemo() {
         value={rangeValue}
         onValueChange={(value) =>
           setRangeValue(
-            Array.isArray(value) ? [...value] : [value] as number[]
+            Array.isArray(value) ? [...value] : ([value] as number[]),
           )
         }
         max={100}

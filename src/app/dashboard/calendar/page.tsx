@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from "@/modules/components//ui/skeleton";
 
 import CalendarDemo from "./calendar-demo";
 

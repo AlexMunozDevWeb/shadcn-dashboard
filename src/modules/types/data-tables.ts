@@ -1,6 +1,6 @@
 import type { VariantProps } from "class-variance-authority";
 
-import type { badgeVariants } from "@/components/ui/badge";
+import type { badgeVariants } from "@/modules/components//ui/badge";
 import type { Payment } from "@/modules/data/payment";
 
 export type PaymentStatus = Payment["status"];

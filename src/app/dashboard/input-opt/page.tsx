@@ -2,12 +2,12 @@
 
 import { REGEXP_ONLY_DIGITS } from "input-otp";
 
-import { Field, FieldLabel } from "@/components/ui/field";
+import { Field, FieldLabel } from "@/modules/components//ui/field";
 import {
   InputOTP,
   InputOTPGroup,
   InputOTPSlot,
-} from "@/components/ui/input-otp";
+} from "@/modules/components//ui/input-otp";
 
 export default function InputOTPPattern() {
   return (

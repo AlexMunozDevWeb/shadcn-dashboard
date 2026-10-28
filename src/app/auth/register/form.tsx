@@ -9,9 +9,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { ArrowRight, Mail, ShieldCheck, User, Zap } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
+import { Button } from "@/modules/components/ui/button";
+import { Checkbox } from "@/modules/components/ui/checkbox";
+import { Label } from "@/modules/components/ui/label";
 import { AuthTextField } from "@/modules/auth/components/auth-text-field";
 import { RegisterPasswordField } from "@/modules/auth/components/register-password-field";
 import { ROLES, registerSchema } from "./schema";

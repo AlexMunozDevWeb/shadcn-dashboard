@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { es } from "date-fns/locale";
-import { Calendar } from "@/components/ui/calendar";
+import { Calendar } from "@/modules/components//ui/calendar";
 
 export default function CalendarDemo() {
   const [date, setDate] = useState<Date | undefined>(new Date());

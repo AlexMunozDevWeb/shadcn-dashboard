@@ -7,8 +7,8 @@ import {
 } from "@tanstack/react-table";
 import { type DataTableFeatures } from "./data-table-features";
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Badge } from "@/modules/components//ui/badge";
+import { Button } from "@/modules/components//ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,9 +17,9 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/modules/components//ui/dropdown-menu";
 
-import { Checkbox } from "@/components/ui/checkbox";
+import { Checkbox } from "@/modules/components//ui/checkbox";
 
 import { toast } from "sonner";
 

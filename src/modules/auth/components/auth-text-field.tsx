@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { Label } from "@/components/ui/label";
+import { Label } from "@/modules/components//ui/label";
 import type { UseFormRegisterReturn } from "react-hook-form";
 
 type AuthTextFieldProps = {

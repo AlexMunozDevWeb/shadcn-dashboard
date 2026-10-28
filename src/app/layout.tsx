@@ -3,9 +3,9 @@ import { Inter, Montserrat } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/modules/lib/utils";
 
-import { ThemeProvider } from "@/components/theme-provider";
-import { Toaster as SonnerToaster } from "@/components/ui/sonner";
-import { Toaster } from "@/components/ui/toast";
+import { ThemeProvider } from "@/modules/components/theme-provider";
+import { Toaster as SonnerToaster } from "@/modules/components/ui/sonner";
+import { Toaster } from "@/modules/components/ui/toast";
 
 const fontInter = Inter({
   subsets: ["latin"],

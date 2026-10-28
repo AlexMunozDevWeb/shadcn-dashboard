@@ -5,7 +5,7 @@ import {
   AvatarGroup,
   AvatarGroupCount,
   AvatarImage,
-} from "@/components/ui/avatar";
+} from "@/modules/components//ui/avatar";
 
 export default function AvatarDemo() {
   return (

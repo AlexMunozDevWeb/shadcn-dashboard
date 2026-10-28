@@ -9,7 +9,7 @@ import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/modules/components//ui/button";
 import {
   Card,
   CardContent,
@@ -17,15 +17,15 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "@/modules/components//ui/card";
 import {
   Field,
   FieldError,
   FieldGroup,
   FieldLabel,
-} from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
-import { Calendar } from "@/components/ui/calendar";
+} from "@/modules/components//ui/field";
+import { Input } from "@/modules/components//ui/input";
+import { Calendar } from "@/modules/components//ui/calendar";
 import { CalendarDays } from "lucide-react";
 
 const formSchema = z.object({

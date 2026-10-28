@@ -1,5 +1,5 @@
-'use client'
-import { useState } from "react"
+"use client";
+import { useState } from "react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -10,20 +10,19 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
-import { Button } from "@/components/ui/button"
+} from "@/modules/components//ui/alert-dialog";
+import { Button } from "@/modules/components//ui/button";
 
 export default function AlertDialogDemo() {
-
-  const [dialogOpen, setDialogOpen] = useState(false)
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   return (
     <div className="grid w-full max-w-md items-start gap-4">
-      <AlertDialog 
-        open={dialogOpen}
-        onOpenChange={setDialogOpen}>
-        <AlertDialogTrigger render={<Button variant="outline">Show Dialog</Button>} />
-        
+      <AlertDialog open={dialogOpen} onOpenChange={setDialogOpen}>
+        <AlertDialogTrigger
+          render={<Button variant="outline">Show Dialog</Button>}
+        />
+
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
@@ -33,13 +32,17 @@ export default function AlertDialogDemo() {
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel onClick={ () => console.log('cancel') }>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={ () => console.log('continue') }>Continue</AlertDialogAction>
+            <AlertDialogCancel onClick={() => console.log("cancel")}>
+              Cancel
+            </AlertDialogCancel>
+            <AlertDialogAction onClick={() => console.log("continue")}>
+              Continue
+            </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-  
-      <Button onClick={ () => setDialogOpen(true)}>Open Dialog</Button>
+
+      <Button onClick={() => setDialogOpen(true)}>Open Dialog</Button>
     </div>
-  )
+  );
 }

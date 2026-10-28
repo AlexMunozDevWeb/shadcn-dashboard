@@ -14,14 +14,14 @@ import {
   Send,
   Trash2,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/modules/components//ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "@/modules/components//ui/card";
 
 export default function ButtonPage() {
   return (

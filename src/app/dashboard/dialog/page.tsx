@@ -1,5 +1,5 @@
-'use client'
-import { Button } from "@/components/ui/button"
+"use client";
+import { Button } from "@/modules/components//ui/button";
 import {
   Dialog,
   DialogClose,
@@ -9,9 +9,9 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+} from "@/modules/components//ui/dialog";
+import { Input } from "@/modules/components//ui/input";
+import { Label } from "@/modules/components//ui/label";
 
 export default function DialogCloseButton() {
   return (
@@ -32,7 +32,11 @@ export default function DialogCloseButton() {
             </Label>
             <Input
               id="link"
-              onClick= {()=>navigator.clipboard.writeText('https://ui.shadcn.com/docs/installation')}
+              onClick={() =>
+                navigator.clipboard.writeText(
+                  "https://ui.shadcn.com/docs/installation",
+                )
+              }
               defaultValue="https://ui.shadcn.com/docs/installation"
               readOnly
             />
@@ -43,5 +47,5 @@ export default function DialogCloseButton() {
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  )
+  );
 }

@@ -22,7 +22,7 @@ import {
   X,
 } from "lucide-react";
 import { cn } from "@/modules/lib/utils";
-import { usePaperTheme } from "@/components/theme-provider";
+import { usePaperTheme } from "@/modules/components/theme-provider";
 
 const initialStatCards = [
   {

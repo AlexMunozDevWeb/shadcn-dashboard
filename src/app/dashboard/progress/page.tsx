@@ -4,7 +4,7 @@ import {
   Progress,
   ProgressLabel,
   ProgressValue,
-} from "@/components/ui/progress";
+} from "@/modules/components//ui/progress";
 import { cn } from "cn";
 
 import { useEffect, useState } from "react";
