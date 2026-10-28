@@ -14,6 +14,14 @@ export const auth = betterAuth({
     enabled: true,
     requireEmailVerification: true,
   },
+  emailVerification: {
+    sendOnSignIn: true,
+    sendOnSignUp: true,
+    autoSignInAfterVerification: true,
+    sendVerificationEmail: async ({ user, url, token }) => {
+      console.log("Verification email:", { user, url, token });
+    },
+  },
 
   // Proveedores
   socialProviders: {

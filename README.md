@@ -2,11 +2,17 @@
 
 Dashboard de ejemplo construido con Next.js App Router, React, TypeScript, Tailwind CSS y componentes shadcn/ui. Incluye una página principal de dashboard, ejemplos de componentes, temas visuales y pantallas de autenticación.
 
+## Demo
+
+- [Dashboard](https://dashboard-admin-five-delta.vercel.app/dashboard)
+- [Iniciar sesión](https://dashboard-admin-five-delta.vercel.app/auth/login)
+- [Crear cuenta](https://dashboard-admin-five-delta.vercel.app/auth/register)
+
 ## Requisitos
 
 - Node.js compatible con Next.js 16.
 - npm.
-- PostgreSQL con una cadena de conexión disponible para la aplicación.
+- PostgreSQL para la configuración de Better Auth.
 
 ## Instalación
 
@@ -16,7 +22,7 @@ Instala las dependencias:
 npm install
 ```
 
-Crea tu archivo local de variables de entorno a partir de la plantilla:
+Crea tu archivo local de variables de entorno:
 
 ```powershell
 Copy-Item .env.template .env
@@ -24,12 +30,15 @@ Copy-Item .env.template .env
 
 Completa en `.env` las credenciales necesarias:
 
-- `DATABASE_URL`: conexión PostgreSQL usada por Better Auth. La configuración actual habilita SSL.
-- `BETTER_AUTH_SECRET`: secreto para firmar sesiones. Puedes generar uno con `openssl rand -base64 32`.
-- `BETTER_AUTH_URL`: URL base de la aplicación; en local, `http://localhost:3000`.
-- `GITHUB_CLIENT_ID` y `GITHUB_CLIENT_SECRET`, y/o `GOOGLE_CLIENT_ID` y `GOOGLE_CLIENT_SECRET`, para habilitar los proveedores OAuth correspondientes.
+| Variable                                    | Uso                                                                              |
+| ------------------------------------------- | -------------------------------------------------------------------------------- |
+| `DATABASE_URL`                              | Conexión PostgreSQL usada por Better Auth. La configuración actual habilita SSL. |
+| `BETTER_AUTH_SECRET`                        | Secreto para firmar sesiones. Puedes generarlo con `openssl rand -base64 32`.    |
+| `BETTER_AUTH_URL`                           | URL base de la aplicación; en local, `http://localhost:3000`.                    |
+| `GITHUB_CLIENT_ID` / `GITHUB_CLIENT_SECRET` | Credenciales OAuth de GitHub, si habilitas ese proveedor.                        |
+| `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` | Credenciales OAuth de Google, si habilitas ese proveedor.                        |
 
-La plantilla también incluye variables alternativas de PostgreSQL y `STITCH_API_KEY`. La configuración de la aplicación lee `DATABASE_URL`; configura las demás solo si la herramienta o el entorno que utilizas las requiere. No subas el archivo `.env` ni secretos al repositorio.
+La plantilla también incluye variables alternativas de PostgreSQL y `STITCH_API_KEY`. La configuración de Better Auth utiliza `DATABASE_URL`; las demás variables solo son necesarias si las usa otra herramienta o el entorno de despliegue. No compartas ni subas `.env` al repositorio.
 
 ## Desarrollo
 
@@ -50,18 +59,22 @@ Abre [http://localhost:3000](http://localhost:3000).
 - `/auth/register`: registro.
 - `/api/auth/*`: endpoint de Better Auth.
 
-Las pantallas de inicio de sesión y registro incluyen acciones de demostración; su interfaz no está conectada todavía al cliente de autenticación.
-
-## Better Auth y PostgreSQL
+## Autenticación
 
 La configuración del servidor está en `src/modules/auth/lib/auth.ts`, el cliente en `src/modules/lib/auth-client.ts` y las rutas HTTP en `src/app/api/auth/[...all]/routes.ts`.
 
-Ejecuta estos comandos desde la raíz del proyecto. La opción `--config` apunta al archivo de configuración, que no está en la raíz:
+Better Auth está configurado con PostgreSQL, correo y contraseña, verificación de correo y proveedores OAuth de GitHub y Google. El envío del correo de verificación está actualmente en modo de demostración: la implementación escribe sus datos en la consola del servidor en lugar de enviarlos con un proveedor de correo.
+
+Las pantallas `/auth/login` y `/auth/register` también muestran respuestas de demostración y aún no están conectadas al cliente de autenticación. Por tanto, disponer de la configuración del servidor no implica que los formularios de la interfaz ya autentiquen usuarios.
+
+Para generar o aplicar el esquema de Better Auth, ejecuta desde la raíz del proyecto:
 
 ```bash
 npx @better-auth/cli generate --config ./src/modules/auth/lib/auth.ts
 npx @better-auth/cli migrate --config ./src/modules/auth/lib/auth.ts
 ```
+
+La opción `--config` apunta al archivo de configuración, ubicado en `src/modules/auth/lib/` y no en la raíz.
 
 ## Comprobaciones
 
