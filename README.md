@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Shadcn Dashboard
 
-## Getting Started
+Dashboard de ejemplo construido con Next.js App Router, React, TypeScript, Tailwind CSS y componentes shadcn/ui. Incluye una página principal de dashboard, ejemplos de componentes, temas visuales y pantallas de autenticación.
 
-First, run the development server:
+## Requisitos
+
+- Node.js compatible con Next.js 16.
+- npm.
+- PostgreSQL con una cadena de conexión disponible para la aplicación.
+
+## Instalación
+
+Instala las dependencias:
+
+```bash
+npm install
+```
+
+Crea tu archivo local de variables de entorno a partir de la plantilla:
+
+```powershell
+Copy-Item .env.template .env
+```
+
+Completa en `.env` las credenciales necesarias:
+
+- `DATABASE_URL`: conexión PostgreSQL usada por Better Auth. La configuración actual habilita SSL.
+- `BETTER_AUTH_SECRET`: secreto para firmar sesiones. Puedes generar uno con `openssl rand -base64 32`.
+- `BETTER_AUTH_URL`: URL base de la aplicación; en local, `http://localhost:3000`.
+- `GITHUB_CLIENT_ID` y `GITHUB_CLIENT_SECRET`, y/o `GOOGLE_CLIENT_ID` y `GOOGLE_CLIENT_SECRET`, para habilitar los proveedores OAuth correspondientes.
+
+La plantilla también incluye variables alternativas de PostgreSQL y `STITCH_API_KEY`. La configuración de la aplicación lee `DATABASE_URL`; configura las demás solo si la herramienta o el entorno que utilizas las requiere. No subas el archivo `.env` ni secretos al repositorio.
+
+## Desarrollo
+
+Inicia el servidor local:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abre [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Rutas principales
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `/`: página inicial.
+- `/dashboard`: dashboard principal.
+- `/dashboard/*`: páginas de demostración de componentes y patrones de interfaz.
+- `/auth/login`: inicio de sesión.
+- `/auth/register`: registro.
+- `/api/auth/*`: endpoint de Better Auth.
 
-## Learn More
+Las pantallas de inicio de sesión y registro incluyen acciones de demostración; su interfaz no está conectada todavía al cliente de autenticación.
 
-To learn more about Next.js, take a look at the following resources:
+## Better Auth y PostgreSQL
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+La configuración del servidor está en `src/modules/auth/lib/auth.ts`, el cliente en `src/modules/lib/auth-client.ts` y las rutas HTTP en `src/app/api/auth/[...all]/routes.ts`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Ejecuta estos comandos desde la raíz del proyecto. La opción `--config` apunta al archivo de configuración, que no está en la raíz:
 
-## Deploy on Vercel
+```bash
+npx @better-auth/cli generate --config ./src/modules/auth/lib/auth.ts
+npx @better-auth/cli migrate --config ./src/modules/auth/lib/auth.ts
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Comprobaciones
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run lint
+npm run build
+```
+
+## Estructura del proyecto
+
+```text
+src/
+  app/       Rutas, layouts y páginas del App Router
+  modules/   Módulos de autenticación, componentes, utilidades y tipos
+public/      Recursos estáticos
+```
