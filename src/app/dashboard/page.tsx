@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import {
   Calendar,
   Check,
@@ -322,71 +323,13 @@ export default function DashboardPage() {
 
             {/* Interactive SVG Chart */}
             <div className="relative h-44 sm:h-48 md:h-52 w-full pt-2">
-              <svg
-                viewBox="0 0 350 120"
-                className="h-full w-full overflow-visible"
-              >
-                <defs>
-                  <linearGradient id="mintGradient" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#6bd098" stopOpacity="0.25" />
-                    <stop offset="100%" stopColor="#6bd098" stopOpacity="0.0" />
-                  </linearGradient>
-                </defs>
-                {[20, 55, 90].map((y) => (
-                  <line
-                    key={y}
-                    x1="0"
-                    x2="350"
-                    y1={y}
-                    y2={y}
-                    stroke="var(--border)"
-                    strokeWidth="1"
-                    strokeDasharray="3 3"
-                  />
-                ))}
-
-                <path
-                  d="M 10,75 C 45,85 75,55 110,60 C 145,65 175,90 220,80 C 265,70 300,50 340,48 L 340,110 L 10,110 Z"
-                  fill="url(#mintGradient)"
-                />
-
-                <path
-                  d="M 10,75 C 45,85 75,55 110,60 C 145,65 175,90 220,80 C 265,70 300,50 340,48"
-                  fill="none"
-                  stroke="#6bd098"
-                  strokeLinecap="round"
-                  strokeWidth="3.5"
-                />
-
-                <circle
-                  cx="110"
-                  cy="60"
-                  r={hoveredMonth === 3 ? 6 : 3.5}
-                  fill="#ffffff"
-                  stroke="#6bd098"
-                  strokeWidth="2.5"
-                  className="cursor-pointer transition-all"
-                  onMouseEnter={() => setHoveredMonth(3)}
-                />
-                <circle
-                  cx="220"
-                  cy="80"
-                  r={hoveredMonth === 6 ? 6 : 3.5}
-                  fill="#ffffff"
-                  stroke="#6bd098"
-                  strokeWidth="2.5"
-                  className="cursor-pointer transition-all"
-                  onMouseEnter={() => setHoveredMonth(6)}
-                />
-                <circle
-                  cx="340"
-                  cy="48"
-                  r={hoveredMonth === 9 ? 7 : 4.5}
-                  fill="#6bd098"
-                  className="cursor-pointer transition-all"
-                  onMouseEnter={() => setHoveredMonth(9)}
-                />
-              </svg>
+              <Image
+                src="/dashboard-earnings-chart.svg"
+                alt=""
+                width={350}
+                height={120}
+                className="h-full w-full object-contain"
+              />
 
               <div className="mt-2 flex justify-between text-[10px] sm:text-[11px] md:text-xs lg:text-xs font-medium text-paper-muted">
                 {earningsData.map((d, i) => (
@@ -445,77 +388,13 @@ export default function DashboardPage() {
 
             {/* Interactive SVG Subscriptions Chart */}
             <div className="relative h-44 sm:h-48 md:h-52 w-full pt-2">
-              <svg
-                viewBox="0 0 350 120"
-                className="h-full w-full overflow-visible"
-              >
-                <defs>
-                  <linearGradient
-                    id="coralGradient"
-                    x1="0"
-                    y1="0"
-                    x2="0"
-                    y2="1"
-                  >
-                    <stop offset="0%" stopColor="#ef8157" stopOpacity="0.22" />
-                    <stop offset="100%" stopColor="#ef8157" stopOpacity="0.0" />
-                  </linearGradient>
-                </defs>
-                {[20, 55, 90].map((y) => (
-                  <line
-                    key={y}
-                    x1="0"
-                    x2="350"
-                    y1={y}
-                    y2={y}
-                    stroke="var(--border)"
-                    strokeWidth="1"
-                    strokeDasharray="3 3"
-                  />
-                ))}
-
-                <path
-                  d="M 10,105 C 50,90 90,85 140,82 C 190,80 240,60 280,58 C 310,56 325,45 345,35 L 345,110 L 10,110 Z"
-                  fill="url(#coralGradient)"
-                />
-
-                <path
-                  d="M 10,105 C 50,90 90,85 140,82 C 190,80 240,60 280,58 C 310,56 325,45 345,35"
-                  fill="none"
-                  stroke="#ef8157"
-                  strokeLinecap="round"
-                  strokeWidth="3.5"
-                />
-
-                <circle
-                  cx="140"
-                  cy="82"
-                  r={hoveredHour === 2 ? 6 : 3.5}
-                  fill="#ffffff"
-                  stroke="#ef8157"
-                  strokeWidth="2.5"
-                  className="cursor-pointer transition-all"
-                  onMouseEnter={() => setHoveredHour(2)}
-                />
-                <circle
-                  cx="280"
-                  cy="58"
-                  r={hoveredHour === 5 ? 6 : 3.5}
-                  fill="#ffffff"
-                  stroke="#ef8157"
-                  strokeWidth="2.5"
-                  className="cursor-pointer transition-all"
-                  onMouseEnter={() => setHoveredHour(5)}
-                />
-                <circle
-                  cx="345"
-                  cy="35"
-                  r={hoveredHour === 7 ? 7 : 4.5}
-                  fill="#ef8157"
-                  className="cursor-pointer transition-all"
-                  onMouseEnter={() => setHoveredHour(7)}
-                />
-              </svg>
+              <Image
+                src="/dashboard-subscriptions-chart.svg"
+                alt=""
+                width={350}
+                height={120}
+                className="h-full w-full object-contain"
+              />
 
               <div className="mt-2 flex justify-between text-[10px] sm:text-[11px] md:text-xs lg:text-xs font-medium text-paper-muted">
                 {subscriptionData.map((d, i) => (
@@ -572,61 +451,13 @@ export default function DashboardPage() {
 
             {/* SVG Donut Chart */}
             <div className="relative flex h-44 sm:h-48 md:h-52 items-center justify-center">
-              <svg
-                viewBox="0 0 100 100"
-                className="h-36 w-36 sm:h-40 sm:w-40 md:h-44 md:w-44 -rotate-90"
-              >
-                <circle
-                  cx="50"
-                  cy="50"
-                  r="38"
-                  fill="transparent"
-                  stroke="var(--background)"
-                  strokeWidth="12"
-                />
-
-                <circle
-                  cx="50"
-                  cy="50"
-                  r="38"
-                  fill="transparent"
-                  stroke="#51cbce"
-                  strokeWidth={donutHover === "Opened" ? "14" : "12"}
-                  strokeDasharray="238.7"
-                  strokeDashoffset="90"
-                  className="cursor-pointer transition-all duration-200"
-                  onMouseEnter={() => setDonutHover("Opened")}
-                  onMouseLeave={() => setDonutHover(null)}
-                />
-
-                <circle
-                  cx="50"
-                  cy="50"
-                  r="38"
-                  fill="transparent"
-                  stroke="#ef8157"
-                  strokeWidth={donutHover === "Bounced" ? "14" : "12"}
-                  strokeDasharray="238.7"
-                  strokeDashoffset="183"
-                  className="cursor-pointer transition-all duration-200"
-                  onMouseEnter={() => setDonutHover("Bounced")}
-                  onMouseLeave={() => setDonutHover(null)}
-                />
-
-                <circle
-                  cx="50"
-                  cy="50"
-                  r="38"
-                  fill="transparent"
-                  stroke="#fbc658"
-                  strokeWidth={donutHover === "Unsub" ? "14" : "12"}
-                  strokeDasharray="238.7"
-                  strokeDashoffset="219"
-                  className="cursor-pointer transition-all duration-200"
-                  onMouseEnter={() => setDonutHover("Unsub")}
-                  onMouseLeave={() => setDonutHover(null)}
-                />
-              </svg>
+              <Image
+                src="/dashboard-email-statistics.svg"
+                alt=""
+                width={100}
+                height={100}
+                className="h-36 w-36 -rotate-90 sm:h-40 sm:w-40 md:h-44 md:w-44"
+              />
 
               <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
                 <span className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold tracking-tight text-foreground font-heading">
@@ -769,75 +600,20 @@ export default function DashboardPage() {
                 className="relative w-full max-w-[340px] md:max-w-[380px] h-32 md:h-36 transition-transform duration-300"
                 style={{ transform: `scale(${mapZoom})` }}
               >
-                <svg viewBox="0 0 380 180" className="w-full h-full opacity-85">
-                  <path
-                    d="M 50,45 Q 80,35 110,48 Q 120,70 100,85 Q 70,80 50,45 Z"
-                    fill="var(--map-land)"
-                    stroke="var(--map-border)"
-                    strokeWidth="1"
-                  />
-                  <path
-                    d="M 115,95 Q 140,95 145,130 Q 130,165 115,140 Q 105,115 115,95 Z"
-                    fill="var(--map-land)"
-                    stroke="var(--map-border)"
-                    strokeWidth="1"
-                  />
-                  <path
-                    d="M 175,40 Q 220,35 240,55 Q 225,75 185,70 Q 165,55 175,40 Z"
-                    fill="var(--map-land)"
-                    stroke="var(--map-border)"
-                    strokeWidth="1"
-                  />
-                  <path
-                    d="M 185,78 Q 225,80 230,120 Q 200,145 185,115 Z"
-                    fill="var(--map-land)"
-                    stroke="var(--map-border)"
-                    strokeWidth="1"
-                  />
-                  <path
-                    d="M 245,45 Q 310,35 340,65 Q 330,95 270,90 Q 235,70 245,45 Z"
-                    fill="var(--map-land)"
-                    stroke="var(--map-border)"
-                    strokeWidth="1"
-                  />
-                  <path
-                    d="M 295,120 Q 330,115 340,145 Q 310,160 295,140 Z"
-                    fill="var(--map-land)"
-                    stroke="var(--map-border)"
-                    strokeWidth="1"
-                  />
-
-                  {initialCountries.map((c) => {
-                    const isPinSelected = selectedCountry === c.id;
-                    return (
-                      <g
-                        key={c.id}
-                        className="cursor-pointer transition-transform duration-200 hover:scale-125"
-                        onClick={() =>
-                          setSelectedCountry(isPinSelected ? null : c.id)
-                        }
-                      >
-                        <circle
-                          cx={c.coords.x}
-                          cy={c.coords.y}
-                          r={isPinSelected ? "7" : "4"}
-                          fill={isPinSelected ? "#ef8157" : activeAccentHex}
-                          className={
-                            isPinSelected ? "animate-ping opacity-75" : ""
-                          }
-                        />
-                        <circle
-                          cx={c.coords.x}
-                          cy={c.coords.y}
-                          r={isPinSelected ? "5" : "3"}
-                          fill={isPinSelected ? "#ef8157" : activeAccentHex}
-                          stroke="#ffffff"
-                          strokeWidth="1.5"
-                        />
-                      </g>
-                    );
-                  })}
-                </svg>
+                <Image
+                  src="/dashboard-global-sales-map.svg"
+                  alt=""
+                  width={380}
+                  height={180}
+                  className="h-full w-full object-contain opacity-85 dark:hidden"
+                />
+                <Image
+                  src="/dashboard-global-sales-map-dark.svg"
+                  alt=""
+                  width={380}
+                  height={180}
+                  className="hidden h-full w-full object-contain opacity-85 dark:block"
+                />
               </div>
 
               <p className="relative mt-2 text-xs sm:text-sm md:text-sm lg:text-base font-bold tracking-wider text-foreground uppercase font-heading">
@@ -848,7 +624,7 @@ export default function DashboardPage() {
               <span className="relative text-[11px] sm:text-xs md:text-sm text-paper-muted">
                 {selectedCountry
                   ? `Volume: ${initialCountries.find((c) => c.id === selectedCountry)?.total} items shipped`
-                  : "Interactive World Distribution"}
+                  : "World Distribution"}
               </span>
 
               <div className="relative mt-3 flex items-center gap-2">
