@@ -230,7 +230,9 @@ export default function DataTable<TData extends RowData>({
       </div>
       <Select
         onValueChange={(value) => {
-          table.setPageSize(+value);
+          if (value) {
+            table.setPageSize(Number(value));
+          }
         }}
       >
         <SelectTrigger className="w-[180px] p-5 ml-2 mb-2">

@@ -20,9 +20,9 @@ const fontMontserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Paper Dashboard PRO React - Creative Tim Replica",
+  title: "Dashboard Admin PRO - Creative Tim Replica",
   description:
-    "Paper Dashboard PRO React replica built with Next.js, Tailwind CSS and shadcn/ui.",
+    "Dashboard Admin PRO replica built with Next.js, Tailwind CSS and shadcn/ui.",
 };
 
 export default function RootLayout({

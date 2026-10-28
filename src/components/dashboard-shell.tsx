@@ -304,7 +304,7 @@ export default function DashboardShell({
                 className="text-xs font-bold tracking-wider uppercase font-heading"
                 style={{ color: sidebarConfig.text }}
               >
-                Paper Dashboard PRO
+                Dashboard Admin PRO
               </span>
             </div>
             <button
@@ -364,7 +364,7 @@ export default function DashboardShell({
             </button>
             <div>
               <h1 className="text-base sm:text-xl md:text-2xl lg:text-2xl font-bold tracking-tight text-foreground font-heading">
-                Paper Dashboard PRO React
+                Dashboard Admin PRO
               </h1>
               <p className="hidden text-xs sm:text-xs md:text-sm lg:text-sm font-medium text-paper-muted sm:block">
                 Enterprise SaaS Administration &amp; System Telemetry

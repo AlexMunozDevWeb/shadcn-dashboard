@@ -1,6 +1,10 @@
 "use client";
 
-import { createColumnHelper } from "@tanstack/react-table";
+import {
+  createColumnHelper,
+  type FilterFn,
+  type Row,
+} from "@tanstack/react-table";
 import { type DataTableFeatures } from "./data-table-features";
 
 import { Badge } from "@/components/ui/badge";
@@ -27,8 +31,8 @@ import { type BadgeVariant, type PaymentStatus, statusVariants } from "@/types";
 // Use `accessor` for data columns and `display` for columns without one.
 const columnHelper = createColumnHelper<DataTableFeatures, Payment>();
 
-const myCustomFilterFn: FilterFn<Payment> = (
-  row: Row<Payment>,
+const myCustomFilterFn: FilterFn<DataTableFeatures, Payment> = (
+  row: Row<DataTableFeatures, Payment>,
   columnId: string,
   filterValue: string,
 ) => {
