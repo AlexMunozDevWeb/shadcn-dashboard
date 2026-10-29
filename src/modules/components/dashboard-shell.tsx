@@ -202,7 +202,7 @@ export default function DashboardShell({
   const handleSignOut = async () => {
     const { error } = await authClient.signOut();
     if (error) alert("Error al cerrar sesión");
-    router.replace("/");
+    router.replace("/auth/login");
 
     // await authClient.signOut({
     //   fetchOptions: {
@@ -392,9 +392,6 @@ export default function DashboardShell({
               <h1 className="text-base sm:text-xl md:text-2xl lg:text-2xl font-bold tracking-tight text-foreground font-heading">
                 Dashboard Admin PRO
               </h1>
-              <p className="hidden text-xs sm:text-xs md:text-sm lg:text-sm font-medium text-paper-muted sm:block">
-                Enterprise SaaS Administration &amp; System Telemetry
-              </p>
             </div>
           </div>
 
@@ -446,7 +443,7 @@ export default function DashboardShell({
                 <DropdownMenuTrigger
                   type="button"
                   aria-label="Abrir menú de usuario"
-                  className="hidden items-center gap-2.5 border-l border-border pl-3 outline-none transition-opacity hover:opacity-80 focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-ring md:flex"
+                  className="items-center gap-2.5 border-l border-border pl-3 outline-none transition-opacity hover:opacity-80 focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-ring md:flex"
                 >
                   <div
                     className="flex h-8 w-8 items-center justify-center rounded-full text-xs font-bold text-white shadow-sm"
@@ -456,9 +453,6 @@ export default function DashboardShell({
                   </div>
                   <div className="text-left">
                     <span className="block text-xs md:text-sm font-bold text-foreground leading-tight font-heading">
-                      Chet Fakerr
-                    </span>
-                    <span className="block text-[10px] md:text-xs font-medium text-muted-foreground">
                       Administrator
                     </span>
                   </div>
