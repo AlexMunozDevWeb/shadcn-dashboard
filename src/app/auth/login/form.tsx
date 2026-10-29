@@ -23,6 +23,7 @@ import { Label } from "@/modules/components/ui/label";
 import { useState } from "react";
 import { AuthTextField } from "@/modules/auth/components/auth-text-field";
 import SocialSignInButtons from "@/modules/auth/components/social-sign-in-buttons";
+import { authClient } from "@/modules/lib/auth-client";
 
 const loginSchema = z.object({
   email: z
@@ -58,17 +59,55 @@ export default function LoginForm() {
     },
   });
 
-  const onSubmit = async (data: LoginFormData) => {
-    setIsLoading(true);
-    // Simulate brief login delay
-    await new Promise((resolve) => setTimeout(resolve, 800));
-    setIsLoading(false);
-    toast.success("Welcome back! Redirecting to Dashboard...", {
-      description: `Logged in as ${data.email}`,
-    });
-    setTimeout(() => {
-      router.push("/dashboard");
-    }, 1200);
+  const onSubmit = async (dataForm: LoginFormData) => {
+    const email = dataForm.email;
+    const password = dataForm.password;
+
+    const { data, error } = await authClient.signIn.email(
+      {
+        /* The user email */
+        email,
+        /*The user password */
+        password,
+        /* A URL to redirect to after the user verifies their email (optional) */
+        callbackURL: "/dashboard",
+        /**
+         * remember the user session after the browser is closed.
+         * @default true
+         */
+        rememberMe: false,
+      },
+      {
+        onRequest: () => {
+          console.log("Loading...");
+          setIsLoading(true);
+        },
+        onSuccess: () => {
+          console.log("Success");
+          setIsLoading(false);
+          toast.success("Welcome back! Redirecting to Dashboard...", {
+            description: `Logged in as ${dataForm.email}`,
+          });
+        },
+        onError: async (ctx) => {
+          if (ctx.error.status === 403) {
+            alert("El email no ha sido verificado.");
+            await authClient.sendVerificationEmail({
+              email: email,
+              callbackURL: "/",
+            });
+            return;
+          }
+
+          if (ctx.error.status === 403) {
+            alert("El email no ha sido verificado. Por favor ");
+          }
+          console.log({ ContextError: ctx.error });
+          console.log("Credenciales no correctas");
+          return;
+        },
+      },
+    );
   };
 
   return (
