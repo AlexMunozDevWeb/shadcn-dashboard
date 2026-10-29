@@ -1,5 +1,6 @@
 import { betterAuth } from "better-auth";
 import { Pool } from "pg";
+import { Resend } from "resend";
 
 export const auth = betterAuth({
   plugins: [],
@@ -18,8 +19,32 @@ export const auth = betterAuth({
     sendOnSignIn: true,
     sendOnSignUp: true,
     autoSignInAfterVerification: true,
-    sendVerificationEmail: async ({ user, url, token }) => {
-      console.log("Verification email:", { user, url, token });
+
+    sendVerificationEmail: async ({ user, url }) => {
+      const apiKey = process.env.RESEND_API_KEY;
+      if (!apiKey) {
+        throw new Error("Falta configurar RESEND_API_KEY.");
+      }
+
+      const resend = new Resend(apiKey);
+      void resend.emails
+        .send({
+          from: "Mi aplicación <onboarding@resend.dev>",
+          to: user.email,
+          subject: "Verifica tu correo",
+          text: `Para verificar tu correo, abre este enlace: ${url}`,
+        })
+        .then(({ error }) => {
+          if (error) {
+            console.error(
+              "No se pudo enviar el correo de verificación:",
+              error,
+            );
+          }
+        })
+        .catch((error: unknown) => {
+          console.error("Falló el envío del correo de verificación:", error);
+        });
     },
   },
 

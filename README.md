@@ -37,6 +37,7 @@ Completa en `.env` las credenciales necesarias:
 | `BETTER_AUTH_URL`                           | URL base de la aplicación; en local, `http://localhost:3000`.                    |
 | `GITHUB_CLIENT_ID` / `GITHUB_CLIENT_SECRET` | Credenciales OAuth de GitHub, si habilitas ese proveedor.                        |
 | `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` | Credenciales OAuth de Google, si habilitas ese proveedor.                        |
+| `RESEND_API_KEY`                            | Clave API de Resend para enviar correos de verificación.                         |
 
 La plantilla también incluye variables alternativas de PostgreSQL y `STITCH_API_KEY`. La configuración de Better Auth utiliza `DATABASE_URL`; las demás variables solo son necesarias si las usa otra herramienta o el entorno de despliegue. No compartas ni subas `.env` al repositorio.
 
@@ -63,7 +64,7 @@ Abre [http://localhost:3000](http://localhost:3000).
 
 La configuración del servidor está en `src/modules/auth/lib/auth.ts`, el cliente en `src/modules/lib/auth-client.ts` y las rutas HTTP en `src/app/api/auth/[...all]/routes.ts`.
 
-Better Auth está configurado con PostgreSQL, correo y contraseña, verificación de correo y proveedores OAuth de GitHub y Google. El envío del correo de verificación está actualmente en modo de demostración: la implementación escribe sus datos en la consola del servidor en lugar de enviarlos con un proveedor de correo.
+Better Auth está configurado con PostgreSQL, correo y contraseña, verificación de correo y proveedores OAuth de GitHub y Google. Los correos de verificación se envían mediante Resend usando el remitente de prueba `onboarding@resend.dev`. No hay ningún dominio propio configurado: en este modo de prueba, Resend solo permite enviar al correo asociado a tu propia cuenta de Resend (por ejemplo, tu cuenta de Google/Gmail). Para enviar a otras direcciones, verifica un dominio propio en Resend y configura un remitente de ese dominio.
 
 Las pantallas `/auth/login` y `/auth/register` también muestran respuestas de demostración y aún no están conectadas al cliente de autenticación. Por tanto, disponer de la configuración del servidor no implica que los formularios de la interfaz ya autentiquen usuarios.
 

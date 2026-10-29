@@ -16,6 +16,7 @@ import { RegisterPasswordField } from "@/modules/auth/components/register-passwo
 import SocialSignInButtons from "@/modules/auth/components/social-sign-in-buttons";
 import { ROLES, registerSchema } from "./schema";
 import type { RegisterFormData } from "./schema";
+import { authClient } from "@/modules/lib/auth-client";
 
 export default function RegisterForm() {
   const router = useRouter();
@@ -42,19 +43,36 @@ export default function RegisterForm() {
 
   const selectedRole = watch("role");
 
-  const onSubmit = async (data: RegisterFormData) => {
-    setIsLoading(true);
-    // Simulate brief network latency
-    await new Promise((resolve) => setTimeout(resolve, 800));
-    setIsLoading(false);
+  const onSubmit = async (dataForm: RegisterFormData) => {
+    const name = `${dataForm.firstName + " " + dataForm.lastName}`;
+    const email = dataForm.email;
+    const password = dataForm.password;
+    const { data, error } = await authClient.signUp.email(
+      {
+        email, // user email address
+        password, // user password -> min 8 characters by default
+        name, // user display name
+        callbackURL: "/dashboard", // Verify email
+      },
+      {
+        onRequest: (ctx) => {
+          console.log("Cargando...");
+          setIsLoading(true);
+        },
+        onSuccess: (ctx) => {
+          console.log("Todo bien!", ctx);
+          setIsLoading(false);
+          router.push("/");
+        },
+        onError: (ctx) => {
+          alert(ctx.error.message);
+        },
+      },
+    );
 
     toast.success("Account created successfully!", {
-      description: `Welcome to Paper Dashboard PRO, ${data.firstName}!`,
+      description: `Welcome to Paper Dashboard PRO, ${dataForm.firstName}!`,
     });
-
-    setTimeout(() => {
-      router.push("/dashboard");
-    }, 1200);
   };
 
   return (
@@ -99,6 +117,7 @@ export default function RegisterForm() {
           {/* Register Form */}
           <form
             onSubmit={handleSubmit(onSubmit)}
+            // onSubmit={handleSubmit}
             className="space-y-4"
             noValidate
           >
