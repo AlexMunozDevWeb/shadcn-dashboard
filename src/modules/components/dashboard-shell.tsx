@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { cn } from "@/modules/lib/utils";
 import {
@@ -10,6 +10,7 @@ import {
   CheckCircle2,
   ChevronDown,
   Gauge,
+  LogOut,
   Map,
   Menu,
   Plus,
@@ -20,7 +21,17 @@ import {
 
 import SidebarLinks, { navItems } from "@/modules/components/sidebar-links";
 import SettingsFab from "@/modules/components/settings-fab";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/modules/components/ui/dropdown-menu";
 import { usePaperTheme } from "./theme-provider";
+import { authClient } from "../lib/auth-client";
 
 function DrawerNav({ onClose }: { onClose: () => void }) {
   const pathname = usePathname();
@@ -186,6 +197,21 @@ export default function DashboardShell({
 }) {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const { activeAccentHex, sidebarConfig } = usePaperTheme();
+  const router = useRouter();
+
+  const handleSignOut = async () => {
+    const { error } = await authClient.signOut();
+    if (error) alert("Error al cerrar sesión");
+    router.replace("/");
+
+    // await authClient.signOut({
+    //   fetchOptions: {
+    //     onSuccess: () => {
+    //       router.push("/");
+    //     },
+    //   },
+    // });
+  };
 
   return (
     <div className="flex min-h-screen overflow-x-hidden bg-background">
@@ -416,23 +442,49 @@ export default function DashboardShell({
               </button>
 
               {/* User badge */}
-              <div className="hidden items-center gap-2.5 border-l border-border pl-3 md:flex">
-                <div
-                  className="flex h-8 w-8 items-center justify-center rounded-full text-xs font-bold text-white shadow-sm"
-                  style={{ backgroundColor: activeAccentHex }}
+              <DropdownMenu>
+                <DropdownMenuTrigger
+                  type="button"
+                  aria-label="Abrir menú de usuario"
+                  className="hidden items-center gap-2.5 border-l border-border pl-3 outline-none transition-opacity hover:opacity-80 focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-ring md:flex"
                 >
-                  CF
-                </div>
-                <div className="text-left">
-                  <span className="block text-xs md:text-sm font-bold text-foreground leading-tight font-heading">
-                    Chet Faker
-                  </span>
-                  <span className="block text-[10px] md:text-xs font-medium text-muted-foreground">
-                    Administrator
-                  </span>
-                </div>
-                <ChevronDown className="h-3 w-3 text-muted-foreground" />
-              </div>
+                  <div
+                    className="flex h-8 w-8 items-center justify-center rounded-full text-xs font-bold text-white shadow-sm"
+                    style={{ backgroundColor: activeAccentHex }}
+                  >
+                    CF
+                  </div>
+                  <div className="text-left">
+                    <span className="block text-xs md:text-sm font-bold text-foreground leading-tight font-heading">
+                      Chet Fakerr
+                    </span>
+                    <span className="block text-[10px] md:text-xs font-medium text-muted-foreground">
+                      Administrator
+                    </span>
+                  </div>
+                  <ChevronDown className="h-3 w-3 text-muted-foreground" />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56">
+                  <DropdownMenuGroup>
+                    <DropdownMenuLabel>
+                      <span className="block font-semibold text-foreground">
+                        Chet Faker
+                      </span>
+                      <span className="text-xs font-normal text-muted-foreground">
+                        Administrator
+                      </span>
+                    </DropdownMenuLabel>
+                  </DropdownMenuGroup>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem
+                    onClick={handleSignOut}
+                    variant="destructive"
+                  >
+                    <LogOut aria-hidden="true" />
+                    Cerrar sesión
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </div>
         </header>
