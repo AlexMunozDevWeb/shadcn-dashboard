@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
@@ -14,6 +13,7 @@ import { Checkbox } from "@/modules/components/ui/checkbox";
 import { Label } from "@/modules/components/ui/label";
 import { AuthTextField } from "@/modules/auth/components/auth-text-field";
 import { RegisterPasswordField } from "@/modules/auth/components/register-password-field";
+import SocialSignInButtons from "@/modules/auth/components/social-sign-in-buttons";
 import { ROLES, registerSchema } from "./schema";
 import type { RegisterFormData } from "./schema";
 
@@ -86,43 +86,7 @@ export default function RegisterForm() {
           </div>
 
           {/* Social Logins */}
-          <div className="mt-6 grid grid-cols-2 gap-3">
-            <button
-              type="button"
-              onClick={() =>
-                toast.info("Google sign-up is in demonstration mode.")
-              }
-              className="group flex items-center justify-center gap-2 rounded-lg border border-border/60 bg-muted/60 px-3 py-2.5 font-heading text-xs font-semibold text-foreground transition-all duration-200 hover:border-primary/40 hover:bg-muted active:scale-[0.99]"
-            >
-              <Image
-                src="/google.svg"
-                alt=""
-                width={16}
-                height={16}
-                className="size-4 shrink-0"
-                aria-hidden="true"
-              />
-              <span className="transition-colors group-hover:text-primary">
-                Google
-              </span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() =>
-                toast.info("GitHub sign-up is in demonstration mode.")
-              }
-              className="group flex items-center justify-center gap-2 rounded-lg border border-border/60 bg-muted/60 px-3 py-2.5 font-heading text-xs font-semibold text-foreground transition-all duration-200 hover:border-primary/40 hover:bg-muted active:scale-[0.99]"
-            >
-              <span
-                className="size-4 shrink-0 bg-foreground transition-colors group-hover:bg-primary [mask-image:url('/github.svg')] [mask-position:center] [mask-repeat:no-repeat] [mask-size:contain]"
-                aria-hidden="true"
-              />
-              <span className="transition-colors group-hover:text-primary">
-                GitHub
-              </span>
-            </button>
-          </div>
+          <SocialSignInButtons action="sign-up" />
 
           {/* Separator */}
           <div className="relative my-6 flex items-center justify-center">
