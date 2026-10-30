@@ -62,11 +62,13 @@ Abre [http://localhost:3000](http://localhost:3000).
 
 ## Autenticación
 
-La configuración del servidor está en `src/modules/auth/lib/auth.ts`, el cliente en `src/modules/lib/auth-client.ts` y las rutas HTTP en `src/app/api/auth/[...all]/routes.ts`.
+La configuración del servidor está en `src/modules/auth/lib/auth.ts`, el cliente en `src/modules/lib/auth-client.ts` y las rutas HTTP en `src/app/api/auth/[...all]/route.ts`.
 
 Better Auth está configurado con PostgreSQL, correo y contraseña, verificación de correo y proveedores OAuth de GitHub y Google. Los correos de verificación se envían mediante Resend usando el remitente de prueba `onboarding@resend.dev`. No hay ningún dominio propio configurado: en este modo de prueba, Resend solo permite enviar al correo asociado a tu propia cuenta de Resend (por ejemplo, tu cuenta de Google/Gmail). Para enviar a otras direcciones, verifica un dominio propio en Resend y configura un remitente de ese dominio.
 
-Las pantallas `/auth/login` y `/auth/register` también muestran respuestas de demostración y aún no están conectadas al cliente de autenticación. Por tanto, disponer de la configuración del servidor no implica que los formularios de la interfaz ya autentiquen usuarios.
+Las pantallas `/auth/login` y `/auth/register` utilizan el cliente de Better Auth. Las rutas `/dashboard/*` validan la sesión en el layout del servidor y redirigen a `/auth/login` cuando no existe una sesión activa.
+
+Si `NEXT_PUBLIC_APP_URL` no está definida, el cliente usa el mismo origen que la aplicación. En despliegues con dominios separados, configura esta variable con la URL pública del servidor de autenticación.
 
 Para generar o aplicar el esquema de Better Auth, ejecuta desde la raíz del proyecto:
 
