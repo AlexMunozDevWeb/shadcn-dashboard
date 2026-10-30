@@ -12,6 +12,7 @@ import { Card, CardContent } from "@/modules/components//ui/card";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
+import { toast } from "sonner";
 
 const formSchema = z.object({
   username: z.string().trim().min(1, "El nombre de usuario es obligatorio."),
@@ -32,7 +33,9 @@ export default function LoginForm() {
   });
 
   function onSubmit(data: z.infer<typeof formSchema>) {
-    console.log(data);
+    toast.success("Form submitted", {
+      description: `Welcome, ${data.username}.`,
+    });
   }
 
   return (

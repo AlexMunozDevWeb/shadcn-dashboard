@@ -12,6 +12,7 @@ import {
   AlertDialogTrigger,
 } from "@/modules/components//ui/alert-dialog";
 import { Button } from "@/modules/components//ui/button";
+import { toast } from "sonner";
 
 export default function AlertDialogDemo() {
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -32,10 +33,12 @@ export default function AlertDialogDemo() {
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel onClick={() => console.log("cancel")}>
+            <AlertDialogCancel onClick={() => toast.info("Action cancelled.")}>
               Cancel
             </AlertDialogCancel>
-            <AlertDialogAction onClick={() => console.log("continue")}>
+            <AlertDialogAction
+              onClick={() => toast.success("Action confirmed.")}
+            >
               Continue
             </AlertDialogAction>
           </AlertDialogFooter>

@@ -7,7 +7,6 @@ import {
   ChevronRight,
   Download,
   GitBranch,
-  GitFork,
   Heart,
   Plus,
   RotateCw,

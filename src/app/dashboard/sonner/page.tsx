@@ -15,7 +15,7 @@ export default function SonnerDemo() {
             description: `Fecha: ${new Date()}`,
             action: {
               label: "Undo",
-              onClick: () => console.log("Undo"),
+              onClick: () => toast.info("Action reverted."),
             },
           })
         }
@@ -31,7 +31,7 @@ export default function SonnerDemo() {
             description: `Fecha: ${new Date()}`,
             action: {
               label: "Undo",
-              onClick: () => console.log("Undo"),
+              onClick: () => toast.info("Action reverted."),
             },
           })
         }
