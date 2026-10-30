@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { ArrowRight, Mail, ShieldCheck, User, Zap } from "lucide-react";
@@ -21,12 +21,12 @@ import { authClient } from "@/modules/lib/auth-client";
 export default function RegisterForm() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
 
   const {
     register,
     handleSubmit,
     control,
-    watch,
     setValue,
     formState: { errors },
   } = useForm<RegisterFormData>({
@@ -41,38 +41,35 @@ export default function RegisterForm() {
     },
   });
 
-  const selectedRole = watch("role");
+  const selectedRole = useWatch({ control, name: "role" });
 
   const onSubmit = async (dataForm: RegisterFormData) => {
-    const name = `${dataForm.firstName + " " + dataForm.lastName}`;
-    const email = dataForm.email;
-    const password = dataForm.password;
-    const { data, error } = await authClient.signUp.email(
+    setFormError(null);
+
+    await authClient.signUp.email(
       {
-        email, // user email address
-        password, // user password -> min 8 characters by default
-        name, // user display name
-        callbackURL: "/dashboard", // Verify email
+        email: dataForm.email,
+        password: dataForm.password,
+        name: `${dataForm.firstName} ${dataForm.lastName}`.trim(),
+        callbackURL: "/dashboard",
       },
       {
-        onRequest: (ctx) => {
-          console.log("Cargando...");
+        onRequest: () => {
           setIsLoading(true);
         },
-        onSuccess: (ctx) => {
-          console.log("Todo bien!", ctx);
+        onSuccess: () => {
           setIsLoading(false);
-          router.push("/");
+          toast.success("Account created successfully!", {
+            description: `Welcome to Paper Dashboard PRO, ${dataForm.firstName}!`,
+          });
+          router.push("/auth/login");
         },
         onError: (ctx) => {
-          alert(ctx.error.message);
+          setIsLoading(false);
+          setFormError(ctx.error.message || "No se pudo crear la cuenta.");
         },
       },
     );
-
-    toast.success("Account created successfully!", {
-      description: `Welcome to Paper Dashboard PRO, ${dataForm.firstName}!`,
-    });
   };
 
   return (
@@ -166,14 +163,21 @@ export default function RegisterForm() {
               <Label className="block font-heading text-xs font-bold tracking-wide uppercase text-foreground">
                 Your Role / Workspace
               </Label>
-              <div className="grid grid-cols-3 gap-2">
+              <div
+                className="grid grid-cols-3 gap-2"
+                role="group"
+                aria-label="Your role or workspace"
+              >
                 {ROLES.map((role) => {
                   const isSelected = selectedRole === role;
                   return (
                     <button
                       key={role}
                       type="button"
-                      onClick={() => setValue("role", role)}
+                      aria-pressed={isSelected}
+                      onClick={() =>
+                        setValue("role", role, { shouldValidate: true })
+                      }
                       className={`rounded-lg py-2 px-3 font-heading text-xs font-bold uppercase tracking-wider transition-all duration-200 active:scale-[0.98] ${
                         isSelected
                           ? "bg-primary text-primary-foreground shadow-xs"
@@ -185,6 +189,14 @@ export default function RegisterForm() {
                   );
                 })}
               </div>
+              {errors.role && (
+                <p
+                  role="alert"
+                  className="text-xs font-medium text-destructive"
+                >
+                  {errors.role.message}
+                </p>
+              )}
             </div>
 
             {/* Terms Checkbox */}
@@ -208,22 +220,14 @@ export default function RegisterForm() {
                 >
                   I agree to the{" "}
                   <Link
-                    href="#"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      toast.info("Terms of Service preview.");
-                    }}
+                    href="/legal/terms"
                     className="font-medium text-primary hover:underline"
                   >
                     Terms of Service
                   </Link>{" "}
                   and{" "}
                   <Link
-                    href="#"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      toast.info("Privacy Policy preview.");
-                    }}
+                    href="/legal/privacy"
                     className="font-medium text-primary hover:underline"
                   >
                     Privacy Policy
@@ -231,11 +235,23 @@ export default function RegisterForm() {
                 </Label>
               </div>
               {errors.terms && (
-                <p className="text-xs font-medium text-destructive">
+                <p
+                  role="alert"
+                  className="text-xs font-medium text-destructive"
+                >
                   {errors.terms.message}
                 </p>
               )}
             </div>
+
+            {formError && (
+              <p
+                role="alert"
+                className="rounded-lg border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive"
+              >
+                {formError}
+              </p>
+            )}
 
             {/* Submit Button */}
             <Button

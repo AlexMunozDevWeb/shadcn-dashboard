@@ -7,7 +7,7 @@ export default function AuthHeader() {
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-8">
         {/* Brand Logo */}
         <Link
-          href="#"
+          href="/auth/login"
           className="group flex items-center gap-2.5 transition-transform hover:scale-[1.02]"
         >
           <div className="flex size-9 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-[0_4px_8px_rgba(81,203,206,0.3)] transition-colors group-hover:bg-primary/90">
@@ -21,7 +21,7 @@ export default function AuthHeader() {
         {/* Right User Avatar Indicator */}
         <div className="flex items-center gap-3">
           <Link
-            href="#"
+            href="/auth/login"
             aria-label="User account"
             className="flex size-8 items-center justify-center rounded-full bg-primary/20 text-primary shadow-xs transition-transform hover:scale-105 active:scale-95 dark:bg-primary/30"
           >

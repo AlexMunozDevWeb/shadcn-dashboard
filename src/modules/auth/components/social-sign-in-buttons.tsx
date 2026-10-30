@@ -1,5 +1,9 @@
+"use client";
+
 import { authClient } from "@/modules/lib/auth-client";
 import Image from "next/image";
+import { useState } from "react";
+import { toast } from "sonner";
 
 type SocialSignInButtonsProps = {
   action: "sign-in" | "sign-up";
@@ -8,20 +12,33 @@ type SocialSignInButtonsProps = {
 export default function SocialSignInButtons({
   action,
 }: SocialSignInButtonsProps) {
+  const [isLoading, setIsLoading] = useState(false);
+  const actionLabel = action === "sign-up" ? "Sign up" : "Sign in";
+
   const handleGoogleSignIn = async () => {
-    const { data, error } = await authClient.signIn.social({
-      provider: "google",
-      callbackURL: "/dashboard",
-    });
-    console.log(JSON.stringify({ data, error }));
+    await handleSocialSignIn("google");
   };
 
   const handleGithubSignIn = async () => {
-    const { data, error } = await authClient.signIn.social({
-      provider: "github",
+    await handleSocialSignIn("github");
+  };
+
+  const handleSocialSignIn = async (provider: "google" | "github") => {
+    setIsLoading(true);
+    const { error } = await authClient.signIn.social({
+      provider,
       callbackURL: "/dashboard",
     });
-    console.log(JSON.stringify({ data, error }));
+
+    if (error) {
+      setIsLoading(false);
+      toast.error(
+        `No se pudo ${action === "sign-up" ? "crear la cuenta" : "iniciar sesión"}.`,
+        {
+          description: error.message,
+        },
+      );
+    }
   };
 
   return (
@@ -29,6 +46,8 @@ export default function SocialSignInButtons({
       <button
         type="button"
         onClick={handleGoogleSignIn}
+        disabled={isLoading}
+        aria-label={`${actionLabel} with Google`}
         className="group flex items-center justify-center gap-2 rounded-lg border border-border/60 bg-muted/60 px-3 py-2.5 font-heading text-xs font-semibold text-foreground transition-all duration-200 hover:border-primary/40 hover:bg-muted active:scale-[0.99]"
       >
         <Image
@@ -47,6 +66,8 @@ export default function SocialSignInButtons({
       <button
         type="button"
         onClick={handleGithubSignIn}
+        disabled={isLoading}
+        aria-label={`${actionLabel} with GitHub`}
         className="group flex items-center justify-center gap-2 rounded-lg border border-border/60 bg-muted/60 px-3 py-2.5 font-heading text-xs font-semibold text-foreground transition-all duration-200 hover:border-primary/40 hover:bg-muted active:scale-[0.99]"
       >
         <span

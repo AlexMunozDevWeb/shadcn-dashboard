@@ -47,13 +47,21 @@ export function AuthTextField({
           type={type}
           autoComplete={autoComplete}
           placeholder={placeholder}
+          aria-invalid={Boolean(error)}
+          aria-describedby={error ? `${id}-error` : undefined}
           className={`w-full bg-transparent py-2.5 font-sans text-sm text-foreground placeholder:text-muted-foreground focus:outline-none ${
             Icon ? "px-3" : "px-3.5"
           }`}
         />
       </div>
       {error && (
-        <p className="mt-1 text-xs font-medium text-destructive">{error}</p>
+        <p
+          id={`${id}-error`}
+          role="alert"
+          className="mt-1 text-xs font-medium text-destructive"
+        >
+          {error}
+        </p>
       )}
     </div>
   );

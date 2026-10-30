@@ -2,11 +2,38 @@ import { betterAuth } from "better-auth";
 import { Pool } from "pg";
 import { Resend } from "resend";
 
+const databaseUrl = process.env.DATABASE_URL;
+if (!databaseUrl) {
+  throw new Error("DATABASE_URL must be configured.");
+}
+
+const resendApiKey = process.env.RESEND_API_KEY;
+const resend = resendApiKey ? new Resend(resendApiKey) : null;
+
+const socialProviders = {
+  ...(process.env.GITHUB_CLIENT_ID && process.env.GITHUB_CLIENT_SECRET
+    ? {
+        github: {
+          clientId: process.env.GITHUB_CLIENT_ID,
+          clientSecret: process.env.GITHUB_CLIENT_SECRET,
+        },
+      }
+    : {}),
+  ...(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET
+    ? {
+        google: {
+          clientId: process.env.GOOGLE_CLIENT_ID,
+          clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        },
+      }
+    : {}),
+};
+
 export const auth = betterAuth({
   plugins: [],
   // Database
   database: new Pool({
-    connectionString: process.env.DATABASE_URL,
+    connectionString: databaseUrl,
     ssl: true,
   }),
 
@@ -21,42 +48,25 @@ export const auth = betterAuth({
     autoSignInAfterVerification: true,
 
     sendVerificationEmail: async ({ user, url }) => {
-      const apiKey = process.env.RESEND_API_KEY;
-      if (!apiKey) {
-        throw new Error("Falta configurar RESEND_API_KEY.");
+      if (!resend) {
+        throw new Error("RESEND_API_KEY must be configured.");
       }
 
-      const resend = new Resend(apiKey);
-      void resend.emails
-        .send({
-          from: "Mi aplicación <onboarding@resend.dev>",
-          to: user.email,
-          subject: "Verifica tu correo",
-          text: `Para verificar tu correo, abre este enlace: ${url}`,
-        })
-        .then(({ error }) => {
-          if (error) {
-            console.error(
-              "No se pudo enviar el correo de verificación:",
-              error,
-            );
-          }
-        })
-        .catch((error: unknown) => {
-          console.error("Falló el envío del correo de verificación:", error);
+      const { error } = await resend.emails.send({
+        from: "Mi aplicación <onboarding@resend.dev>",
+        to: user.email,
+        subject: "Verifica tu correo",
+        text: `Para verificar tu correo, abre este enlace: ${url}`,
+      });
+
+      if (error) {
+        throw new Error("Unable to send verification email.", {
+          cause: error,
         });
+      }
     },
   },
 
   // Proveedores
-  socialProviders: {
-    github: {
-      clientId: process.env.GITHUB_CLIENT_ID as string,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
-    },
-    google: {
-      clientId: process.env.GOOGLE_CLIENT_ID as string,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-    },
-  },
+  socialProviders,
 });

@@ -3,7 +3,6 @@
 import { toast } from "sonner";
 import Link from "next/link";
 
-import { useRouter } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -41,9 +40,9 @@ const loginSchema = z.object({
 type LoginFormData = z.infer<typeof loginSchema>;
 
 export default function LoginForm() {
-  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
 
   const {
     register,
@@ -60,51 +59,40 @@ export default function LoginForm() {
   });
 
   const onSubmit = async (dataForm: LoginFormData) => {
-    const email = dataForm.email;
-    const password = dataForm.password;
+    setFormError(null);
 
-    const { data, error } = await authClient.signIn.email(
+    await authClient.signIn.email(
       {
-        /* The user email */
-        email,
-        /*The user password */
-        password,
-        /* A URL to redirect to after the user verifies their email (optional) */
+        email: dataForm.email,
+        password: dataForm.password,
         callbackURL: "/dashboard",
-        /**
-         * remember the user session after the browser is closed.
-         * @default true
-         */
-        rememberMe: false,
+        rememberMe: dataForm.rememberMe,
       },
       {
         onRequest: () => {
-          console.log("Loading...");
           setIsLoading(true);
         },
         onSuccess: () => {
-          console.log("Success");
           setIsLoading(false);
           toast.success("Welcome back! Redirecting to Dashboard...", {
             description: `Logged in as ${dataForm.email}`,
           });
         },
         onError: async (ctx) => {
+          setIsLoading(false);
+
           if (ctx.error.status === 403) {
-            alert("El email no ha sido verificado.");
+            setFormError(
+              "El email no ha sido verificado. Revisa tu bandeja de entrada.",
+            );
             await authClient.sendVerificationEmail({
-              email: email,
+              email: dataForm.email,
               callbackURL: "/",
             });
             return;
           }
 
-          if (ctx.error.status === 403) {
-            alert("El email no ha sido verificado. Por favor ");
-          }
-          console.log({ ContextError: ctx.error });
-          console.log("Credenciales no correctas");
-          return;
+          setFormError(ctx.error.message || "No se pudo iniciar sesión.");
         },
       },
     );
@@ -193,6 +181,10 @@ export default function LoginForm() {
                   type={showPassword ? "text" : "password"}
                   autoComplete="current-password"
                   placeholder="••••••••"
+                  aria-invalid={Boolean(errors.password)}
+                  aria-describedby={
+                    errors.password ? "password-error" : undefined
+                  }
                   className="w-full bg-transparent px-3 py-2.5 font-sans text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
                 />
                 <button
@@ -209,11 +201,24 @@ export default function LoginForm() {
                 </button>
               </div>
               {errors.password && (
-                <p className="text-xs text-destructive mt-1 font-medium">
+                <p
+                  id="password-error"
+                  role="alert"
+                  className="mt-1 text-xs font-medium text-destructive"
+                >
                   {errors.password.message}
                 </p>
               )}
             </div>
+
+            {formError && (
+              <p
+                role="alert"
+                className="rounded-lg border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive"
+              >
+                {formError}
+              </p>
+            )}
 
             {/* Options: Remember me & Forgot password */}
             <div className="flex items-center justify-between pt-1">
@@ -237,7 +242,7 @@ export default function LoginForm() {
                 </Label>
               </div>
               <Link
-                href="/login"
+                href="/auth/login"
                 onClick={(e) => {
                   e.preventDefault();
                   toast.info(
