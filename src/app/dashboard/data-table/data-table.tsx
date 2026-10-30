@@ -41,8 +41,6 @@ import {
 
 import { features, type DataTableFeatures } from "./data-table-features";
 
-import { Payment } from "@/modules/data/payment";
-
 interface DataTableProps<TData extends RowData> {
   columns: ColumnDef<DataTableFeatures, TData>[];
   data: TData[];
@@ -64,6 +62,7 @@ export default function DataTable<TData extends RowData>({
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [currentStatus, setCurrentStatus] = useState<string | null>(null);
   const [rowSelection, setRowSelection] = useState({});
+  const [removedRows, setRemovedRows] = useState<TData[]>([]);
   const isDeleteActive = Object.keys(rowSelection).length > 0;
 
   const [columnVisibility, setColumnVisibility] =
@@ -71,7 +70,7 @@ export default function DataTable<TData extends RowData>({
 
   const table = useTable({
     features,
-    data,
+    data: data.filter((item) => !removedRows.includes(item)),
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -129,10 +128,12 @@ export default function DataTable<TData extends RowData>({
             <Button
               variant="destructive"
               onClick={() => {
-                const ids = table.getSelectedRowModel().rows.map((row) => {
-                  return (row.original as Payment).clientName;
-                });
-                console.log(ids);
+                const selectedRows = table.getSelectedRowModel().rows;
+                setRemovedRows((current) => [
+                  ...current,
+                  ...selectedRows.map((row) => row.original),
+                ]);
+                setRowSelection({});
               }}
             >
               Delete

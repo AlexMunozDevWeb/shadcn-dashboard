@@ -43,8 +43,7 @@ const myCustomFilterFn: FilterFn<DataTableFeatures, Payment> = (
   filterValue = filterValue.toLowerCase();
   const filterParts = filterValue.split(" ");
   const rowValues =
-    `${row.original.clientName} ${row.original.clientName} ${row.original.status}`.toLowerCase();
-  console.log(rowValues);
+    `${row.original.clientName} ${row.original.email} ${row.original.status}`.toLowerCase();
 
   return filterParts.every((part) => rowValues.includes(part));
 };
