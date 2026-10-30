@@ -17,6 +17,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { usePaperTheme } from "./theme-provider";
+import { uiText } from "@/modules/data/ui-text";
 
 export type NavSubItem = {
   name: string;
@@ -31,66 +32,74 @@ export type NavItem = {
 };
 
 export const navItems: NavItem[] = [
-  { name: "Dashboard", href: "/dashboard", icon: Gauge },
+  { name: uiText.navigation.dashboard, href: "/dashboard", icon: Gauge },
   {
-    name: "Pages",
+    name: uiText.navigation.pages,
     icon: Copy,
     children: [
-      { name: "Profile", href: "/dashboard" },
-      { name: "Pricing", href: "/dashboard/card" },
-      { name: "Timeline", href: "/dashboard/progress" },
-      { name: "Login Modal", href: "/dashboard/dialog" },
-      { name: "Register Drawer", href: "/dashboard/sheet" },
+      { name: uiText.navigation.profile, href: "/dashboard" },
+      { name: uiText.navigation.pricing, href: "/dashboard/card" },
+      { name: uiText.navigation.timeline, href: "/dashboard/progress" },
+      { name: uiText.navigation.loginModal, href: "/dashboard/dialog" },
+      { name: uiText.navigation.registerDrawer, href: "/dashboard/sheet" },
     ],
   },
   {
-    name: "Components",
+    name: uiText.navigation.components,
     icon: Boxes,
     children: [
-      { name: "Buttons", href: "/dashboard/button" },
-      { name: "Cards", href: "/dashboard/card" },
-      { name: "Badges", href: "/dashboard/badge" },
-      { name: "Alerts", href: "/dashboard/alert" },
-      { name: "Dialogs", href: "/dashboard/dialog" },
-      { name: "Tabs", href: "/dashboard/tabs" },
-      { name: "Toasts & Sonner", href: "/dashboard/toast" },
-      { name: "Checkbox & Select", href: "/dashboard/checkbox" },
-      { name: "Sliders", href: "/dashboard/slider" },
-      { name: "Accordions", href: "/dashboard/accordion" },
-      { name: "Avatars", href: "/dashboard/avatar" },
+      { name: uiText.navigation.buttons, href: "/dashboard/button" },
+      { name: uiText.navigation.cards, href: "/dashboard/card" },
+      { name: uiText.navigation.badges, href: "/dashboard/badges" },
+      { name: uiText.navigation.alerts, href: "/dashboard/alert" },
+      { name: uiText.navigation.dialogs, href: "/dashboard/dialog" },
+      { name: uiText.navigation.tabs, href: "/dashboard/tabs" },
+      { name: uiText.navigation.toasts, href: "/dashboard/toast" },
+      { name: uiText.navigation.checkboxSelect, href: "/dashboard/checkbox" },
+      { name: uiText.navigation.sliders, href: "/dashboard/slider" },
+      { name: uiText.navigation.accordions, href: "/dashboard/accordion" },
+      { name: uiText.navigation.avatars, href: "/dashboard/avatar" },
     ],
   },
   {
-    name: "Forms",
+    name: uiText.navigation.forms,
     icon: PenTool,
     children: [
-      { name: "Input OTP", href: "/dashboard/input-opt" },
-      { name: "Combobox", href: "/dashboard/combobox" },
-      { name: "Carousels", href: "/dashboard/carousel" },
-      { name: "Form", href: "/dashboard/form" },
+      { name: uiText.navigation.inputOtp, href: "/dashboard/input-opt" },
+      { name: uiText.navigation.combobox, href: "/dashboard/combobox" },
+      { name: uiText.navigation.carousels, href: "/dashboard/carousel" },
+      { name: uiText.navigation.form, href: "/dashboard/form" },
     ],
   },
   {
-    name: "Tables",
+    name: uiText.navigation.tables,
     icon: Table,
     children: [
-      { name: "Command Palette", href: "/dashboard/command" },
-      { name: "Menubar", href: "/dashboard/menubar" },
-      { name: "Context Menu", href: "/dashboard/context-menu" },
-      { name: "Data Table", href: "/dashboard/data-table" },
+      { name: uiText.navigation.commandPalette, href: "/dashboard/command" },
+      { name: uiText.navigation.menubar, href: "/dashboard/menubar" },
+      { name: uiText.navigation.contextMenu, href: "/dashboard/context-menu" },
+      { name: uiText.navigation.dataTable, href: "/dashboard/data-table" },
     ],
   },
   {
-    name: "Maps",
+    name: uiText.navigation.maps,
     icon: Map,
     children: [
-      { name: "Vector Heatmap", href: "/dashboard" },
-      { name: "Skeleton Loader", href: "/dashboard/skeleton" },
+      { name: uiText.navigation.vectorHeatmap, href: "/dashboard" },
+      { name: uiText.navigation.skeletonLoader, href: "/dashboard/skeleton" },
     ],
   },
-  { name: "Widgets", href: "/dashboard/shadcn", icon: Archive },
-  { name: "Charts", href: "/dashboard/progress", icon: BarChart3 },
-  { name: "Calendar", href: "/dashboard/calendar", icon: CalendarDays },
+  { name: uiText.navigation.widgets, href: "/dashboard/shadcn", icon: Archive },
+  {
+    name: uiText.navigation.charts,
+    href: "/dashboard/progress",
+    icon: BarChart3,
+  },
+  {
+    name: uiText.navigation.calendar,
+    href: "/dashboard/calendar",
+    icon: CalendarDays,
+  },
 ];
 
 export default function SidebarLinks() {

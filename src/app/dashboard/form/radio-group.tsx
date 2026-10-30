@@ -30,27 +30,28 @@ import {
   RadioGroup,
   RadioGroupItem,
 } from "@/modules/components//ui/radio-group";
+import { uiText } from "@/modules/data/ui-text";
 
 const plans = [
   {
     id: "starter",
-    title: "Starter (100K tokens/month)",
-    description: "For everyday use with basic features.",
+    title: uiText.demo.form.starter,
+    description: uiText.demo.form.starterDescription,
   },
   {
     id: "pro",
-    title: "Pro (1M tokens/month)",
-    description: "For advanced AI usage with more features.",
+    title: uiText.demo.form.pro,
+    description: uiText.demo.form.proDescription,
   },
   {
     id: "enterprise",
-    title: "Enterprise (Unlimited tokens)",
-    description: "For large teams and heavy usage.",
+    title: uiText.demo.form.enterprise,
+    description: uiText.demo.form.enterpriseDescription,
   },
 ] as const;
 
 const formSchema = z.object({
-  plan: z.string().min(1, "You must select a subscription plan to continue."),
+  plan: z.string().min(1, uiText.demo.form.planRequired),
 });
 
 export default function FormRhfRadioGroup() {
@@ -62,7 +63,7 @@ export default function FormRhfRadioGroup() {
   });
 
   function onSubmit(data: z.infer<typeof formSchema>) {
-    toast("You submitted the following values:", {
+    toast(uiText.demo.form.submittedValues, {
       description: (
         <pre className="mt-2 w-[320px] overflow-x-auto rounded-md bg-code p-4 text-code-foreground">
           <code>{JSON.stringify(data, null, 2)}</code>
@@ -81,9 +82,9 @@ export default function FormRhfRadioGroup() {
   return (
     <Card className="w-full sm:max-w-md">
       <CardHeader>
-        <CardTitle>Subscription Plan</CardTitle>
+        <CardTitle>{uiText.demo.form.subscriptionTitle}</CardTitle>
         <CardDescription>
-          See pricing and features for each plan.
+          {uiText.demo.form.subscriptionDescription}
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -94,9 +95,9 @@ export default function FormRhfRadioGroup() {
               control={form.control}
               render={({ field, fieldState }) => (
                 <FieldSet data-invalid={fieldState.invalid}>
-                  <FieldLegend>Plan</FieldLegend>
+                  <FieldLegend>{uiText.demo.form.plan}</FieldLegend>
                   <FieldDescription>
-                    You can upgrade or downgrade your plan at any time.
+                    {uiText.demo.form.planDescription}
                   </FieldDescription>
                   <RadioGroup
                     name={field.name}
@@ -140,10 +141,10 @@ export default function FormRhfRadioGroup() {
       <CardFooter>
         <Field orientation="horizontal">
           <Button type="button" variant="outline" onClick={() => form.reset()}>
-            Reset
+            {uiText.demo.form.reset}
           </Button>
           <Button type="submit" form="form-rhf-radiogroup">
-            Save
+            {uiText.demo.form.save}
           </Button>
         </Field>
       </CardFooter>

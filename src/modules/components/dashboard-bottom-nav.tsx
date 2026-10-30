@@ -3,12 +3,17 @@ import { usePathname } from "next/navigation";
 import { BarChart3, Gauge, Map, Plus, Settings } from "lucide-react";
 import { cn } from "@/modules/lib/utils";
 import { usePaperTheme } from "./theme-provider";
+import { uiText } from "@/modules/data/ui-text";
 
 const bottomTabs = [
-  { name: "Dashboard", href: "/dashboard", icon: Gauge },
-  { name: "Widgets", href: "/dashboard/shadcn", icon: BarChart3 },
-  { name: "Components", href: "/dashboard/button", icon: Map },
-  { name: "Settings", href: "/dashboard/card", icon: Settings },
+  { name: uiText.navigation.dashboard, href: "/dashboard", icon: Gauge },
+  {
+    name: uiText.navigation.widgets,
+    href: "/dashboard/shadcn",
+    icon: BarChart3,
+  },
+  { name: uiText.navigation.components, href: "/dashboard/button", icon: Map },
+  { name: uiText.navigation.settings, href: "/dashboard/card", icon: Settings },
 ];
 
 function BottomTab({
@@ -57,7 +62,7 @@ export default function DashboardBottomNav() {
         <div className="flex items-center justify-center px-1">
           <button
             type="button"
-            aria-label="Acción rápida"
+            aria-label={uiText.dashboard.addTask}
             className="-mt-4 flex h-11 w-11 items-center justify-center rounded-full text-white shadow-lg transition duration-200 hover:scale-105 active:scale-95 dark:text-primary-foreground"
             style={{ backgroundColor: activeAccentHex }}
           >

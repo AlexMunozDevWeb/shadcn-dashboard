@@ -1,32 +1,33 @@
 import { z } from "zod";
+import { uiText } from "@/modules/data/ui-text";
 
-export const ROLES = ["Developer", "Designer", "Manager"] as const;
+export const ROLES = uiText.auth.roles;
 
 export const registerSchema = z.object({
   firstName: z
     .string()
     .trim()
-    .min(1, "First name is required.")
-    .min(2, "First name must have at least 2 characters."),
+    .min(1, uiText.auth.firstNameRequired)
+    .min(2, uiText.auth.firstNameMin),
   lastName: z
     .string()
     .trim()
-    .min(1, "Last name is required.")
-    .min(2, "Last name must have at least 2 characters."),
+    .min(1, uiText.auth.lastNameRequired)
+    .min(2, uiText.auth.lastNameMin),
   email: z
     .string()
     .trim()
-    .min(1, "Work email is required.")
-    .email("Please enter a valid email address."),
+    .min(1, uiText.auth.workEmailRequired)
+    .email(uiText.auth.emailInvalid),
   password: z
     .string()
-    .min(1, "Password is required.")
-    .min(8, "Password must have at least 8 characters."),
+    .min(1, uiText.auth.passwordRequired)
+    .min(8, uiText.auth.passwordMinRegister),
   role: z.enum(ROLES, {
-    message: "Please select your primary role.",
+    message: uiText.auth.roleRequired,
   }),
   terms: z.boolean().refine((val) => val === true, {
-    message: "You must accept the terms of service and privacy policy.",
+    message: uiText.auth.termsRequired,
   }),
 });
 

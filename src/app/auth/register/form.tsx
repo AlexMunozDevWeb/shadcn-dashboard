@@ -17,6 +17,7 @@ import SocialSignInButtons from "@/modules/auth/components/social-sign-in-button
 import { ROLES, registerSchema } from "./schema";
 import type { RegisterFormData } from "./schema";
 import { authClient } from "@/modules/lib/auth-client";
+import { uiText } from "@/modules/data/ui-text";
 
 export default function RegisterForm() {
   const router = useRouter();
@@ -59,14 +60,14 @@ export default function RegisterForm() {
         },
         onSuccess: () => {
           setIsLoading(false);
-          toast.success("Account created successfully!", {
-            description: `Welcome to Paper Dashboard PRO, ${dataForm.firstName}!`,
+          toast.success(uiText.auth.accountCreated, {
+            description: `${uiText.auth.welcome}, ${dataForm.firstName}!`,
           });
           router.push("/auth/login");
         },
         onError: (ctx) => {
           setIsLoading(false);
-          setFormError(ctx.error.message || "No se pudo crear la cuenta.");
+          setFormError(ctx.error.message || uiText.auth.accountFailed);
         },
       },
     );
@@ -90,13 +91,13 @@ export default function RegisterForm() {
           {/* Header Badge & Title */}
           <div className="text-center">
             <span className="inline-block rounded-full bg-primary/15 px-3 py-1 font-heading text-[11px] font-bold tracking-wider uppercase text-primary">
-              Get Started
+              {uiText.auth.getStarted}
             </span>
             <h1 className="mt-2 font-heading text-2xl font-bold tracking-tight text-foreground sm:text-[28px]">
-              Create an Account
+              {uiText.auth.registerTitle}
             </h1>
             <p className="mx-auto mt-1 max-w-sm text-xs text-muted-foreground sm:text-sm">
-              Join over 45,000+ developers and teams using Paper PRO.
+              {uiText.auth.registerSubtitle}
             </p>
           </div>
 
@@ -107,7 +108,7 @@ export default function RegisterForm() {
           <div className="relative my-6 flex items-center justify-center">
             <div className="h-px w-full bg-border/70" />
             <span className="absolute bg-card px-3 font-heading text-[11px] font-semibold tracking-wider uppercase text-muted-foreground">
-              or sign up with email
+              {uiText.auth.signUpWithEmail}
             </span>
           </div>
 
@@ -121,19 +122,19 @@ export default function RegisterForm() {
             {/* First Name & Last Name */}
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               <AuthTextField
-                label="First Name"
+                label={uiText.auth.firstName}
                 id="first-name"
                 type="text"
-                placeholder="Eleanor"
+                placeholder={uiText.auth.firstNamePlaceholder}
                 registration={register("firstName")}
                 error={errors.firstName?.message}
                 icon={User}
               />
               <AuthTextField
-                label="Last Name"
+                label={uiText.auth.lastName}
                 id="last-name"
                 type="text"
-                placeholder="Vance"
+                placeholder={uiText.auth.lastNamePlaceholder}
                 registration={register("lastName")}
                 error={errors.lastName?.message}
               />
@@ -141,11 +142,11 @@ export default function RegisterForm() {
 
             {/* Work Email */}
             <AuthTextField
-              label="Work Email"
+              label={uiText.auth.workEmail}
               id="work-email"
               type="email"
               autoComplete="email"
-              placeholder="eleanor@company.design"
+              placeholder={uiText.auth.workEmailPlaceholder}
               registration={register("email")}
               error={errors.email?.message}
               icon={Mail}
@@ -161,12 +162,12 @@ export default function RegisterForm() {
             {/* Role / Workspace Selector */}
             <div className="space-y-1.5 pt-1">
               <Label className="block font-heading text-xs font-bold tracking-wide uppercase text-foreground">
-                Your Role / Workspace
+                {uiText.auth.roleLabel}
               </Label>
               <div
                 className="grid grid-cols-3 gap-2"
                 role="group"
-                aria-label="Your role or workspace"
+                aria-label={uiText.auth.roleGroup}
               >
                 {ROLES.map((role) => {
                   const isSelected = selectedRole === role;
@@ -218,19 +219,19 @@ export default function RegisterForm() {
                   htmlFor="terms"
                   className="cursor-pointer select-none text-xs leading-relaxed text-muted-foreground"
                 >
-                  I agree to the{" "}
+                  {uiText.auth.agreeTo}{" "}
                   <Link
                     href="/legal/terms"
                     className="font-medium text-primary hover:underline"
                   >
-                    Terms of Service
+                    {uiText.auth.terms}
                   </Link>{" "}
-                  and{" "}
+                  {uiText.auth.and}{" "}
                   <Link
                     href="/legal/privacy"
                     className="font-medium text-primary hover:underline"
                   >
-                    Privacy Policy
+                    {uiText.auth.privacy}
                   </Link>
                 </Label>
               </div>
@@ -260,7 +261,9 @@ export default function RegisterForm() {
               className="mt-4 h-11 w-full gap-2 rounded-lg bg-primary font-heading text-xs font-bold tracking-wider uppercase text-primary-foreground shadow-[0_4px_12px_rgba(81,203,206,0.35)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/95 hover:shadow-[0_6px_16px_rgba(81,203,206,0.5)] active:translate-y-0 sm:text-sm"
             >
               <span>
-                {isLoading ? "Creating Account..." : "Create Account"}
+                {isLoading
+                  ? uiText.auth.creatingAccount
+                  : uiText.auth.createAccount}
               </span>
               <ArrowRight className="size-4" />
             </Button>
@@ -268,12 +271,12 @@ export default function RegisterForm() {
 
           {/* Switch to Log In */}
           <div className="mt-6 border-t border-border/70 pt-4 text-center text-xs text-muted-foreground sm:text-sm">
-            Already have an account?{" "}
+            {uiText.auth.loginQuestion}{" "}
             <Link
               href="/auth/login"
               className="font-semibold text-primary transition-colors hover:underline ml-1"
             >
-              Log in
+              {uiText.auth.login}
             </Link>
           </div>
         </div>

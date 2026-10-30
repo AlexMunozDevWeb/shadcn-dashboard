@@ -6,6 +6,7 @@ import {
   AvatarGroupCount,
   AvatarImage,
 } from "@/modules/components//ui/avatar";
+import { uiText } from "@/modules/data/ui-text";
 
 export default function AvatarDemo() {
   return (
@@ -13,37 +14,40 @@ export default function AvatarDemo() {
       <Avatar>
         <AvatarImage
           src="https://github.com/shadcn.png"
-          alt="@shadcn"
+          alt={uiText.demo.avatar.shadcn}
           className="grayscale"
         />
-        <AvatarFallback>CN</AvatarFallback>
+        <AvatarFallback>{uiText.demo.avatar.cn}</AvatarFallback>
       </Avatar>
       <Avatar>
         <AvatarImage
           src="https://github.com/evilrabbit.png"
-          alt="@evilrabbit"
+          alt={uiText.demo.avatar.evilrabbit}
         />
-        <AvatarFallback>ER</AvatarFallback>
+        <AvatarFallback>{uiText.demo.avatar.er}</AvatarFallback>
         <AvatarBadge className="bg-green-600 dark:bg-green-800" />
       </Avatar>
       <AvatarGroup className="grayscale">
         <Avatar>
-          <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-          <AvatarFallback>CN</AvatarFallback>
+          <AvatarImage
+            src="https://github.com/shadcn.png"
+            alt={uiText.demo.avatar.shadcn}
+          />
+          <AvatarFallback>{uiText.demo.avatar.cn}</AvatarFallback>
         </Avatar>
         <Avatar>
           <AvatarImage
             src="https://github.com/maxleiter.png"
-            alt="@maxleiter"
+            alt={uiText.demo.avatar.maxleiter}
           />
-          <AvatarFallback>LR</AvatarFallback>
+          <AvatarFallback>{uiText.demo.avatar.lr}</AvatarFallback>
         </Avatar>
         <Avatar>
           <AvatarImage
             src="https://github.com/evilrabbit.png"
-            alt="@evilrabbit"
+            alt={uiText.demo.avatar.evilrabbit}
           />
-          <AvatarFallback>ER</AvatarFallback>
+          <AvatarFallback>{uiText.demo.avatar.er}</AvatarFallback>
         </Avatar>
         <AvatarGroupCount>+3</AvatarGroupCount>
       </AvatarGroup>

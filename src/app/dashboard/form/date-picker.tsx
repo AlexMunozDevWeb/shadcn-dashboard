@@ -27,10 +27,11 @@ import {
 import { Input } from "@/modules/components//ui/input";
 import { Calendar } from "@/modules/components//ui/calendar";
 import { CalendarDays } from "lucide-react";
+import { uiText } from "@/modules/data/ui-text";
 
 const formSchema = z.object({
-  eventName: z.string().trim().min(1, "Escribe el nombre del evento."),
-  date: z.date("Selecciona una fecha para el evento."),
+  eventName: z.string().trim().min(1, uiText.demo.form.eventRequired),
+  date: z.date(uiText.demo.form.dateRequired),
 });
 
 export default function FormDatePicker() {
@@ -44,7 +45,7 @@ export default function FormDatePicker() {
   });
 
   function onSubmit(data: z.infer<typeof formSchema>) {
-    toast("Evento guardado", {
+    toast(uiText.demo.form.eventSaved, {
       description: `${data.eventName} · ${format(data.date, "PPP", { locale: es })}`,
       position: "bottom-right",
     });
@@ -53,10 +54,8 @@ export default function FormDatePicker() {
   return (
     <Card className="w-full sm:max-w-md">
       <CardHeader>
-        <CardTitle>Programar un evento</CardTitle>
-        <CardDescription>
-          Indica el nombre y la fecha del evento.
-        </CardDescription>
+        <CardTitle>{uiText.demo.form.eventTitle}</CardTitle>
+        <CardDescription>{uiText.demo.form.eventDescription}</CardDescription>
       </CardHeader>
       <CardContent>
         <form
@@ -71,7 +70,7 @@ export default function FormDatePicker() {
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
                   <FieldLabel htmlFor="form-rhf-date-picker-event-name">
-                    Nombre del evento
+                    {uiText.demo.form.eventName}
                   </FieldLabel>
                   <Input
                     {...field}
@@ -82,7 +81,7 @@ export default function FormDatePicker() {
                         ? "form-rhf-date-picker-event-name-error"
                         : undefined
                     }
-                    placeholder="Ej. Reunión de equipo"
+                    placeholder={uiText.demo.form.eventPlaceholder}
                     autoComplete="off"
                     required
                   />
@@ -101,7 +100,7 @@ export default function FormDatePicker() {
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
                   <FieldLabel htmlFor="form-rhf-date-picker-date">
-                    Fecha
+                    {uiText.demo.form.date}
                   </FieldLabel>
                   <Popover.Root
                     open={datePickerOpen}
@@ -126,7 +125,7 @@ export default function FormDatePicker() {
                       <span>
                         {field.value
                           ? format(field.value, "PPP", { locale: es })
-                          : "Selecciona una fecha"}
+                          : uiText.demo.form.selectDate}
                       </span>
                       <CalendarDays aria-hidden="true" />
                     </Popover.Trigger>
@@ -168,7 +167,7 @@ export default function FormDatePicker() {
       </CardContent>
       <CardFooter className="justify-end">
         <Button type="submit" form="form-rhf-date-picker">
-          Guardar evento
+          {uiText.demo.form.saveEvent}
         </Button>
       </CardFooter>
     </Card>

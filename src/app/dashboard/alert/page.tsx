@@ -4,34 +4,32 @@ import {
   AlertDescription,
   AlertTitle,
 } from "@/modules/components/ui/alert";
+import { uiText } from "@/modules/data/ui-text";
 
 export default function PageDemo() {
   return (
     <div className="grid w-full max-w-md items-start gap-4">
       <Alert>
         <RocketIcon />
-        <AlertTitle>Payment successful</AlertTitle>
+        <AlertTitle>{uiText.demo.alert.paymentSuccessful}</AlertTitle>
         <AlertDescription>
-          Your payment of $29.99 has been processed. A receipt has been sent to
-          your email address.
+          {uiText.demo.alert.paymentDescription}
         </AlertDescription>
       </Alert>
 
       <Alert variant="destructive">
         <InfoIcon />
-        <AlertTitle>New feature available</AlertTitle>
+        <AlertTitle>{uiText.demo.alert.featureAvailable}</AlertTitle>
         <AlertDescription>
-          We&apos;ve added dark mode support. You can enable it in your account
-          settings.
+          {uiText.demo.alert.featureDescription}
         </AlertDescription>
       </Alert>
 
       <Alert variant="success">
         <CheckIcon />
-        <AlertTitle>Success!</AlertTitle>
+        <AlertTitle>{uiText.demo.alert.success}</AlertTitle>
         <AlertDescription>
-          We&apos;ve added dark mode support. You can enable it in your account
-          settings.
+          {uiText.demo.alert.featureDescription}
         </AlertDescription>
       </Alert>
     </div>

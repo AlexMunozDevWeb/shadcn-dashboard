@@ -8,12 +8,15 @@ import {
   InputOTPGroup,
   InputOTPSlot,
 } from "@/modules/components//ui/input-otp";
+import { uiText } from "@/modules/data/ui-text";
 
 export default function InputOTPPattern() {
   return (
     <div className="flex flex-col gap-4">
       <Field className="w-fit">
-        <FieldLabel htmlFor="digits-only">Digits Only</FieldLabel>
+        <FieldLabel htmlFor="digits-only">
+          {uiText.demo.inputOtp.digitsOnly}
+        </FieldLabel>
         <InputOTP id="digits-only" maxLength={6} pattern={REGEXP_ONLY_DIGITS}>
           <InputOTPGroup>
             <InputOTPSlot index={0} />

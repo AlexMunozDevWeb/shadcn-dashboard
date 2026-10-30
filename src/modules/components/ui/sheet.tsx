@@ -6,6 +6,7 @@ import { cn } from "cn";
 
 import { Button } from "@/modules/components/ui/button";
 import { XIcon } from "lucide-react";
+import { uiText } from "@/modules/data/ui-text";
 
 function Sheet({ ...props }: SheetPrimitive.Root.Props) {
   return <SheetPrimitive.Root data-slot="sheet" {...props} />;
@@ -71,7 +72,7 @@ function SheetContent({
             }
           >
             <XIcon />
-            <span className="sr-only">Close</span>
+            <span className="sr-only">{uiText.accessibility.close}</span>
           </SheetPrimitive.Close>
         )}
       </SheetPrimitive.Popup>

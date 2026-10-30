@@ -13,6 +13,7 @@ import {
   OctagonXIcon,
   Loader2Icon,
 } from "lucide-react";
+import { uiText } from "@/modules/data/ui-text";
 
 const toast = ToastPrimitive.createToastManager();
 
@@ -124,7 +125,7 @@ function ToastClose({
   return (
     <ToastPrimitive.Close
       data-slot="toast-close"
-      aria-label="Close toast"
+      aria-label={uiText.accessibility.closeToast}
       render={render}
       className={cn(
         "relative shrink-0 text-muted-foreground after:absolute after:-inset-2 after:content-[''] hover:text-foreground",

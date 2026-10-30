@@ -14,31 +14,33 @@ import {
   MenubarSubTrigger,
   MenubarTrigger,
 } from "@/modules/components//ui/menubar";
+import { uiText } from "@/modules/data/ui-text";
 
 export default function MenubarDemo() {
   return (
     <Menubar className="w-72">
       <MenubarMenu>
-        <MenubarTrigger>File</MenubarTrigger>
+        <MenubarTrigger>{uiText.demo.menubar.file}</MenubarTrigger>
         <MenubarContent>
           <MenubarGroup>
             <MenubarItem>
-              New Tab <MenubarShortcut>⌘T</MenubarShortcut>
+              {uiText.demo.menubar.newTab} <MenubarShortcut>⌘T</MenubarShortcut>
             </MenubarItem>
             <MenubarItem>
-              New Window <MenubarShortcut>⌘N</MenubarShortcut>
+              {uiText.demo.menubar.newWindow}{" "}
+              <MenubarShortcut>⌘N</MenubarShortcut>
             </MenubarItem>
-            <MenubarItem disabled>New Incognito Window</MenubarItem>
+            <MenubarItem disabled>{uiText.demo.menubar.incognito}</MenubarItem>
           </MenubarGroup>
           <MenubarSeparator />
           <MenubarGroup>
             <MenubarSub>
-              <MenubarSubTrigger>Share</MenubarSubTrigger>
+              <MenubarSubTrigger>{uiText.demo.menubar.share}</MenubarSubTrigger>
               <MenubarSubContent>
                 <MenubarGroup>
-                  <MenubarItem>Email link</MenubarItem>
-                  <MenubarItem>Messages</MenubarItem>
-                  <MenubarItem>Notes</MenubarItem>
+                  <MenubarItem>{uiText.demo.menubar.emailLink}</MenubarItem>
+                  <MenubarItem>{uiText.demo.menubar.messages}</MenubarItem>
+                  <MenubarItem>{uiText.demo.menubar.notes}</MenubarItem>
                 </MenubarGroup>
               </MenubarSubContent>
             </MenubarSub>
@@ -46,88 +48,99 @@ export default function MenubarDemo() {
           <MenubarSeparator />
           <MenubarGroup>
             <MenubarItem>
-              Print... <MenubarShortcut>⌘P</MenubarShortcut>
+              {uiText.demo.menubar.print} <MenubarShortcut>⌘P</MenubarShortcut>
             </MenubarItem>
           </MenubarGroup>
         </MenubarContent>
       </MenubarMenu>
       <MenubarMenu>
-        <MenubarTrigger>Edit</MenubarTrigger>
+        <MenubarTrigger>{uiText.demo.menubar.edit}</MenubarTrigger>
         <MenubarContent>
           <MenubarGroup>
             <MenubarItem>
-              Undo <MenubarShortcut>⌘Z</MenubarShortcut>
+              {uiText.demo.menubar.undo} <MenubarShortcut>⌘Z</MenubarShortcut>
             </MenubarItem>
             <MenubarItem>
-              Redo <MenubarShortcut>⇧⌘Z</MenubarShortcut>
+              {uiText.demo.menubar.redo} <MenubarShortcut>⇧⌘Z</MenubarShortcut>
             </MenubarItem>
           </MenubarGroup>
           <MenubarSeparator />
           <MenubarGroup>
             <MenubarSub>
-              <MenubarSubTrigger>Find</MenubarSubTrigger>
+              <MenubarSubTrigger>{uiText.demo.menubar.find}</MenubarSubTrigger>
               <MenubarSubContent>
                 <MenubarGroup>
-                  <MenubarItem>Search the web</MenubarItem>
+                  <MenubarItem>{uiText.demo.menubar.searchWeb}</MenubarItem>
                 </MenubarGroup>
                 <MenubarSeparator />
                 <MenubarGroup>
-                  <MenubarItem>Find...</MenubarItem>
-                  <MenubarItem>Find Next</MenubarItem>
-                  <MenubarItem>Find Previous</MenubarItem>
+                  <MenubarItem>{uiText.demo.menubar.findItem}</MenubarItem>
+                  <MenubarItem>{uiText.demo.menubar.findNext}</MenubarItem>
+                  <MenubarItem>{uiText.demo.menubar.findPrevious}</MenubarItem>
                 </MenubarGroup>
               </MenubarSubContent>
             </MenubarSub>
           </MenubarGroup>
           <MenubarSeparator />
           <MenubarGroup>
-            <MenubarItem>Cut</MenubarItem>
-            <MenubarItem>Copy</MenubarItem>
-            <MenubarItem>Paste</MenubarItem>
+            <MenubarItem>{uiText.demo.menubar.cut}</MenubarItem>
+            <MenubarItem>{uiText.demo.menubar.copy}</MenubarItem>
+            <MenubarItem>{uiText.demo.menubar.paste}</MenubarItem>
           </MenubarGroup>
         </MenubarContent>
       </MenubarMenu>
       <MenubarMenu>
-        <MenubarTrigger>View</MenubarTrigger>
+        <MenubarTrigger>{uiText.demo.menubar.view}</MenubarTrigger>
         <MenubarContent className="w-44">
           <MenubarGroup>
-            <MenubarCheckboxItem>Bookmarks Bar</MenubarCheckboxItem>
-            <MenubarCheckboxItem checked>Full URLs</MenubarCheckboxItem>
+            <MenubarCheckboxItem>
+              {uiText.demo.menubar.bookmarks}
+            </MenubarCheckboxItem>
+            <MenubarCheckboxItem checked>
+              {uiText.demo.menubar.urls}
+            </MenubarCheckboxItem>
           </MenubarGroup>
           <MenubarSeparator />
           <MenubarGroup>
             <MenubarItem inset>
-              Reload <MenubarShortcut>⌘R</MenubarShortcut>
+              {uiText.demo.menubar.reload} <MenubarShortcut>⌘R</MenubarShortcut>
             </MenubarItem>
             <MenubarItem disabled inset>
-              Force Reload <MenubarShortcut>⇧⌘R</MenubarShortcut>
+              {uiText.demo.menubar.forceReload}{" "}
+              <MenubarShortcut>⇧⌘R</MenubarShortcut>
             </MenubarItem>
           </MenubarGroup>
           <MenubarSeparator />
           <MenubarGroup>
-            <MenubarItem inset>Toggle Fullscreen</MenubarItem>
+            <MenubarItem inset>{uiText.demo.menubar.fullscreen}</MenubarItem>
           </MenubarGroup>
           <MenubarSeparator />
           <MenubarGroup>
-            <MenubarItem inset>Hide Sidebar</MenubarItem>
+            <MenubarItem inset>{uiText.demo.menubar.hideSidebar}</MenubarItem>
           </MenubarGroup>
         </MenubarContent>
       </MenubarMenu>
       <MenubarMenu>
-        <MenubarTrigger>Profiles</MenubarTrigger>
+        <MenubarTrigger>{uiText.demo.menubar.profiles}</MenubarTrigger>
         <MenubarContent>
           <MenubarRadioGroup value="benoit">
-            <MenubarRadioItem value="andy">Andy</MenubarRadioItem>
-            <MenubarRadioItem value="benoit">Benoit</MenubarRadioItem>
-            <MenubarRadioItem value="Luis">Luis</MenubarRadioItem>
+            <MenubarRadioItem value="andy">
+              {uiText.demo.menubar.andy}
+            </MenubarRadioItem>
+            <MenubarRadioItem value="benoit">
+              {uiText.demo.menubar.benoit}
+            </MenubarRadioItem>
+            <MenubarRadioItem value="Luis">
+              {uiText.demo.menubar.luis}
+            </MenubarRadioItem>
           </MenubarRadioGroup>
           <MenubarSeparator />
           <MenubarGroup>
-            <MenubarItem inset>Edit...</MenubarItem>
+            <MenubarItem inset>{uiText.demo.menubar.editProfile}</MenubarItem>
           </MenubarGroup>
           <MenubarSeparator />
           <MenubarGroup>
-            <MenubarItem inset>Add Profile...</MenubarItem>
+            <MenubarItem inset>{uiText.demo.menubar.addProfile}</MenubarItem>
           </MenubarGroup>
         </MenubarContent>
       </MenubarMenu>

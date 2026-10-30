@@ -14,6 +14,7 @@ import {
 import { InputGroupAddon } from "@/modules/components//ui/input-group";
 
 import { GlobeIcon } from "lucide-react";
+import { uiText } from "@/modules/data/ui-text";
 
 const frameworks = [
   "Next.js",
@@ -63,9 +64,9 @@ export default function ComboboxBasic() {
   return (
     <div className="flex flex-col gap-4">
       <Combobox items={frameworks}>
-        <ComboboxInput placeholder="Select a framework" />
+        <ComboboxInput placeholder={uiText.demo.combobox.framework} />
         <ComboboxContent>
-          <ComboboxEmpty>No items found.</ComboboxEmpty>
+          <ComboboxEmpty>{uiText.demo.combobox.noItems}</ComboboxEmpty>
           <ComboboxList>
             {(item) => (
               <ComboboxItem key={item} value={item}>
@@ -76,13 +77,13 @@ export default function ComboboxBasic() {
         </ComboboxContent>
       </Combobox>
       <Combobox items={timezones}>
-        <ComboboxInput placeholder="Select a timezone">
+        <ComboboxInput placeholder={uiText.demo.combobox.timezone}>
           <InputGroupAddon>
             <GlobeIcon />
           </InputGroupAddon>
         </ComboboxInput>
         <ComboboxContent alignOffset={-28} className="w-60">
-          <ComboboxEmpty>No timezones found.</ComboboxEmpty>
+          <ComboboxEmpty>{uiText.demo.combobox.noTimezones}</ComboboxEmpty>
           <ComboboxList>
             {(group) => (
               <ComboboxGroup key={group.value} items={group.items}>

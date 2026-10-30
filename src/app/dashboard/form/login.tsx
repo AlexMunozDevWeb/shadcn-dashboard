@@ -13,14 +13,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 import { toast } from "sonner";
+import { uiText } from "@/modules/data/ui-text";
 
 const formSchema = z.object({
-  username: z.string().trim().min(1, "El nombre de usuario es obligatorio."),
+  username: z.string().trim().min(1, uiText.demo.form.usernameRequired),
   email: z
     .string()
     .trim()
-    .min(1, "El correo electrónico es obligatorio.")
-    .email("Introduce un correo electrónico válido."),
+    .min(1, uiText.demo.form.emailRequired)
+    .email(uiText.demo.form.emailInvalid),
 });
 
 export default function LoginForm() {
@@ -33,8 +34,8 @@ export default function LoginForm() {
   });
 
   function onSubmit(data: z.infer<typeof formSchema>) {
-    toast.success("Form submitted", {
-      description: `Welcome, ${data.username}.`,
+    toast.success(uiText.demo.form.submitted, {
+      description: `${uiText.demo.form.welcome}, ${data.username}.`,
     });
   }
 
@@ -53,7 +54,7 @@ export default function LoginForm() {
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
                   <FieldLabel htmlFor="form-rhf-demo-title">
-                    Username
+                    {uiText.demo.form.username}
                   </FieldLabel>
                   <Input
                     {...field}
@@ -64,7 +65,7 @@ export default function LoginForm() {
                         ? "form-rhf-demo-title-error"
                         : undefined
                     }
-                    placeholder="Insert username..."
+                    placeholder={uiText.demo.form.usernamePlaceholder}
                     autoComplete="off"
                     required
                   />
@@ -82,7 +83,9 @@ export default function LoginForm() {
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor="form-rhf-demo-email">Email</FieldLabel>
+                  <FieldLabel htmlFor="form-rhf-demo-email">
+                    {uiText.demo.form.email}
+                  </FieldLabel>
                   <Input
                     {...field}
                     id="form-rhf-demo-email"
@@ -93,7 +96,7 @@ export default function LoginForm() {
                         ? "form-rhf-demo-email-error"
                         : undefined
                     }
-                    placeholder="Insert email..."
+                    placeholder={uiText.demo.form.emailPlaceholder}
                     autoComplete="off"
                     required
                   />
@@ -109,7 +112,7 @@ export default function LoginForm() {
           </FieldGroup>
         </form>
         <Button type="submit" form="form-rhf-demo" className="mt-4">
-          Submit
+          {uiText.demo.form.submit}
         </Button>
       </CardContent>
     </Card>

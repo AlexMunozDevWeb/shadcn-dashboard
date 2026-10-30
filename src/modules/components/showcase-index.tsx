@@ -1,6 +1,7 @@
 "use client";
 
 import { MouseEvent, useEffect, useState } from "react";
+import { uiText } from "@/modules/data/ui-text";
 
 export type ShowcaseIndexItem = {
   id: string;
@@ -58,7 +59,7 @@ export default function ShowcaseIndex({
   return (
     <div className="contents">
       <nav
-        aria-label="Component index"
+        aria-label={uiText.accessibility.componentIndex}
         className="mb-8 flex flex-wrap gap-1.5 lg:hidden"
       >
         {items.map((item) => {
@@ -82,7 +83,7 @@ export default function ShowcaseIndex({
       </nav>
 
       <nav
-        aria-label="Component index"
+        aria-label={uiText.accessibility.componentIndex}
         className="hidden lg:col-start-2 lg:row-start-1 lg:block"
       >
         <div className="sticky top-24">

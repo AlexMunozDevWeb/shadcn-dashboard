@@ -18,19 +18,48 @@ import {
 } from "./theme-provider";
 import { cn } from "@/modules/lib/utils";
 import { Switch } from "@/modules/components/ui/switch";
+import { uiText } from "@/modules/data/ui-text";
 
 const sidebarOptions: { id: SidebarTheme; label: string; color: string }[] = [
-  { id: "dark", label: "Dark Carbon", color: "#212120" },
-  { id: "slate", label: "Slate Industrial", color: "#2b303a" },
-  { id: "white", label: "Clean White", color: "#ffffff" },
+  { id: "dark", label: uiText.settings.sidebarOptions.dark, color: "#212120" },
+  {
+    id: "slate",
+    label: uiText.settings.sidebarOptions.slate,
+    color: "#2b303a",
+  },
+  {
+    id: "white",
+    label: uiText.settings.sidebarOptions.white,
+    color: "#ffffff",
+  },
 ];
 
 const accentOptions: { id: AccentTheme; label: string; color: string }[] = [
-  { id: "teal", label: "Cyan Teal", color: accentHexMap.teal },
-  { id: "blue", label: "Sky Blue", color: accentHexMap.blue },
-  { id: "mint", label: "Fresh Mint", color: accentHexMap.mint },
-  { id: "yellow", label: "Radiant Amber", color: accentHexMap.yellow },
-  { id: "coral", label: "Warm Coral", color: accentHexMap.coral },
+  {
+    id: "teal",
+    label: uiText.settings.accentOptions.teal,
+    color: accentHexMap.teal,
+  },
+  {
+    id: "blue",
+    label: uiText.settings.accentOptions.blue,
+    color: accentHexMap.blue,
+  },
+  {
+    id: "mint",
+    label: uiText.settings.accentOptions.mint,
+    color: accentHexMap.mint,
+  },
+  {
+    id: "yellow",
+    label: uiText.settings.accentOptions.yellow,
+    color: accentHexMap.yellow,
+  },
+  {
+    id: "coral",
+    label: uiText.settings.accentOptions.coral,
+    color: accentHexMap.coral,
+  },
 ];
 
 export default function SettingsFab() {
@@ -50,7 +79,7 @@ export default function SettingsFab() {
         <button
           type="button"
           onClick={() => setIsOpen((prev) => !prev)}
-          aria-label="Configuración de diseño"
+          aria-label={uiText.settings.designSettings}
           aria-expanded={isOpen}
           className={cn(
             "flex h-12 w-12 items-center justify-center rounded-full border border-border bg-card text-card-foreground shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95",
@@ -82,7 +111,7 @@ export default function SettingsFab() {
                     style={{ backgroundColor: activeAccentHex }}
                   />
                   <span className="text-xs font-bold tracking-wider text-foreground uppercase font-heading">
-                    Design Configurator
+                    {uiText.settings.designConfigurator}
                   </span>
                 </div>
                 <button
@@ -101,7 +130,7 @@ export default function SettingsFab() {
                   className="flex items-center gap-2 text-[11px] font-semibold tracking-wider text-foreground uppercase"
                 >
                   <Moon className="size-3.5" aria-hidden="true" />
-                  Modo oscuro
+                  {uiText.settings.darkMode}
                 </label>
                 <Switch
                   id="settings-dark-mode"
@@ -109,13 +138,13 @@ export default function SettingsFab() {
                   onCheckedChange={(checked) =>
                     setTheme(checked ? "dark" : "light")
                   }
-                  aria-label="Modo oscuro"
+                  aria-label={uiText.settings.darkMode}
                 />
               </div>
 
               <div className="border-b border-border py-3.5 text-center">
                 <span className="text-[11px] font-semibold tracking-wider text-muted-foreground uppercase">
-                  Sidebar Background
+                  {uiText.settings.sidebarBackground}
                 </span>
                 <div className="mt-2.5 flex items-center justify-center gap-3">
                   {sidebarOptions.map((opt) => {
@@ -158,7 +187,7 @@ export default function SettingsFab() {
               {/* Accent Color switcher */}
               <div className="border-b border-border py-3.5 text-center">
                 <span className="text-[11px] font-semibold tracking-wider text-muted-foreground uppercase">
-                  Active Accent Color
+                  {uiText.settings.activeAccentColor}
                 </span>
                 <div className="mt-2.5 flex items-center justify-center gap-2.5">
                   {accentOptions.map((opt) => {
@@ -198,7 +227,7 @@ export default function SettingsFab() {
                   style={{ backgroundColor: activeAccentHex }}
                 >
                   <HelpCircle className="h-3.5 w-3.5" />
-                  Showcase UI Primitives
+                  {uiText.settings.showcasePrimitives}
                 </a>
                 <a
                   href="https://demos.creative-tim.com/paper-dashboard-pro-react/"
@@ -207,7 +236,7 @@ export default function SettingsFab() {
                   className="flex w-full items-center justify-center gap-1.5 rounded-lg border border-border bg-card py-2 text-center text-xs font-semibold tracking-wider text-card-foreground uppercase transition duration-200 hover:border-ring hover:bg-muted"
                 >
                   <ExternalLink className="h-3.5 w-3.5 text-muted-foreground" />
-                  Paper PRO Specs
+                  {uiText.settings.paperSpecs}
                 </a>
               </div>
             </div>

@@ -13,6 +13,7 @@ import {
   SheetTrigger,
 } from "@/modules/components//ui/sheet";
 import { useState } from "react";
+import { uiText } from "@/modules/data/ui-text";
 
 export default function SheetDemo() {
   const SHEET_SIDES = ["top", "right", "bottom", "left"] as const;
@@ -25,29 +26,36 @@ export default function SheetDemo() {
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger
             onClick={() => setOpen(true)}
-            render={<Button variant="outline">Open</Button>}
+            render={<Button variant="outline">{uiText.demo.sheet.open}</Button>}
           />
           <SheetContent>
             <SheetHeader>
-              <SheetTitle>Edit profile</SheetTitle>
+              <SheetTitle>{uiText.demo.sheet.title}</SheetTitle>
               <SheetDescription>
-                Make changes to your profile here. Click save when you&apos;re
-                done.
+                {uiText.demo.sheet.description}
               </SheetDescription>
             </SheetHeader>
             <div className="grid flex-1 auto-rows-min gap-6 px-4">
               <div className="grid gap-3">
-                <Label htmlFor="sheet-demo-name">Name</Label>
+                <Label htmlFor="sheet-demo-name">
+                  {uiText.demo.sheet.name}
+                </Label>
                 <Input id="sheet-demo-name" defaultValue="Pedro Duarte" />
               </div>
               <div className="grid gap-3">
-                <Label htmlFor="sheet-demo-username">Username</Label>
+                <Label htmlFor="sheet-demo-username">
+                  {uiText.demo.sheet.username}
+                </Label>
                 <Input id="sheet-demo-username" defaultValue="@peduarte" />
               </div>
             </div>
             <SheetFooter>
-              <Button type="submit">Save changes</Button>
-              <SheetClose render={<Button variant="outline">Close</Button>} />
+              <Button type="submit">{uiText.demo.sheet.save}</Button>
+              <SheetClose
+                render={
+                  <Button variant="outline">{uiText.demo.sheet.close}</Button>
+                }
+              />
             </SheetFooter>
           </SheetContent>
         </Sheet>
@@ -67,10 +75,9 @@ export default function SheetDemo() {
               className="data-[side=bottom]:max-h-[50vh] data-[side=top]:max-h-[50vh]"
             >
               <SheetHeader>
-                <SheetTitle>Edit profile</SheetTitle>
+                <SheetTitle>{uiText.demo.sheet.title}</SheetTitle>
                 <SheetDescription>
-                  Make changes to your profile here. Click save when you&apos;re
-                  done.
+                  {uiText.demo.sheet.description}
                 </SheetDescription>
               </SheetHeader>
               <div className="no-scrollbar overflow-y-auto px-4">
@@ -88,9 +95,13 @@ export default function SheetDemo() {
                 ))}
               </div>
               <SheetFooter>
-                <Button type="submit">Save changes</Button>
+                <Button type="submit">{uiText.demo.sheet.save}</Button>
                 <SheetClose
-                  render={<Button variant="outline">Cancel</Button>}
+                  render={
+                    <Button variant="outline">
+                      {uiText.demo.sheet.cancel}
+                    </Button>
+                  }
                 />
               </SheetFooter>
             </SheetContent>

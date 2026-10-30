@@ -2,70 +2,71 @@
 
 import { Button } from "@/modules/components//ui/button";
 import { toast } from "@/modules/components//ui/toast";
+import { uiText } from "@/modules/data/ui-text";
 
 export default function ToastDemo() {
   function showToast() {
     toast.add({
-      title: "Event created",
-      description: "Sunday, December 3 at 9:00 AM",
+      title: uiText.demo.toast.title,
+      description: uiText.demo.toast.date,
     });
   }
 
   return (
     <div className="grid grid-cols-4 gap-4">
       <Button variant="outline" onClick={showToast}>
-        Show Toast
+        {uiText.demo.toast.show}
       </Button>
       <Button
         variant="outline"
-        onClick={() => toast.add({ description: "Event has been created." })}
+        onClick={() => toast.add({ description: uiText.demo.toast.created })}
       >
-        Default
+        {uiText.demo.toast.default}
       </Button>
       <Button
         variant="outline"
         onClick={() =>
           toast.add({
             type: "success",
-            description: "Event has been created.",
+            description: uiText.demo.toast.created,
           })
         }
       >
-        Success
+        {uiText.demo.toast.success}
       </Button>
       <Button
         variant="outline"
         onClick={() =>
           toast.add({
             type: "info",
-            description: "Arrive 10 minutes before the event.",
+            description: uiText.demo.toast.arrive,
           })
         }
       >
-        Info
+        {uiText.demo.toast.info}
       </Button>
       <Button
         variant="outline"
         onClick={() =>
           toast.add({
             type: "warning",
-            description: "The event cannot start before 8:00 AM.",
+            description: uiText.demo.toast.tooEarly,
           })
         }
       >
-        Warning
+        {uiText.demo.toast.warning}
       </Button>
       <Button
         variant="outline"
         onClick={() =>
           toast.add({
             type: "error",
-            description: "The event could not be created.",
+            description: uiText.demo.toast.failed,
             priority: "high",
           })
         }
       >
-        Error
+        {uiText.demo.toast.error}
       </Button>
     </div>
   );

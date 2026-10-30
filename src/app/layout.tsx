@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Montserrat } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/modules/lib/utils";
+import { uiText } from "@/modules/data/ui-text";
 
 import { ThemeProvider } from "@/modules/components/theme-provider";
 import { Toaster as SonnerToaster } from "@/modules/components/ui/sonner";
@@ -20,9 +21,8 @@ const fontMontserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Dashboard Admin PRO - Creative Tim Replica",
-  description:
-    "Dashboard Admin PRO replica built with Next.js, Tailwind CSS and shadcn/ui.",
+  title: uiText.brand.product,
+  description: `${uiText.brand.product} built with ${uiText.brand.framework}, Tailwind CSS and shadcn/ui.`,
 };
 
 export default function RootLayout({

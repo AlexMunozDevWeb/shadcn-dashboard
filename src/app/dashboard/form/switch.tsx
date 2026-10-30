@@ -24,10 +24,11 @@ import {
   FieldLabel,
 } from "@/modules/components//ui/field";
 import { Switch } from "@/modules/components//ui/switch";
+import { uiText } from "@/modules/data/ui-text";
 
 const formSchema = z.object({
   twoFactor: z.boolean().refine((val) => val === true, {
-    message: "It is highly recommended to enable two-factor authentication.",
+    message: uiText.demo.form.recommendedTwoFactor,
   }),
 });
 
@@ -40,7 +41,7 @@ export default function FormRhfSwitch() {
   });
 
   function onSubmit(data: z.infer<typeof formSchema>) {
-    toast("You submitted the following values:", {
+    toast(uiText.demo.form.submittedValues, {
       description: (
         <pre className="mt-2 w-[320px] overflow-x-auto rounded-md bg-code p-4 text-code-foreground">
           <code>{JSON.stringify(data, null, 2)}</code>
@@ -59,9 +60,9 @@ export default function FormRhfSwitch() {
   return (
     <Card className="w-full sm:max-w-md">
       <CardHeader>
-        <CardTitle>Security Settings</CardTitle>
+        <CardTitle>{uiText.demo.form.security}</CardTitle>
         <CardDescription>
-          Manage your account security preferences.
+          {uiText.demo.form.securityDescription}
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -77,10 +78,10 @@ export default function FormRhfSwitch() {
                 >
                   <FieldContent>
                     <FieldLabel htmlFor="form-rhf-switch-twoFactor">
-                      Multi-factor authentication
+                      {uiText.demo.form.multiFactor}
                     </FieldLabel>
                     <FieldDescription>
-                      Enable multi-factor authentication to secure your account.
+                      {uiText.demo.form.multiFactorDescription}
                     </FieldDescription>
                     {fieldState.invalid && (
                       <FieldError errors={[fieldState.error]} />
@@ -102,10 +103,10 @@ export default function FormRhfSwitch() {
       <CardFooter>
         <Field orientation="horizontal">
           <Button type="button" variant="outline" onClick={() => form.reset()}>
-            Reset
+            {uiText.demo.form.reset}
           </Button>
           <Button type="submit" form="form-rhf-switch">
-            Save
+            {uiText.demo.form.save}
           </Button>
         </Field>
       </CardFooter>

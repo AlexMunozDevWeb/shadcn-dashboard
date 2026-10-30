@@ -3,6 +3,7 @@ import { Suspense } from "react";
 
 import ShowcaseIndex from "@/modules/components//showcase-index";
 import { Skeleton } from "@/modules/components//ui/skeleton";
+import { uiText } from "@/modules/data/ui-text";
 
 import AccordionDemo from "../accordion/page";
 import AlertDemo from "../alert/page";
@@ -35,29 +36,97 @@ type ShowcaseSection = {
 };
 
 const sections: ShowcaseSection[] = [
-  { id: "accordion", label: "Accordion", Demo: AccordionDemo },
-  { id: "alert", label: "Alert", Demo: AlertDemo },
-  { id: "alert-dialog", label: "Alert dialog", Demo: AlertDialogDemo },
-  { id: "avatar", label: "Avatar", Demo: AvatarDemo },
-  { id: "badge", label: "Badge", Demo: BadgeDemo },
-  { id: "button", label: "Button", Demo: ButtonDemo },
-  { id: "calendar", label: "Calendar", Demo: CalendarDemo },
-  { id: "card", label: "Card", Demo: CardDemo },
-  { id: "carousel", label: "Carousel", Demo: CarouselDemo },
-  { id: "checkbox", label: "Checkbox", Demo: CheckboxDemo },
-  { id: "combobox", label: "Combobox", Demo: ComboboxDemo },
-  { id: "command", label: "Command", Demo: CommandDemo },
-  { id: "context-menu", label: "Context menu", Demo: ContextMenuDemo },
-  { id: "dialog", label: "Dialog", Demo: DialogDemo },
-  { id: "input-otp", label: "Input OTP", Demo: InputOTPDemo },
-  { id: "menubar", label: "Menubar", Demo: MenubarDemo },
-  { id: "progress", label: "Progress", Demo: ProgressDemo },
-  { id: "sheet", label: "Sheet", Demo: SheetDemo },
-  { id: "skeleton", label: "Skeleton", Demo: SkeletonDemo },
-  { id: "slider", label: "Slider", Demo: SliderDemo },
-  { id: "sonner", label: "Sonner", Demo: SonnerDemo },
-  { id: "tabs", label: "Tabs", Demo: TabsDemo },
-  { id: "toast", label: "Toast", Demo: ToastDemo },
+  {
+    id: "accordion",
+    label: uiText.demo.showcase.sections.accordion,
+    Demo: AccordionDemo,
+  },
+  { id: "alert", label: uiText.demo.showcase.sections.alert, Demo: AlertDemo },
+  {
+    id: "alert-dialog",
+    label: uiText.demo.showcase.sections.alertDialog,
+    Demo: AlertDialogDemo,
+  },
+  {
+    id: "avatar",
+    label: uiText.demo.showcase.sections.avatar,
+    Demo: AvatarDemo,
+  },
+  { id: "badge", label: uiText.demo.showcase.sections.badge, Demo: BadgeDemo },
+  {
+    id: "button",
+    label: uiText.demo.showcase.sections.button,
+    Demo: ButtonDemo,
+  },
+  {
+    id: "calendar",
+    label: uiText.demo.showcase.sections.calendar,
+    Demo: CalendarDemo,
+  },
+  { id: "card", label: uiText.demo.showcase.sections.card, Demo: CardDemo },
+  {
+    id: "carousel",
+    label: uiText.demo.showcase.sections.carousel,
+    Demo: CarouselDemo,
+  },
+  {
+    id: "checkbox",
+    label: uiText.demo.showcase.sections.checkbox,
+    Demo: CheckboxDemo,
+  },
+  {
+    id: "combobox",
+    label: uiText.demo.showcase.sections.combobox,
+    Demo: ComboboxDemo,
+  },
+  {
+    id: "command",
+    label: uiText.demo.showcase.sections.command,
+    Demo: CommandDemo,
+  },
+  {
+    id: "context-menu",
+    label: uiText.demo.showcase.sections.contextMenu,
+    Demo: ContextMenuDemo,
+  },
+  {
+    id: "dialog",
+    label: uiText.demo.showcase.sections.dialog,
+    Demo: DialogDemo,
+  },
+  {
+    id: "input-otp",
+    label: uiText.demo.showcase.sections.inputOtp,
+    Demo: InputOTPDemo,
+  },
+  {
+    id: "menubar",
+    label: uiText.demo.showcase.sections.menubar,
+    Demo: MenubarDemo,
+  },
+  {
+    id: "progress",
+    label: uiText.demo.showcase.sections.progress,
+    Demo: ProgressDemo,
+  },
+  { id: "sheet", label: uiText.demo.showcase.sections.sheet, Demo: SheetDemo },
+  {
+    id: "skeleton",
+    label: uiText.demo.showcase.sections.skeleton,
+    Demo: SkeletonDemo,
+  },
+  {
+    id: "slider",
+    label: uiText.demo.showcase.sections.slider,
+    Demo: SliderDemo,
+  },
+  {
+    id: "sonner",
+    label: uiText.demo.showcase.sections.sonner,
+    Demo: SonnerDemo,
+  },
+  { id: "tabs", label: uiText.demo.showcase.sections.tabs, Demo: TabsDemo },
+  { id: "toast", label: uiText.demo.showcase.sections.toast, Demo: ToastDemo },
 ];
 
 function SkeletonFallback() {
@@ -89,11 +158,10 @@ export default function ShadcnShowcasePage() {
     <div>
       <header className="mb-10">
         <h1 className="text-2xl font-semibold tracking-tight text-foreground/80">
-          Shadcn
+          {uiText.demo.showcase.shadcn}
         </h1>
         <p className="mt-2 max-w-[65ch] text-sm text-muted-foreground">
-          All {sections.length} component demos from the dashboard, collected on
-          a single page.
+          {uiText.demo.showcase.description}
         </p>
       </header>
 

@@ -40,6 +40,7 @@ import {
 } from "@/modules/components//ui/dropdown-menu";
 
 import { features, type DataTableFeatures } from "./data-table-features";
+import { uiText } from "@/modules/data/ui-text";
 
 interface DataTableProps<TData extends RowData> {
   columns: ColumnDef<DataTableFeatures, TData>[];
@@ -47,11 +48,11 @@ interface DataTableProps<TData extends RowData> {
 }
 
 const items = [
-  { label: "All", value: "all" },
-  { label: "Pending", value: "pending" },
-  { label: "Processing", value: "processing" },
-  { label: "Success", value: "success" },
-  { label: "Failed", value: "failed" },
+  { label: uiText.dashboard.all, value: "all" },
+  { label: uiText.dashboard.pending, value: "pending" },
+  { label: uiText.dashboard.processing, value: "processing" },
+  { label: uiText.dashboard.success, value: "success" },
+  { label: uiText.dashboard.failed, value: "failed" },
 ];
 
 export default function DataTable<TData extends RowData>({
@@ -89,7 +90,7 @@ export default function DataTable<TData extends RowData>({
       <div className="flex justify-between py-4 mx-4 gap-4">
         <div className="flex gap-4 w-3xl">
           <Input
-            placeholder="Filter anything..."
+            placeholder={uiText.demo.dataTable.filter}
             value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
             onChange={(event) => {
               setCurrentStatus("all");
@@ -109,11 +110,11 @@ export default function DataTable<TData extends RowData>({
             }}
           >
             <SelectTrigger className="w-full max-w-48">
-              <SelectValue placeholder="Status" />
+              <SelectValue placeholder={uiText.demo.dataTable.status} />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
-                <SelectLabel>Status</SelectLabel>
+                <SelectLabel>{uiText.demo.dataTable.status}</SelectLabel>
                 {items.map((item) => (
                   <SelectItem key={item.value} value={item.value}>
                     {item.label}
@@ -136,14 +137,14 @@ export default function DataTable<TData extends RowData>({
                 setRowSelection({});
               }}
             >
-              Delete
+              {uiText.demo.dataTable.delete}
             </Button>
           )}
           <DropdownMenu>
             <DropdownMenuTrigger
               render={<Button variant="outline" className="ml-auto" />}
             >
-              Columns
+              {uiText.demo.dataTable.columns}
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               {table
@@ -201,7 +202,7 @@ export default function DataTable<TData extends RowData>({
           ) : (
             <TableRow>
               <TableCell colSpan={columns.length} className="h-24 text-center">
-                No results.
+                {uiText.demo.dataTable.noResults}
               </TableCell>
             </TableRow>
           )}
@@ -210,7 +211,8 @@ export default function DataTable<TData extends RowData>({
       <div className="flex items-center justify-between space-x-2 py-4 mx-4">
         <div className="flex-1 text-sm text-muted-foreground">
           {table.getFilteredSelectedRowModel().rows.length} of{" "}
-          {table.getFilteredRowModel().rows.length} row(s) selected.
+          {table.getFilteredRowModel().rows.length}{" "}
+          {uiText.demo.dataTable.selected}
         </div>
         <Button
           variant="outline"
@@ -218,7 +220,7 @@ export default function DataTable<TData extends RowData>({
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
         >
-          Previous
+          {uiText.demo.dataTable.previous}
         </Button>
         <Button
           variant="outline"
@@ -226,7 +228,7 @@ export default function DataTable<TData extends RowData>({
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
         >
-          Next
+          {uiText.demo.dataTable.next}
         </Button>
       </div>
       <Select
@@ -237,11 +239,11 @@ export default function DataTable<TData extends RowData>({
         }}
       >
         <SelectTrigger className="w-[180px] p-5 ml-2 mb-2">
-          <SelectValue placeholder="10 Rows"></SelectValue>
+          <SelectValue placeholder={uiText.demo.dataTable.rows}></SelectValue>
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
-            <SelectLabel>Row per page</SelectLabel>
+            <SelectLabel>{uiText.demo.dataTable.rowsPerPage}</SelectLabel>
             <SelectItem value="10">10</SelectItem>
             <SelectItem value="20">20</SelectItem>
             <SelectItem value="30">30</SelectItem>

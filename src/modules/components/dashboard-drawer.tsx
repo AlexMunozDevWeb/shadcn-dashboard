@@ -4,6 +4,7 @@ import { X } from "lucide-react";
 import { cn } from "@/modules/lib/utils";
 import { navItems } from "@/modules/components/sidebar-links";
 import { usePaperTheme } from "./theme-provider";
+import { uiText } from "@/modules/data/ui-text";
 
 function DrawerNav({ onClose }: { onClose: () => void }) {
   const pathname = usePathname();
@@ -108,7 +109,7 @@ export default function DashboardDrawer({
     >
       <button
         type="button"
-        aria-label="Cerrar menú"
+        aria-label={uiText.accessibility.closeMenu}
         className="absolute inset-0 cursor-default bg-black/60 backdrop-blur-xs transition-opacity"
         onClick={onClose}
       />
@@ -119,7 +120,7 @@ export default function DashboardDrawer({
         )}
         role="dialog"
         aria-modal="true"
-        aria-label="Navegación principal"
+        aria-label={uiText.accessibility.navigation}
         inert={!open}
         style={{
           backgroundColor: sidebarConfig.bg,
@@ -135,12 +136,12 @@ export default function DashboardDrawer({
               className="font-heading text-xs font-bold tracking-wider uppercase"
               style={{ color: sidebarConfig.text }}
             >
-              Dashboard Admin PRO
+              {uiText.brand.product}
             </span>
           </div>
           <button
             type="button"
-            aria-label="Cerrar menú"
+            aria-label={uiText.accessibility.closeMenu}
             onClick={onClose}
             className="p-1 text-gray-400 hover:text-white"
           >
@@ -163,13 +164,13 @@ export default function DashboardDrawer({
               className="font-heading truncate text-xs font-bold"
               style={{ color: sidebarConfig.text }}
             >
-              Chet Faker
+              {uiText.dashboard.userName}
             </p>
             <span
               className="text-[10px] font-semibold tracking-wider uppercase"
               style={{ color: activeAccentHex }}
             >
-              Administrator
+              {uiText.dashboard.administrator}
             </span>
           </div>
         </div>

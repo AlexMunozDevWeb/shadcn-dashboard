@@ -12,23 +12,26 @@ import {
 } from "@/modules/components//ui/dialog";
 import { Input } from "@/modules/components//ui/input";
 import { Label } from "@/modules/components//ui/label";
+import { uiText } from "@/modules/data/ui-text";
 
 export default function DialogCloseButton() {
   return (
     <Dialog>
-      <DialogTrigger render={<Button variant="outline">Share</Button>} />
+      <DialogTrigger
+        render={<Button variant="outline">{uiText.demo.dialog.share}</Button>}
+      />
 
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Share link</DialogTitle>
+          <DialogTitle>{uiText.demo.dialog.title}</DialogTitle>
           <DialogDescription>
-            Anyone who has this link will be able to view this.
+            {uiText.demo.dialog.description}
           </DialogDescription>
         </DialogHeader>
         <div className="flex items-center gap-2">
           <div className="grid flex-1 gap-2">
             <Label htmlFor="link" className="sr-only">
-              Link
+              {uiText.demo.dialog.link}
             </Label>
             <Input
               id="link"
@@ -43,7 +46,9 @@ export default function DialogCloseButton() {
           </div>
         </div>
         <DialogFooter className="sm:justify-start">
-          <DialogClose render={<Button type="button">Close</Button>} />
+          <DialogClose
+            render={<Button type="button">{uiText.demo.dialog.close}</Button>}
+          />
         </DialogFooter>
       </DialogContent>
     </Dialog>

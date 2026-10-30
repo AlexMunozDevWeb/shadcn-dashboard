@@ -23,13 +23,14 @@ import {
 } from "lucide-react";
 import { cn } from "@/modules/lib/utils";
 import { usePaperTheme } from "@/modules/components/theme-provider";
+import { uiText } from "@/modules/data/ui-text";
 
 const initialStatCards = [
   {
     id: "capacity",
-    label: "Capacity",
+    label: uiText.dashboard.capacity,
     value: "150GB",
-    meta: "Update Now",
+    meta: uiText.dashboard.updateNow,
     metaIcon: RotateCw,
     Icon: Globe,
     iconBg:
@@ -38,9 +39,9 @@ const initialStatCards = [
   },
   {
     id: "revenue",
-    label: "Revenue",
+    label: uiText.dashboard.revenue,
     value: "$ 1,345",
-    meta: "Last day",
+    meta: uiText.dashboard.lastDay,
     metaIcon: Calendar,
     Icon: CreditCard,
     iconBg:
@@ -49,9 +50,9 @@ const initialStatCards = [
   },
   {
     id: "errors",
-    label: "Errors",
+    label: uiText.dashboard.errors,
     value: "23",
-    meta: "In the last hour",
+    meta: uiText.dashboard.lastHour,
     metaIcon: Clock,
     Icon: Share2,
     iconBg:
@@ -60,9 +61,9 @@ const initialStatCards = [
   },
   {
     id: "followers",
-    label: "Followers",
+    label: uiText.dashboard.followers,
     value: "+45K",
-    meta: "Update now",
+    meta: uiText.dashboard.updateNowLower,
     metaIcon: RotateCw,
     Icon: Heart,
     iconBg:
@@ -99,7 +100,7 @@ const initialCountries = [
   {
     id: "usa",
     flag: "🇺🇸",
-    name: "USA",
+    name: uiText.dashboard.countries.usa,
     total: "2.920",
     share: "53.23%",
     coords: { x: 95, y: 72 },
@@ -107,7 +108,7 @@ const initialCountries = [
   {
     id: "germany",
     flag: "🇩🇪",
-    name: "Germany",
+    name: uiText.dashboard.countries.germany,
     total: "1.300",
     share: "20.43%",
     coords: { x: 195, y: 55 },
@@ -115,7 +116,7 @@ const initialCountries = [
   {
     id: "australia",
     flag: "🇦🇺",
-    name: "Australia",
+    name: uiText.dashboard.countries.australia,
     total: "760",
     share: "10.35%",
     coords: { x: 310, y: 135 },
@@ -123,7 +124,7 @@ const initialCountries = [
   {
     id: "uk",
     flag: "🇬🇧",
-    name: "United Kingdom",
+    name: uiText.dashboard.countries.uk,
     total: "690",
     share: "7.87%",
     coords: { x: 182, y: 50 },
@@ -131,7 +132,7 @@ const initialCountries = [
   {
     id: "romania",
     flag: "🇷🇴",
-    name: "Romania",
+    name: uiText.dashboard.countries.romania,
     total: "600",
     share: "5.94%",
     coords: { x: 215, y: 62 },
@@ -139,40 +140,47 @@ const initialCountries = [
   {
     id: "brasil",
     flag: "🇧🇷",
-    name: "Brasil",
+    name: uiText.dashboard.countries.brasil,
     total: "550",
     share: "4.34%",
     coords: { x: 135, y: 118 },
   },
 ];
 
-const defaultTasks = [
+type DashboardTask = {
+  id: number;
+  title: string;
+  meta: string;
+  metaClass: string;
+  done: boolean;
+};
+
+const defaultTasks: DashboardTask[] = [
   {
     id: 1,
-    title: 'Sign contract for "What conference organizes af?"',
-    meta: "Completed 2h ago",
+    title: uiText.dashboard.taskOne,
+    meta: uiText.dashboard.taskCompleted,
     metaClass: "text-muted-foreground font-normal",
     done: true,
   },
   {
     id: 2,
-    title: "Lines From Great Russian Literature? Or E-mails From My Boss?",
-    meta: "Priority High",
+    title: uiText.dashboard.taskTwo,
+    meta: uiText.dashboard.taskPriority,
     metaClass: "text-accent-teal font-semibold",
     done: false,
   },
   {
     id: 3,
-    title:
-      "Flooded: One year later, assessing what was lost and what was found",
-    meta: "Yesterday",
+    title: uiText.dashboard.taskThree,
+    meta: uiText.dashboard.taskYesterday,
     metaClass: "text-muted-foreground font-normal",
     done: true,
   },
   {
     id: 4,
-    title: "Update Tailwind responsive styles for mobile breakpoints",
-    meta: "In Progress",
+    title: uiText.dashboard.taskFour,
+    meta: uiText.dashboard.taskInProgress,
     metaClass: "text-amber-600 font-semibold",
     done: false,
   },
@@ -207,7 +215,9 @@ export default function DashboardPage() {
           ? {
               ...t,
               done: !t.done,
-              meta: !t.done ? "Just now" : "Pending",
+              meta: !t.done
+                ? uiText.dashboard.taskJustNow
+                : uiText.dashboard.taskPending,
               metaClass: !t.done
                 ? "text-muted-foreground font-normal"
                 : "text-amber-600 font-semibold",
@@ -230,7 +240,7 @@ export default function DashboardPage() {
       {
         id: Date.now(),
         title: newTaskInput.trim(),
-        meta: "New",
+        meta: uiText.dashboard.taskNew,
         metaClass: "text-accent-teal font-semibold",
         done: false,
       },
@@ -301,7 +311,7 @@ export default function DashboardPage() {
                   </span>
                 </button>
                 <span className="text-[10px] sm:text-xs md:text-xs text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100 font-heading uppercase">
-                  Details &rarr;
+                  {uiText.dashboard.details}
                 </span>
               </div>
             </div>
@@ -326,7 +336,7 @@ export default function DashboardPage() {
               </span>
             </div>
             <p className="mb-4 text-[10px] sm:text-xs md:text-xs lg:text-sm font-bold tracking-wider text-paper-muted uppercase font-heading">
-              Total Earnings in Last Ten Quarters
+              {uiText.dashboard.earnings}
             </p>
 
             {/* Interactive SVG Chart */}
@@ -362,12 +372,12 @@ export default function DashboardPage() {
 
           <div className="mt-4 flex items-center justify-between border-t border-border pt-5">
             <span className="text-xs sm:text-sm md:text-sm lg:text-base font-bold text-foreground font-heading">
-              Financial Statistics
+              {uiText.dashboard.financialStatistics}
             </span>
             <button
               type="button"
-              aria-label="Add metric"
-              onClick={() => toast.success("Financial telemetry updated.")}
+              aria-label={uiText.accessibility.addMetric}
+              onClick={() => toast.success(uiText.dashboard.addMetricFeedback)}
               className="flex h-7 w-7 md:h-8 md:w-8 items-center justify-center rounded-full bg-emerald-50 text-accent-mint transition duration-200 hover:bg-accent-mint hover:text-white dark:bg-emerald-950 dark:hover:text-primary-foreground"
             >
               <Plus className="h-3.5 w-3.5 md:h-4 md:w-4" />
@@ -390,7 +400,7 @@ export default function DashboardPage() {
               </span>
             </div>
             <p className="mb-4 text-[10px] sm:text-xs md:text-xs lg:text-sm font-bold tracking-wider text-paper-muted uppercase font-heading">
-              Total Subscriptions in Last 7 Days
+              {uiText.dashboard.subscriptions}
             </p>
 
             {/* Interactive SVG Subscriptions Chart */}
@@ -426,14 +436,12 @@ export default function DashboardPage() {
 
           <div className="mt-4 flex items-center justify-between border-t border-border pt-5">
             <span className="text-xs sm:text-sm md:text-sm lg:text-base font-bold text-foreground font-heading">
-              View all members
+              {uiText.dashboard.viewMembers}
             </span>
             <button
               type="button"
-              aria-label="Play playback"
-              onClick={() =>
-                toast.success("Replaying the 7-day subscription lifecycle.")
-              }
+              aria-label={uiText.accessibility.playPlayback}
+              onClick={() => toast.success(uiText.dashboard.playbackFeedback)}
               className="flex h-7 w-7 md:h-8 md:w-8 items-center justify-center rounded-full bg-orange-50 text-accent-coral transition duration-200 hover:bg-accent-coral hover:text-white dark:bg-orange-950 dark:hover:text-primary-foreground"
             >
               <Play className="h-3 w-3 md:h-3.5 md:w-3.5 fill-current ml-0.5" />
@@ -447,10 +455,10 @@ export default function DashboardPage() {
             <div className="mb-3 flex items-center justify-between">
               <div>
                 <h2 className="text-lg sm:text-xl md:text-2xl lg:text-2xl font-bold tracking-tight text-foreground font-heading">
-                  Email Statistics
+                  {uiText.dashboard.emailStatistics}
                 </h2>
                 <p className="text-[10px] sm:text-xs md:text-xs lg:text-sm font-bold tracking-wider text-paper-muted uppercase font-heading">
-                  Last Campaign Performance
+                  {uiText.dashboard.campaignPerformance}
                 </p>
               </div>
               <span className="flex items-center gap-1.5 rounded-full bg-cyan-50 px-2.5 py-1 text-xs md:text-sm font-bold text-accent-teal border border-cyan-200 dark:border-cyan-900 dark:bg-cyan-950 dark:text-cyan-300">
@@ -487,9 +495,12 @@ export default function DashboardPage() {
 
             <div className="mt-2 flex items-center justify-center gap-4 text-xs sm:text-sm md:text-sm font-semibold text-muted-foreground">
               {[
-                { label: "Opened", color: "bg-accent-teal" },
-                { label: "Bounced", color: "bg-accent-coral" },
-                { label: "Unsub", color: "bg-accent-yellow" },
+                { label: uiText.dashboard.opened, color: "bg-accent-teal" },
+                { label: uiText.dashboard.bounced, color: "bg-accent-coral" },
+                {
+                  label: uiText.dashboard.unsubscribed,
+                  color: "bg-accent-yellow",
+                },
               ].map((item) => (
                 <button
                   key={item.label}
@@ -513,14 +524,12 @@ export default function DashboardPage() {
 
           <div className="mt-4 flex items-center justify-between border-t border-border pt-5">
             <span className="text-xs sm:text-sm md:text-sm lg:text-base font-bold text-foreground font-heading">
-              Campaign Sent 2 Days Ago
+              {uiText.dashboard.campaignSent}
             </span>
             <button
               type="button"
-              aria-label="Refresh campaign"
-              onClick={() =>
-                toast.success("Checking incoming webhook deliveries.")
-              }
+              aria-label={uiText.accessibility.refreshCampaign}
+              onClick={() => toast.success(uiText.dashboard.campaignFeedback)}
               className="flex h-7 w-7 md:h-8 md:w-8 items-center justify-center rounded-full bg-cyan-50 text-accent-teal transition duration-200 hover:bg-accent-teal hover:text-white dark:bg-cyan-950 dark:hover:text-primary-foreground"
             >
               <RotateCw className="h-3.5 w-3.5 md:h-4 md:w-4" />
@@ -536,10 +545,10 @@ export default function DashboardPage() {
           <div className="mb-5 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold tracking-tight text-foreground font-heading">
-                Global Sales by Top Locations
+                {uiText.dashboard.globalSales}
               </h3>
               <p className="text-xs sm:text-sm md:text-sm text-paper-muted font-medium">
-                All Products That Were Shipped Across Continental Nodes
+                {uiText.dashboard.shippedAcrossNodes}
               </p>
             </div>
             {selectedCountry && (
@@ -548,7 +557,7 @@ export default function DashboardPage() {
                 onClick={() => setSelectedCountry(null)}
                 className="text-[11px] sm:text-xs md:text-sm font-semibold text-accent-teal hover:underline self-start sm:self-auto"
               >
-                Clear selection
+                {uiText.dashboard.clearSelection}
               </button>
             )}
           </div>
@@ -635,12 +644,12 @@ export default function DashboardPage() {
               <p className="relative mt-2 text-xs sm:text-sm md:text-sm lg:text-base font-bold tracking-wider text-foreground uppercase font-heading">
                 {selectedCountry
                   ? `Active Focus: ${initialCountries.find((c) => c.id === selectedCountry)?.name}`
-                  : "Vector Heatmap View"}
+                  : uiText.dashboard.vectorHeatmap}
               </p>
               <span className="relative text-[11px] sm:text-xs md:text-sm text-paper-muted">
                 {selectedCountry
                   ? `Volume: ${initialCountries.find((c) => c.id === selectedCountry)?.total} items shipped`
-                  : "World Distribution"}
+                  : uiText.dashboard.worldDistribution}
               </span>
 
               <div className="relative mt-3 flex items-center gap-2">
@@ -649,14 +658,16 @@ export default function DashboardPage() {
                   onClick={() => setMapZoom((z) => Math.min(z + 0.2, 1.8))}
                   className="flex min-h-11 items-center rounded-md border border-border bg-card px-3 py-1 text-[11px] font-bold text-foreground shadow-xs transition hover:border-accent-teal hover:text-accent-teal font-heading sm:text-xs md:text-sm"
                 >
-                  <Plus className="mr-1 h-3 w-3 md:h-3.5 md:w-3.5" /> Zoom In
+                  <Plus className="mr-1 h-3 w-3 md:h-3.5 md:w-3.5" />{" "}
+                  {uiText.dashboard.zoomIn}
                 </button>
                 <button
                   type="button"
                   onClick={() => setMapZoom((z) => Math.max(z - 0.2, 0.8))}
                   className="flex min-h-11 items-center rounded-md border border-border bg-card px-3 py-1 text-[11px] font-bold text-foreground shadow-xs transition hover:border-accent-teal hover:text-accent-teal font-heading sm:text-xs md:text-sm"
                 >
-                  <Minus className="mr-1 h-3 w-3 md:h-3.5 md:w-3.5" /> Zoom Out
+                  <Minus className="mr-1 h-3 w-3 md:h-3.5 md:w-3.5" />{" "}
+                  {uiText.dashboard.zoomOut}
                 </button>
                 {mapZoom !== 1 && (
                   <button
@@ -664,7 +675,7 @@ export default function DashboardPage() {
                     onClick={() => setMapZoom(1)}
                     className="text-[10px] sm:text-xs text-muted-foreground hover:text-foreground font-semibold"
                   >
-                    Reset
+                    {uiText.dashboard.reset}
                   </button>
                 )}
               </div>
@@ -678,15 +689,15 @@ export default function DashboardPage() {
             <div className="mb-4 flex items-center justify-between">
               <div>
                 <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold tracking-tight text-foreground font-heading">
-                  Tasks
+                  {uiText.dashboard.tasks}
                 </h3>
                 <p className="text-xs sm:text-sm md:text-sm text-paper-muted font-medium">
-                  Backend &amp; React development
+                  {uiText.dashboard.development}
                 </p>
               </div>
               <button
                 type="button"
-                aria-label="Add task trigger"
+                aria-label={uiText.accessibility.addTask}
                 onClick={() => setShowAddTask((prev) => !prev)}
                 className="flex h-8 w-8 md:h-9 md:w-9 cursor-pointer items-center justify-center rounded-full bg-muted text-muted-foreground transition hover:bg-muted"
               >
@@ -701,7 +712,7 @@ export default function DashboardPage() {
               >
                 <input
                   type="text"
-                  placeholder="New task description..."
+                  placeholder={uiText.dashboard.taskPlaceholder}
                   value={newTaskInput}
                   onChange={(e) => setNewTaskInput(e.target.value)}
                   autoFocus
@@ -711,7 +722,7 @@ export default function DashboardPage() {
                   type="submit"
                   className="rounded-md bg-accent-teal px-2.5 py-1 text-xs sm:text-sm font-bold text-white dark:text-primary-foreground shadow-xs"
                 >
-                  Add
+                  {uiText.dashboard.add}
                 </button>
               </form>
             )}
@@ -720,7 +731,7 @@ export default function DashboardPage() {
               {tasks.length === 0 ? (
                 <div className="py-6 text-center text-xs sm:text-sm text-muted-foreground">
                   <CheckCircle2 className="mx-auto mb-1 h-6 w-6 text-accent-mint" />
-                  All tasks completed!
+                  {uiText.dashboard.allTasksCompleted}
                 </div>
               ) : (
                 tasks.map((task) => (
@@ -777,7 +788,7 @@ export default function DashboardPage() {
 
                     <button
                       type="button"
-                      aria-label="Delete task"
+                      aria-label={uiText.accessibility.deleteTask}
                       onClick={() => removeTask(task.id)}
                       className="flex h-11 w-11 items-center justify-center text-muted-foreground transition-opacity hover:text-accent-coral sm:opacity-0 sm:group-hover:opacity-100"
                     >
@@ -792,14 +803,14 @@ export default function DashboardPage() {
           <div className="mt-4 flex items-center justify-between border-t border-border pt-4 text-xs sm:text-sm text-paper-muted">
             <span className="flex items-center gap-1.5 text-[11px] sm:text-xs md:text-sm">
               <History className="h-3 w-3 md:h-3.5 md:w-3.5 text-muted-foreground" />
-              Updated 3 minutes ago
+              {uiText.dashboard.updatedMinutesAgo}
             </span>
             <button
               type="button"
               onClick={() => setTasks(defaultTasks)}
               className="text-xs sm:text-sm md:text-sm font-bold text-accent-teal hover:underline font-heading"
             >
-              Reset list
+              {uiText.dashboard.resetList}
             </button>
           </div>
         </div>

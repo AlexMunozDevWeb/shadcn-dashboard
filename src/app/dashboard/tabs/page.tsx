@@ -11,69 +11,68 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/modules/components//ui/tabs";
+import { uiText } from "@/modules/data/ui-text";
 
 export default function TabsDemo() {
   return (
     <Tabs defaultValue="overview" className="w-[400px]">
       <TabsList>
-        <TabsTrigger value="overview">Overview</TabsTrigger>
-        <TabsTrigger value="analytics">Analytics</TabsTrigger>
-        <TabsTrigger value="reports">Reports</TabsTrigger>
-        <TabsTrigger value="settings">Settings</TabsTrigger>
+        <TabsTrigger value="overview">{uiText.demo.tabs.overview}</TabsTrigger>
+        <TabsTrigger value="analytics">
+          {uiText.demo.tabs.analytics}
+        </TabsTrigger>
+        <TabsTrigger value="reports">{uiText.demo.tabs.reports}</TabsTrigger>
+        <TabsTrigger value="settings">{uiText.demo.tabs.settings}</TabsTrigger>
       </TabsList>
       <TabsContent value="overview">
         <Card>
           <CardHeader>
-            <CardTitle>Overview</CardTitle>
+            <CardTitle>{uiText.demo.tabs.overview}</CardTitle>
             <CardDescription>
-              View your key metrics and recent project activity. Track progress
-              across all your active projects.
+              {uiText.demo.tabs.overviewDescription}
             </CardDescription>
           </CardHeader>
           <CardContent className="text-sm text-muted-foreground">
-            You have 12 active projects and 3 pending tasks.
+            {uiText.demo.tabs.overviewContent}
           </CardContent>
         </Card>
       </TabsContent>
       <TabsContent value="analytics">
         <Card>
           <CardHeader>
-            <CardTitle>Analytics</CardTitle>
+            <CardTitle>{uiText.demo.tabs.analytics}</CardTitle>
             <CardDescription>
-              Track performance and user engagement metrics. Monitor trends and
-              identify growth opportunities.
+              {uiText.demo.tabs.analyticsDescription}
             </CardDescription>
           </CardHeader>
           <CardContent className="text-sm text-muted-foreground">
-            Page views are up 25% compared to last month.
+            {uiText.demo.tabs.analyticsContent}
           </CardContent>
         </Card>
       </TabsContent>
       <TabsContent value="reports">
         <Card>
           <CardHeader>
-            <CardTitle>Reports</CardTitle>
+            <CardTitle>{uiText.demo.tabs.reports}</CardTitle>
             <CardDescription>
-              Generate and download your detailed reports. Export data in
-              multiple formats for analysis.
+              {uiText.demo.tabs.reportsDescription}
             </CardDescription>
           </CardHeader>
           <CardContent className="text-sm text-muted-foreground">
-            You have 5 reports ready and available to export.
+            {uiText.demo.tabs.reportsContent}
           </CardContent>
         </Card>
       </TabsContent>
       <TabsContent value="settings">
         <Card>
           <CardHeader>
-            <CardTitle>Settings</CardTitle>
+            <CardTitle>{uiText.demo.tabs.settings}</CardTitle>
             <CardDescription>
-              Manage your account preferences and options. Customize your
-              experience to fit your needs.
+              {uiText.demo.tabs.settingsDescription}
             </CardDescription>
           </CardHeader>
           <CardContent className="text-sm text-muted-foreground">
-            Configure notifications, security, and themes.
+            {uiText.demo.tabs.settingsContent}
           </CardContent>
         </Card>
       </TabsContent>

@@ -1,6 +1,7 @@
 import { betterAuth } from "better-auth";
 import { Pool } from "pg";
 import { Resend } from "resend";
+import { uiText } from "@/modules/data/ui-text";
 
 const databaseUrl = process.env.DATABASE_URL;
 if (!databaseUrl) {
@@ -53,10 +54,10 @@ export const auth = betterAuth({
       }
 
       const { error } = await resend.emails.send({
-        from: "Mi aplicación <onboarding@resend.dev>",
+        from: uiText.email.verificationFrom,
         to: user.email,
-        subject: "Verifica tu correo",
-        text: `Para verificar tu correo, abre este enlace: ${url}`,
+        subject: uiText.email.verificationSubject,
+        text: `${uiText.email.verificationBody} ${url}`,
       });
 
       if (error) {

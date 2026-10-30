@@ -1,6 +1,7 @@
 import { CheckCircle2, ChevronDown } from "lucide-react";
 import SidebarLinks from "@/modules/components/sidebar-links";
 import { usePaperTheme } from "./theme-provider";
+import { uiText } from "@/modules/data/ui-text";
 
 export default function DashboardSidebar() {
   const { activeAccentHex, sidebarConfig } = usePaperTheme();
@@ -23,13 +24,13 @@ export default function DashboardSidebar() {
             className="font-heading block text-sm font-bold tracking-wider uppercase"
             style={{ color: sidebarConfig.text }}
           >
-            Dashboard Admin
+            {uiText.brand.name}
           </span>
           <span
             className="block text-[11px] font-medium tracking-tight"
             style={{ color: sidebarConfig.textMuted }}
           >
-            Next.js
+            {uiText.brand.framework}
           </span>
         </div>
 
@@ -49,13 +50,13 @@ export default function DashboardSidebar() {
                 className="font-heading cursor-pointer text-xs font-bold tracking-wide transition-colors"
                 style={{ color: sidebarConfig.text }}
               >
-                Chet Faker
+                {uiText.dashboard.userName}
               </h4>
               <span
                 className="block text-[10px] font-semibold tracking-wider uppercase"
                 style={{ color: activeAccentHex }}
               >
-                Administrator
+                {uiText.dashboard.administrator}
               </span>
             </div>
           </div>
@@ -77,7 +78,7 @@ export default function DashboardSidebar() {
             className="h-3.5 w-3.5"
             style={{ color: activeAccentHex }}
           />
-          <span>Paper PRO v2.1.0</span>
+          <span>{uiText.brand.version}</span>
         </div>
       </div>
     </aside>

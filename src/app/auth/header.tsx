@@ -1,5 +1,6 @@
 import { LayoutDashboard, User } from "lucide-react";
 import Link from "next/link";
+import { uiText } from "@/modules/data/ui-text";
 
 export default function AuthHeader() {
   return (
@@ -14,7 +15,8 @@ export default function AuthHeader() {
             <LayoutDashboard className="size-5" />
           </div>
           <span className="font-heading text-sm font-semibold tracking-wider uppercase text-foreground sm:text-base">
-            Dashboard Admin <span className="font-bold text-primary">PRO</span>
+            {uiText.brand.name}{" "}
+            <span className="font-bold text-primary">{uiText.brand.tier}</span>
           </span>
         </Link>
 
@@ -22,7 +24,7 @@ export default function AuthHeader() {
         <div className="flex items-center gap-3">
           <Link
             href="/auth/login"
-            aria-label="User account"
+            aria-label={uiText.accessibility.userAccount}
             className="flex size-8 items-center justify-center rounded-full bg-primary/20 text-primary shadow-xs transition-transform hover:scale-105 active:scale-95 dark:bg-primary/30"
           >
             <User className="size-4" />

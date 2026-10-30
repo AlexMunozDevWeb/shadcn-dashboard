@@ -21,17 +21,17 @@ import {
   CardHeader,
   CardTitle,
 } from "@/modules/components//ui/card";
+import { uiText } from "@/modules/data/ui-text";
 
 export default function ButtonPage() {
   return (
     <div className="space-y-6">
       <div>
         <h1 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-foreground font-heading">
-          Buttons &amp; Interactive Triggers
+          {uiText.demo.button.heading}
         </h1>
         <p className="text-xs sm:text-sm md:text-sm text-paper-muted">
-          Paper Tactile button hierarchy with crisp typography, hover elevation
-          lift, and micro-press transitions.
+          {uiText.demo.button.description}
         </p>
       </div>
 
@@ -39,62 +39,62 @@ export default function ButtonPage() {
         {/* Semantic Action Palette */}
         <Card>
           <CardHeader>
-            <CardTitle>Color Variants</CardTitle>
+            <CardTitle>{uiText.demo.button.colorVariants}</CardTitle>
             <CardDescription>
-              Stitch Paper Tactile palette: Primary Teal, Coral Orange, Mint
-              Green, Radiant Yellow, and Sky Blue.
+              {uiText.demo.button.colorDescription}
             </CardDescription>
           </CardHeader>
           <CardContent className="flex flex-wrap gap-3">
-            <Button variant="default">Primary Teal</Button>
-            <Button variant="success">Success Mint</Button>
-            <Button variant="warning">Warning Amber</Button>
-            <Button variant="info">Info Sky</Button>
-            <Button variant="coral">Warm Coral</Button>
-            <Button variant="secondary">Secondary Slate</Button>
-            <Button variant="outline">Outline</Button>
-            <Button variant="paper">Paper Sheet</Button>
-            <Button variant="destructive">Destructive</Button>
-            <Button variant="ghost">Ghost Trigger</Button>
-            <Button variant="link">Inline Link</Button>
-            <Button disabled>Disabled State</Button>
+            <Button variant="default">{uiText.demo.button.primary}</Button>
+            <Button variant="success">{uiText.demo.button.success}</Button>
+            <Button variant="warning">{uiText.demo.button.warning}</Button>
+            <Button variant="info">{uiText.demo.button.info}</Button>
+            <Button variant="coral">{uiText.demo.button.coral}</Button>
+            <Button variant="secondary">{uiText.demo.button.secondary}</Button>
+            <Button variant="outline">{uiText.demo.button.outline}</Button>
+            <Button variant="paper">{uiText.demo.button.paper}</Button>
+            <Button variant="destructive">
+              {uiText.demo.button.destructive}
+            </Button>
+            <Button variant="ghost">{uiText.demo.button.ghost}</Button>
+            <Button variant="link">{uiText.demo.button.link}</Button>
+            <Button disabled>{uiText.demo.button.disabled}</Button>
           </CardContent>
         </Card>
 
         {/* Buttons with Icons */}
         <Card>
           <CardHeader>
-            <CardTitle>Buttons with Glyphs</CardTitle>
+            <CardTitle>{uiText.demo.button.glyphs}</CardTitle>
             <CardDescription>
-              Structured action buttons paired with leading or trailing Lucide
-              icons.
+              {uiText.demo.button.glyphDescription}
             </CardDescription>
           </CardHeader>
           <CardContent className="flex flex-wrap gap-3">
             <Button variant="default">
               <Plus className="mr-1.5 h-4 w-4" />
-              New Deployment
+              {uiText.demo.button.newDeployment}
             </Button>
             <Button variant="success">
               <Check className="mr-1.5 h-4 w-4" />
-              Confirm Build
+              {uiText.demo.button.confirmBuild}
             </Button>
             <Button variant="coral">
               <Trash2 className="mr-1.5 h-4 w-4" />
-              Delete Node
+              {uiText.demo.button.deleteNode}
             </Button>
             <Button variant="outline">
               <Download className="mr-1.5 h-4 w-4" />
-              Export CSV
+              {uiText.demo.button.exportCsv}
             </Button>
             <Button variant="outline">
               <GitBranch className="mr-1.5 h-4 w-4" />
-              Branch main
+              {uiText.demo.button.branchMain}
               <ArrowUpRight className="ml-1 h-3.5 w-3.5 opacity-60" />
             </Button>
             <Button variant="secondary">
               <RotateCw className="mr-1.5 h-4 w-4" />
-              Sync Replica
+              {uiText.demo.button.syncReplica}
             </Button>
           </CardContent>
         </Card>
@@ -102,40 +102,55 @@ export default function ButtonPage() {
         {/* Size Scale */}
         <Card className="lg:col-span-2">
           <CardHeader>
-            <CardTitle>Scale &amp; Dimensions</CardTitle>
+            <CardTitle>{uiText.demo.button.scale}</CardTitle>
             <CardDescription>
-              From compact table micro-triggers (xs) to dominant hero
-              call-to-actions (lg).
+              {uiText.demo.button.scaleDescription}
             </CardDescription>
           </CardHeader>
           <CardContent className="flex flex-wrap items-center gap-4">
             <Button size="xs" variant="outline">
-              Extra Small
+              {uiText.demo.button.extraSmall}
             </Button>
             <Button size="sm" variant="outline">
-              Small Button
+              {uiText.demo.button.small}
             </Button>
             <Button size="default" variant="default">
-              Default Size
+              {uiText.demo.button.defaultSize}
             </Button>
             <Button size="lg" variant="default">
-              Large Hero Action
+              {uiText.demo.button.large}
               <ChevronRight className="ml-2 h-4 w-4" />
             </Button>
 
             <div className="h-6 w-px bg-border" />
 
             {/* Circular icon buttons */}
-            <Button size="icon-xs" variant="outline" aria-label="Micro Action">
+            <Button
+              size="icon-xs"
+              variant="outline"
+              aria-label={uiText.accessibility.microAction}
+            >
               <Heart className="h-3 w-3 text-accent-coral" />
             </Button>
-            <Button size="icon-sm" variant="outline" aria-label="Small Action">
+            <Button
+              size="icon-sm"
+              variant="outline"
+              aria-label={uiText.accessibility.smallAction}
+            >
               <Plus className="h-3.5 w-3.5 text-accent-teal" />
             </Button>
-            <Button size="icon" variant="default" aria-label="Default Action">
+            <Button
+              size="icon"
+              variant="default"
+              aria-label={uiText.accessibility.defaultAction}
+            >
               <Send className="h-4 w-4" />
             </Button>
-            <Button size="icon-lg" variant="paper" aria-label="Large Action">
+            <Button
+              size="icon-lg"
+              variant="paper"
+              aria-label={uiText.accessibility.largeAction}
+            >
               <ArrowRight className="h-4 w-4 text-foreground" />
             </Button>
           </CardContent>

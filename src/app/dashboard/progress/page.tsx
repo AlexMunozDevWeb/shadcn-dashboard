@@ -8,6 +8,7 @@ import {
 import { cn } from "cn";
 
 import { useEffect, useState } from "react";
+import { uiText } from "@/modules/data/ui-text";
 
 export default function ProgressDemo() {
   const [progress, setProgress] = useState(0);
@@ -30,7 +31,7 @@ export default function ProgressDemo() {
   return (
     <div className="flex flex-col">
       <Progress value={56} className="w-full max-w-s mb-12">
-        <ProgressLabel>Upload progress</ProgressLabel>
+        <ProgressLabel>{uiText.demo.progress.upload}</ProgressLabel>
         <ProgressValue />
       </Progress>
       <Progress

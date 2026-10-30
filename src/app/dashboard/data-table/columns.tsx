@@ -26,6 +26,7 @@ import { toast } from "sonner";
 import { ArrowDown, ArrowUp, ArrowUpDown, MoreHorizontal } from "lucide-react";
 
 import { Payment } from "@/modules/data/payment";
+import { uiText } from "@/modules/data/ui-text";
 import {
   type BadgeVariant,
   type PaymentStatus,
@@ -71,14 +72,14 @@ export const columns = columnHelper.columns([
           table.getIsSomePageRowsSelected() && !table.getIsAllPageRowsSelected()
         }
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
+        aria-label={uiText.accessibility.selectAll}
       />
     ),
     cell: ({ row }) => (
       <Checkbox
         checked={row.getIsSelected()}
         onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
+        aria-label={uiText.accessibility.selectRow}
       />
     ),
     enableSorting: false,
@@ -91,7 +92,7 @@ export const columns = columnHelper.columns([
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Client Name
+          {uiText.demo.dataTable.clientName}
           <SortIcon column={column} />
         </Button>
       );
@@ -104,7 +105,7 @@ export const columns = columnHelper.columns([
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Status
+          {uiText.demo.dataTable.status}
           <SortIcon column={column} />
         </Button>
       );
@@ -126,7 +127,7 @@ export const columns = columnHelper.columns([
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Amount
+          {uiText.demo.dataTable.amount}
           <SortIcon column={column} />
         </Button>
       );
@@ -149,7 +150,7 @@ export const columns = columnHelper.columns([
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Email
+          {uiText.demo.dataTable.email}
           <SortIcon column={column} />
         </Button>
       );
@@ -165,25 +166,31 @@ export const columns = columnHelper.columns([
           <DropdownMenuTrigger
             render={<Button variant="ghost" className="h-8 w-8 p-0" />}
           >
-            <span className="sr-only">Open menu</span>
+            <span className="sr-only">{uiText.demo.dataTable.openMenu}</span>
             <MoreHorizontal className="h-4 w-4" />
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuGroup>
-              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+              <DropdownMenuLabel>
+                {uiText.demo.dataTable.actions}
+              </DropdownMenuLabel>
               <DropdownMenuItem
                 onClick={() => {
                   navigator.clipboard.writeText(payment.id);
-                  toast("Payment ID copied to clipboard", {
+                  toast(uiText.demo.dataTable.copied, {
                     position: "top-right",
                   });
                 }}
               >
-                Copy payment ID
+                {uiText.demo.dataTable.copyPaymentId}
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>View customer</DropdownMenuItem>
-              <DropdownMenuItem>View payment details</DropdownMenuItem>
+              <DropdownMenuItem>
+                {uiText.demo.dataTable.viewCustomer}
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                {uiText.demo.dataTable.viewDetails}
+              </DropdownMenuItem>
             </DropdownMenuGroup>
           </DropdownMenuContent>
         </DropdownMenu>

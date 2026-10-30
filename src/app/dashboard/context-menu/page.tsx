@@ -14,47 +14,60 @@ import {
   ContextMenuSubTrigger,
   ContextMenuTrigger,
 } from "@/modules/components//ui/context-menu";
+import { uiText } from "@/modules/data/ui-text";
 
 export default function ContextMenuDemo() {
   return (
     <ContextMenu>
       <ContextMenuTrigger className="flex aspect-video w-full max-w-xs items-center justify-center rounded-xl border border-dashed text-sm">
         <span className="hidden pointer-fine:inline-block">
-          Right click here
+          {uiText.demo.contextMenu.rightClick}
         </span>
         <span className="hidden pointer-coarse:inline-block">
-          Long press here
+          {uiText.demo.contextMenu.longPress}
         </span>
       </ContextMenuTrigger>
       <ContextMenuContent className="w-48">
         <ContextMenuGroup>
           <ContextMenuItem>
-            Back
+            {uiText.demo.contextMenu.back}
             <ContextMenuShortcut>⌘[</ContextMenuShortcut>
           </ContextMenuItem>
           <ContextMenuItem disabled>
-            Forward
+            {uiText.demo.contextMenu.forward}
             <ContextMenuShortcut>⌘]</ContextMenuShortcut>
           </ContextMenuItem>
           <ContextMenuItem>
-            Reload
+            {uiText.demo.contextMenu.reload}
             <ContextMenuShortcut>⌘R</ContextMenuShortcut>
           </ContextMenuItem>
           <ContextMenuSub>
-            <ContextMenuSubTrigger>More Tools</ContextMenuSubTrigger>
+            <ContextMenuSubTrigger>
+              {uiText.demo.contextMenu.moreTools}
+            </ContextMenuSubTrigger>
             <ContextMenuSubContent className="w-44">
               <ContextMenuGroup>
-                <ContextMenuItem>Save Page...</ContextMenuItem>
-                <ContextMenuItem>Create Shortcut...</ContextMenuItem>
-                <ContextMenuItem>Name Window...</ContextMenuItem>
+                <ContextMenuItem>
+                  {uiText.demo.contextMenu.savePage}
+                </ContextMenuItem>
+                <ContextMenuItem>
+                  {uiText.demo.contextMenu.shortcut}
+                </ContextMenuItem>
+                <ContextMenuItem>
+                  {uiText.demo.contextMenu.nameWindow}
+                </ContextMenuItem>
               </ContextMenuGroup>
               <ContextMenuSeparator />
               <ContextMenuGroup>
-                <ContextMenuItem>Developer Tools</ContextMenuItem>
+                <ContextMenuItem>
+                  {uiText.demo.contextMenu.developerTools}
+                </ContextMenuItem>
               </ContextMenuGroup>
               <ContextMenuSeparator />
               <ContextMenuGroup>
-                <ContextMenuItem variant="destructive">Delete</ContextMenuItem>
+                <ContextMenuItem variant="destructive">
+                  {uiText.demo.contextMenu.delete}
+                </ContextMenuItem>
               </ContextMenuGroup>
             </ContextMenuSubContent>
           </ContextMenuSub>
@@ -62,18 +75,24 @@ export default function ContextMenuDemo() {
         <ContextMenuSeparator />
         <ContextMenuGroup>
           <ContextMenuCheckboxItem checked>
-            Show Bookmarks
+            {uiText.demo.contextMenu.showBookmarks}
           </ContextMenuCheckboxItem>
-          <ContextMenuCheckboxItem>Show Full URLs</ContextMenuCheckboxItem>
+          <ContextMenuCheckboxItem>
+            {uiText.demo.contextMenu.showUrls}
+          </ContextMenuCheckboxItem>
         </ContextMenuGroup>
         <ContextMenuSeparator />
         <ContextMenuGroup>
           <ContextMenuRadioGroup value="pedro">
-            <ContextMenuLabel>People</ContextMenuLabel>
+            <ContextMenuLabel>
+              {uiText.demo.contextMenu.people}
+            </ContextMenuLabel>
             <ContextMenuRadioItem value="pedro">
-              Pedro Duarte
+              {uiText.demo.contextMenu.pedro}
             </ContextMenuRadioItem>
-            <ContextMenuRadioItem value="colm">Colm Tuite</ContextMenuRadioItem>
+            <ContextMenuRadioItem value="colm">
+              {uiText.demo.contextMenu.colm}
+            </ContextMenuRadioItem>
           </ContextMenuRadioGroup>
         </ContextMenuGroup>
       </ContextMenuContent>

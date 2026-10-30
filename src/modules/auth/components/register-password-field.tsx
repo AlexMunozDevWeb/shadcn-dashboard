@@ -6,6 +6,7 @@ import type { Control, UseFormRegisterReturn } from "react-hook-form";
 import { useWatch } from "react-hook-form";
 import { Label } from "@/modules/components//ui/label";
 import type { RegisterFormData } from "../../../app/auth/register/schema";
+import { uiText } from "@/modules/data/ui-text";
 
 type RegisterPasswordFieldProps = {
   control: Control<RegisterFormData>;
@@ -19,7 +20,11 @@ function calculatePasswordStrength(password: string): {
   colorClass: string;
 } {
   if (!password) {
-    return { score: 0, label: "None", colorClass: "text-muted-foreground" };
+    return {
+      score: 0,
+      label: uiText.auth.strengthNone,
+      colorClass: "text-muted-foreground",
+    };
   }
 
   let score = 0;
@@ -36,12 +41,24 @@ function calculatePasswordStrength(password: string): {
   score = Math.max(1, score);
 
   if (score === 1) {
-    return { score: 1, label: "Weak", colorClass: "text-destructive" };
+    return {
+      score: 1,
+      label: uiText.auth.strengthWeak,
+      colorClass: "text-destructive",
+    };
   }
   if (score === 2) {
-    return { score: 2, label: "Medium", colorClass: "text-accent-yellow" };
+    return {
+      score: 2,
+      label: uiText.auth.strengthMedium,
+      colorClass: "text-accent-yellow",
+    };
   }
-  return { score: 3, label: "Strong", colorClass: "text-accent-mint" };
+  return {
+    score: 3,
+    label: uiText.auth.strengthStrong,
+    colorClass: "text-accent-mint",
+  };
 }
 
 export function RegisterPasswordField({
@@ -59,7 +76,7 @@ export function RegisterPasswordField({
         htmlFor="password"
         className="block font-heading text-xs font-bold tracking-wide uppercase text-foreground"
       >
-        Password
+        {uiText.auth.password}
       </Label>
       <div
         className={`relative flex items-center rounded-lg border bg-card/60 shadow-xs transition-all focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20 ${
@@ -74,13 +91,17 @@ export function RegisterPasswordField({
           id="password"
           type={showPassword ? "text" : "password"}
           autoComplete="new-password"
-          placeholder="••••••••••••"
+          placeholder={uiText.auth.registerPasswordPlaceholder}
           className="w-full bg-transparent px-3 py-2.5 font-sans text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
         />
         <button
           type="button"
           onClick={() => setShowPassword((prev) => !prev)}
-          aria-label={showPassword ? "Hide password" : "Show password"}
+          aria-label={
+            showPassword
+              ? uiText.accessibility.hidePassword
+              : uiText.accessibility.showPassword
+          }
           className="mr-3 text-muted-foreground transition-colors hover:text-foreground focus:outline-none"
         >
           {showPassword ? (
@@ -94,7 +115,7 @@ export function RegisterPasswordField({
       <div className="mt-2 space-y-1.5">
         <div className="flex items-center justify-between text-xs font-heading">
           <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-            Password Strength
+            {uiText.auth.passwordStrength}
           </span>
           <span
             className={`text-[11px] font-bold uppercase tracking-wider ${strength.colorClass}`}

@@ -1,6 +1,7 @@
 "use client";
 import { Slider } from "@/modules/components//ui/slider";
 import { useState } from "react";
+import { uiText } from "@/modules/data/ui-text";
 
 export default function SliderDemo() {
   const [sliderValue, setSliderValue] = useState(10);
@@ -8,7 +9,9 @@ export default function SliderDemo() {
 
   return (
     <div className="grid grid-cols-1 gap-3">
-      <span>Slider value: {sliderValue}</span>
+      <span>
+        {uiText.demo.slider.value} {sliderValue}
+      </span>
       <Slider
         value={[sliderValue]}
         onValueChange={(value) =>
@@ -19,7 +22,9 @@ export default function SliderDemo() {
         className="w-full max-w-xs"
       />
 
-      <span>Range value: {rangeValue.join(",")}</span>
+      <span>
+        {uiText.demo.slider.range} {rangeValue.join(",")}
+      </span>
       <Slider
         value={rangeValue}
         onValueChange={(value) =>

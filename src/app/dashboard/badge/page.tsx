@@ -15,17 +15,17 @@ import {
   TrendingDown,
   Clock,
 } from "lucide-react";
+import { uiText } from "@/modules/data/ui-text";
 
 export default function BadgePage() {
   return (
     <div className="space-y-6">
       <div>
         <h1 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-foreground font-heading">
-          Badges &amp; Status Indicators
+          {uiText.demo.badge.heading}
         </h1>
         <p className="text-xs sm:text-sm md:text-sm text-paper-muted">
-          Tactile status pills and contextual micro-badges from the Stitch
-          design system.
+          {uiText.demo.badge.description}
         </p>
       </div>
 
@@ -33,30 +33,28 @@ export default function BadgePage() {
         {/* Core Status Pills */}
         <Card>
           <CardHeader>
-            <CardTitle>Semantic Status Pills</CardTitle>
+            <CardTitle>{uiText.demo.badge.semantic}</CardTitle>
             <CardDescription>
-              Color-coded status indicators with gentle pastel tint fills and
-              crisp borders.
+              {uiText.demo.badge.semanticDescription}
             </CardDescription>
           </CardHeader>
           <CardContent className="flex flex-wrap gap-2.5 items-center">
-            <Badge variant="default">Active / Live</Badge>
-            <Badge variant="success">Completed</Badge>
-            <Badge variant="warning">In Review</Badge>
-            <Badge variant="destructive">Critical Error</Badge>
-            <Badge variant="info">Pending Node</Badge>
-            <Badge variant="secondary">Archived</Badge>
-            <Badge variant="outline">Draft State</Badge>
+            <Badge variant="default">{uiText.demo.badge.active}</Badge>
+            <Badge variant="success">{uiText.demo.badge.completed}</Badge>
+            <Badge variant="warning">{uiText.demo.badge.review}</Badge>
+            <Badge variant="destructive">{uiText.demo.badge.critical}</Badge>
+            <Badge variant="info">{uiText.demo.badge.pending}</Badge>
+            <Badge variant="secondary">{uiText.demo.badge.archived}</Badge>
+            <Badge variant="outline">{uiText.demo.badge.draft}</Badge>
           </CardContent>
         </Card>
 
         {/* Analytical Metric Badges */}
         <Card>
           <CardHeader>
-            <CardTitle>Analytical Delta Chips</CardTitle>
+            <CardTitle>{uiText.demo.badge.analytical}</CardTitle>
             <CardDescription>
-              Numeric badges with directional indicators for KPI trends and
-              real-time delta tracking.
+              {uiText.demo.badge.analyticalDescription}
             </CardDescription>
           </CardHeader>
           <CardContent className="flex flex-wrap gap-2.5 items-center">
@@ -70,11 +68,11 @@ export default function BadgePage() {
             </Badge>
             <Badge variant="warning" className="gap-1">
               <AlertTriangle className="h-3 w-3" />
-              Threshold 92%
+              {uiText.demo.badge.threshold}
             </Badge>
             <Badge variant="default" className="gap-1">
               <Sparkles className="h-3 w-3" />
-              PRO Telemetry
+              {uiText.demo.badge.telemetry}
             </Badge>
             <Badge variant="info" className="gap-1">
               <Clock className="h-3 w-3" />

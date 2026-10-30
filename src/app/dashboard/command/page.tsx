@@ -17,42 +17,43 @@ import {
   CommandSeparator,
   CommandShortcut,
 } from "@/modules/components//ui/command";
+import { uiText } from "@/modules/data/ui-text";
 
 export default function CommandDemo() {
   return (
     <Command className="max-w-sm rounded-lg border">
-      <CommandInput placeholder="Type a command or search..." />
+      <CommandInput placeholder={uiText.demo.command.input} />
       <CommandList>
-        <CommandEmpty>No results found.</CommandEmpty>
-        <CommandGroup heading="Suggestions">
+        <CommandEmpty>{uiText.demo.command.empty}</CommandEmpty>
+        <CommandGroup heading={uiText.demo.command.suggestions}>
           <CommandItem>
             <Calendar />
-            <span>Calendar</span>
+            <span>{uiText.demo.command.calendar}</span>
           </CommandItem>
           <CommandItem>
             <Smile />
-            <span>Search Emoji</span>
+            <span>{uiText.demo.command.searchEmoji}</span>
           </CommandItem>
           <CommandItem disabled>
             <Calculator />
-            <span>Calculator</span>
+            <span>{uiText.demo.command.calculator}</span>
           </CommandItem>
         </CommandGroup>
         <CommandSeparator />
-        <CommandGroup heading="Settings">
+        <CommandGroup heading={uiText.demo.command.settings}>
           <CommandItem>
             <User />
-            <span>Profile</span>
+            <span>{uiText.demo.command.profile}</span>
             <CommandShortcut>⌘P</CommandShortcut>
           </CommandItem>
           <CommandItem>
             <CreditCard />
-            <span>Billing</span>
+            <span>{uiText.demo.command.billing}</span>
             <CommandShortcut>⌘B</CommandShortcut>
           </CommandItem>
           <CommandItem>
             <Settings />
-            <span>Settings</span>
+            <span>{uiText.demo.command.settings}</span>
             <CommandShortcut>⌘S</CommandShortcut>
           </CommandItem>
         </CommandGroup>

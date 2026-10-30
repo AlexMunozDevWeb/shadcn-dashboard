@@ -8,6 +8,7 @@ import useEmblaCarousel, {
 
 import { Button } from "@/modules/components/ui/button";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
+import { uiText } from "@/modules/data/ui-text";
 
 import Autoplay from "embla-carousel-autoplay";
 
@@ -209,7 +210,7 @@ function CarouselPrevious({
       {...props}
     >
       <ChevronLeftIcon />
-      <span className="sr-only">Previous slide</span>
+      <span className="sr-only">{uiText.demo.carousel.previous}</span>
     </Button>
   );
 }
@@ -239,7 +240,7 @@ function CarouselNext({
       {...props}
     >
       <ChevronRightIcon />
-      <span className="sr-only">Next slide</span>
+      <span className="sr-only">{uiText.demo.carousel.next}</span>
     </Button>
   );
 }

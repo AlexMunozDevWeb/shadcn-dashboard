@@ -10,17 +10,14 @@ import {
   FieldSet,
 } from "@/modules/components//ui/field";
 import { useState } from "react";
+import { uiText } from "@/modules/data/ui-text";
 
 export default function CheckboxGroup() {
   const [terms, setTermns] = useState(true);
   return (
     <FieldSet>
-      <FieldLegend variant="label">
-        Show these items on the desktop:
-      </FieldLegend>
-      <FieldDescription>
-        Select the items you want to show on the desktop.
-      </FieldDescription>
+      <FieldLegend variant="label">{uiText.demo.checkbox.legend}</FieldLegend>
+      <FieldDescription>{uiText.demo.checkbox.description}</FieldDescription>
       <FieldGroup className="gap-3">
         <Field orientation="horizontal">
           <Checkbox
@@ -33,13 +30,13 @@ export default function CheckboxGroup() {
             htmlFor="finder-pref-9k2-hard-disks-ljj-checkbox"
             className="font-normal"
           >
-            Hard disks
+            {uiText.demo.checkbox.hardDisks}
           </FieldLabel>
         </Field>
         {terms ? (
-          <Badge>Great!</Badge>
+          <Badge>{uiText.demo.checkbox.great}</Badge>
         ) : (
-          <Badge variant="destructive">Warning!</Badge>
+          <Badge variant="destructive">{uiText.demo.checkbox.warning}</Badge>
         )}
       </FieldGroup>
     </FieldSet>

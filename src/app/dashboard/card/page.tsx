@@ -20,32 +20,33 @@ import {
   ToggleGroup,
   ToggleGroupItem,
 } from "@/modules/components//ui/toggle-group";
+import { uiText } from "@/modules/data/ui-text";
 
 const spacingOptions = [
   {
     className: "[--card-spacing:--spacing(4)]",
-    label: "16px",
+    label: uiText.demo.spacing[0],
     value: "4",
   },
   {
     className: "[--card-spacing:--spacing(5)]",
-    label: "20px",
+    label: uiText.demo.spacing[1],
     value: "5",
   },
   {
     className: "[--card-spacing:--spacing(6)]",
-    label: "24px",
+    label: uiText.demo.spacing[2],
     value: "6",
   },
   {
     className: "[--card-spacing:--spacing(8)]",
-    label: "32px",
+    label: uiText.demo.spacing[3],
     value: "8",
   },
 ];
 
 export default function CardSpacing() {
-  const featureName = "Scheduled reports";
+  const featureName = uiText.demo.card.feature;
 
   const numsCards = "123456";
 
@@ -61,26 +62,24 @@ export default function CardSpacing() {
           <Card key={item} size="sm" className="mx-auto w-full max-w-xs">
             <CardHeader>
               <CardTitle>{featureName}</CardTitle>
-              <CardDescription>
-                Weekly snapshots. No more manual exports.
-              </CardDescription>
+              <CardDescription>{uiText.demo.card.description}</CardDescription>
             </CardHeader>
             <CardContent>
               <ul className="grid gap-2 py-2 text-sm">
                 <li className="flex gap-2">
                   <ChevronRightIcon className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
-                  <span>Choose a schedule (daily, or weekly).</span>
+                  <span>{uiText.demo.card.schedule}</span>
                 </li>
                 <li className="flex gap-2">
                   <ChevronRightIcon className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
-                  <span>Send to channels or specific teammates.</span>
+                  <span>{uiText.demo.card.channels}</span>
                 </li>
               </ul>
             </CardContent>
             <CardFooter className="flex-row gap-3 justify-end">
-              <Button size="sm">Info</Button>
+              <Button size="sm">{uiText.demo.card.info}</Button>
               <Button variant="outline" size="sm">
-                More
+                {uiText.demo.card.more}
               </Button>
             </CardFooter>
           </Card>
@@ -106,34 +105,38 @@ export default function CardSpacing() {
         </ToggleGroup>
         <Card className={selectedSpacing?.className}>
           <CardHeader>
-            <CardTitle>Login to your account</CardTitle>
+            <CardTitle>{uiText.demo.card.loginTitle}</CardTitle>
             <CardDescription>
-              Enter your email below to login to your account
+              {uiText.demo.card.loginDescription}
             </CardDescription>
             <CardAction>
-              <Button variant="link">Sign Up</Button>
+              <Button variant="link">{uiText.demo.card.signUp}</Button>
             </CardAction>
           </CardHeader>
           <CardContent>
             <form>
               <div className="flex flex-col gap-6">
                 <div className="grid gap-2">
-                  <Label htmlFor="email-spacing">Email</Label>
+                  <Label htmlFor="email-spacing">
+                    {uiText.demo.card.email}
+                  </Label>
                   <Input
                     id="email-spacing"
                     type="email"
-                    placeholder="m@example.com"
+                    placeholder={uiText.demo.card.emailPlaceholder}
                     required
                   />
                 </div>
                 <div className="grid gap-2">
                   <div className="flex items-center">
-                    <Label htmlFor="password-spacing">Password</Label>
+                    <Label htmlFor="password-spacing">
+                      {uiText.demo.card.password}
+                    </Label>
                     <a
                       href="/auth/login"
                       className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
                     >
-                      Forgot your password?
+                      {uiText.demo.card.forgotPassword}
                     </a>
                   </div>
                   <Input id="password-spacing" type="password" required />
@@ -143,10 +146,10 @@ export default function CardSpacing() {
           </CardContent>
           <CardFooter className="flex-col gap-2">
             <Button type="submit" className="w-full">
-              Login
+              {uiText.demo.card.login}
             </Button>
             <Button variant="outline" className="w-full">
-              Login with Google
+              {uiText.demo.card.loginGoogle}
             </Button>
           </CardFooter>
         </Card>

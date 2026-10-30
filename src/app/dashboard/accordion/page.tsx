@@ -4,28 +4,26 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/modules/components/ui/accordion";
+import { uiText } from "@/modules/data/ui-text";
 
 const items = [
   {
     id: "item-1",
     value: "shipping",
-    title: "What are your shipping options?",
-    content:
-      "We offer standard (5-7 days), express (2-3 days), and overnight shipping. Free shipping on international orders.",
+    title: uiText.demo.accordion.shippingTitle,
+    content: uiText.demo.accordion.shippingContent,
   },
   {
     id: "item-2",
     value: "returns",
-    title: "What is your return policy?",
-    content:
-      "Returns accepted within 30 days. Items must be unused and in original packaging. Refunds processed within 5-7 business days.",
+    title: uiText.demo.accordion.returnsTitle,
+    content: uiText.demo.accordion.returnsContent,
   },
   {
     id: "item-3",
     value: "support",
-    title: "How can I contact customer support?",
-    content:
-      "Reach us via email, live chat, or phone. We respond within 24 hours during business days.",
+    title: uiText.demo.accordion.supportTitle,
+    content: uiText.demo.accordion.supportContent,
   },
 ];
 

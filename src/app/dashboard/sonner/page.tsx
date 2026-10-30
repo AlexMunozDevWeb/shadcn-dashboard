@@ -3,6 +3,7 @@
 import { toast } from "sonner";
 
 import { Button } from "@/modules/components//ui/button";
+import { uiText } from "@/modules/data/ui-text";
 
 export default function SonnerDemo() {
   return (
@@ -10,33 +11,33 @@ export default function SonnerDemo() {
       <Button
         variant="outline"
         onClick={() =>
-          toast("Event has been created", {
+          toast(uiText.demo.toast.created, {
             duration: 1000,
             description: `Fecha: ${new Date()}`,
             action: {
-              label: "Undo",
-              onClick: () => toast.info("Action reverted."),
+              label: uiText.demo.sonner.undo,
+              onClick: () => toast.info(uiText.demo.sonner.reverted),
             },
           })
         }
       >
-        Show Toast
+        {uiText.demo.toast.show}
       </Button>
       <Button
         variant="outline"
         onClick={() =>
-          toast.success("Event has been created", {
+          toast.success(uiText.demo.toast.created, {
             className: "bg-green-500 text-white",
             duration: 1000,
             description: `Fecha: ${new Date()}`,
             action: {
-              label: "Undo",
-              onClick: () => toast.info("Action reverted."),
+              label: uiText.demo.sonner.undo,
+              onClick: () => toast.info(uiText.demo.sonner.reverted),
             },
           })
         }
       >
-        Show Custom Colors
+        {uiText.demo.sonner.custom}
       </Button>
     </div>
   );

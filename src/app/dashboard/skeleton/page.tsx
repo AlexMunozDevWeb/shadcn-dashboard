@@ -7,6 +7,7 @@ import {
 } from "@/modules/components//ui/card";
 import { Button } from "@/modules/components//ui/button";
 import Image from "next/image";
+import { uiText } from "@/modules/data/ui-text";
 
 const getData = async () => {
   await new Promise((resolve) => setTimeout(resolve, 3000));
@@ -23,18 +24,20 @@ export default async function SkeletonDemo() {
           <CardHeader className="flex flex-row">
             <Image
               src="https://github.com/shadcn.png"
-              alt="Shadcn"
+              alt={uiText.demo.skeleton.alt}
               width={40}
               height={40}
               className="rounded-full mr-2 w-10 h-10"
             />
             <div>
-              <CardTitle>Card Title</CardTitle>
-              <CardDescription>Card Description</CardDescription>
+              <CardTitle>{uiText.demo.skeleton.title}</CardTitle>
+              <CardDescription>
+                {uiText.demo.skeleton.description}
+              </CardDescription>
             </div>
           </CardHeader>
           <CardFooter className="flex justify-end">
-            <Button>Ver más...</Button>
+            <Button>{uiText.demo.skeleton.more}</Button>
           </CardFooter>
         </Card>
       ))}

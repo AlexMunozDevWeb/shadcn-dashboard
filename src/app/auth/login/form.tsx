@@ -23,17 +23,18 @@ import { useState } from "react";
 import { AuthTextField } from "@/modules/auth/components/auth-text-field";
 import SocialSignInButtons from "@/modules/auth/components/social-sign-in-buttons";
 import { authClient } from "@/modules/lib/auth-client";
+import { uiText } from "@/modules/data/ui-text";
 
 const loginSchema = z.object({
   email: z
     .string()
     .trim()
-    .min(1, "Email is required.")
-    .email("Please enter a valid email address."),
+    .min(1, uiText.auth.emailRequired)
+    .email(uiText.auth.emailInvalid),
   password: z
     .string()
-    .min(1, "Password is required.")
-    .min(6, "Password must have at least 6 characters."),
+    .min(1, uiText.auth.passwordRequired)
+    .min(6, uiText.auth.passwordMin),
   rememberMe: z.boolean(),
 });
 
@@ -52,7 +53,7 @@ export default function LoginForm() {
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      email: "name@example.com",
+      email: uiText.auth.emailPlaceholder,
       password: "",
       rememberMe: true,
     },
@@ -74,7 +75,7 @@ export default function LoginForm() {
         },
         onSuccess: () => {
           setIsLoading(false);
-          toast.success("Welcome back! Redirecting to Dashboard...", {
+          toast.success(uiText.auth.welcomeBack, {
             description: `Logged in as ${dataForm.email}`,
           });
         },
@@ -82,9 +83,7 @@ export default function LoginForm() {
           setIsLoading(false);
 
           if (ctx.error.status === 403) {
-            setFormError(
-              "El email no ha sido verificado. Revisa tu bandeja de entrada.",
-            );
+            setFormError(uiText.auth.emailUnverified);
             await authClient.sendVerificationEmail({
               email: dataForm.email,
               callbackURL: "/",
@@ -92,7 +91,7 @@ export default function LoginForm() {
             return;
           }
 
-          setFormError(ctx.error.message || "No se pudo iniciar sesión.");
+          setFormError(ctx.error.message || uiText.auth.loginFailed);
         },
       },
     );
@@ -118,13 +117,13 @@ export default function LoginForm() {
               <LayoutDashboard className="size-7" />
             </div>
             <span className="mb-1 font-heading text-[11px] font-bold tracking-widest uppercase text-primary">
-              Dashboard Admin PRO
+              {uiText.brand.product}
             </span>
             <h1 className="font-heading text-2xl font-bold tracking-tight text-foreground sm:text-[26px]">
-              Log in to your account
+              {uiText.auth.loginTitle}
             </h1>
             <p className="mt-1 text-xs text-muted-foreground sm:text-sm">
-              Welcome back! Please enter your details.
+              {uiText.auth.loginSubtitle}
             </p>
           </div>
 
@@ -147,11 +146,11 @@ export default function LoginForm() {
           >
             {/* Email Address */}
             <AuthTextField
-              label="Email Address"
+              label={uiText.auth.email}
               id="email"
               type="email"
               autoComplete="email"
-              placeholder="name@example.com"
+              placeholder={uiText.auth.emailPlaceholder}
               registration={register("email")}
               error={errors.email?.message}
               icon={Mail}
@@ -164,7 +163,7 @@ export default function LoginForm() {
                   htmlFor="password"
                   className="block font-heading text-xs font-bold tracking-wide uppercase text-foreground"
                 >
-                  Password
+                  {uiText.auth.password}
                 </Label>
               </div>
               <div
@@ -180,7 +179,7 @@ export default function LoginForm() {
                   id="password"
                   type={showPassword ? "text" : "password"}
                   autoComplete="current-password"
-                  placeholder="••••••••"
+                  placeholder={uiText.auth.passwordPlaceholder}
                   aria-invalid={Boolean(errors.password)}
                   aria-describedby={
                     errors.password ? "password-error" : undefined
@@ -190,7 +189,11 @@ export default function LoginForm() {
                 <button
                   type="button"
                   onClick={() => setShowPassword((prev) => !prev)}
-                  aria-label={showPassword ? "Hide password" : "Show password"}
+                  aria-label={
+                    showPassword
+                      ? uiText.accessibility.hidePassword
+                      : uiText.accessibility.showPassword
+                  }
                   className="mr-3 text-muted-foreground transition-colors hover:text-foreground focus:outline-none"
                 >
                   {showPassword ? (
@@ -238,20 +241,18 @@ export default function LoginForm() {
                   htmlFor="remember-me"
                   className="cursor-pointer select-none text-xs font-medium text-foreground sm:text-sm"
                 >
-                  Remember me
+                  {uiText.auth.rememberMe}
                 </Label>
               </div>
               <Link
                 href="/auth/login"
                 onClick={(e) => {
                   e.preventDefault();
-                  toast.info(
-                    "Password reset instructions will be sent to your email.",
-                  );
+                  toast.info(uiText.auth.resetPasswordFeedback);
                 }}
                 className="font-heading text-xs font-semibold text-primary transition-colors hover:underline"
               >
-                Forgot password?
+                {uiText.auth.forgotPassword}
               </Link>
             </div>
 
@@ -261,18 +262,18 @@ export default function LoginForm() {
               disabled={isLoading}
               className="mt-4 h-11 w-full rounded-lg bg-primary font-heading text-xs font-bold tracking-wider uppercase text-primary-foreground shadow-[0_4px_12px_rgba(81,203,206,0.35)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/95 hover:shadow-[0_6px_16px_rgba(81,203,206,0.5)] active:translate-y-0 sm:text-sm"
             >
-              {isLoading ? "Signing In..." : "Let's Go • Sign In"}
+              {isLoading ? uiText.auth.signingIn : uiText.auth.login}
             </Button>
           </form>
 
           {/* Switch to Sign Up */}
           <div className="mt-6 text-center text-xs sm:text-sm text-muted-foreground">
-            Don&apos;t have an account?{" "}
+            {uiText.auth.signUpQuestion}{" "}
             <Link
               href="/auth/register"
               className="font-semibold text-accent-coral transition-colors hover:underline ml-1"
             >
-              Sign up
+              {uiText.auth.signUp}
             </Link>
           </div>
         </div>
@@ -281,19 +282,19 @@ export default function LoginForm() {
         <div className="mt-7 flex items-center justify-center gap-1.5 text-muted-foreground">
           <ShieldCheck className="size-4 text-accent-mint" />
           <span className="font-heading text-[11px] font-bold tracking-wider uppercase text-foreground/80">
-            Dashboard Admin PRO Enterprise Security
+            {uiText.auth.dashboardSecurity}
           </span>
         </div>
 
         <div className="mt-2 flex items-center justify-center gap-3 text-xs text-muted-foreground">
           <div className="flex items-center gap-1.5">
             <span className="size-1.5 rounded-full bg-accent-mint animate-pulse" />
-            <span>Systems 99.98% Operational</span>
+            <span>{uiText.auth.systemsOperational}</span>
           </div>
           <span>•</span>
           <div className="flex items-center gap-1">
             <Lock className="size-3 text-muted-foreground" />
-            <span>256-bit SSL</span>
+            <span>{uiText.auth.ssl}</span>
           </div>
         </div>
       </div>

@@ -6,6 +6,7 @@ import { cn } from "cn";
 
 import { Button } from "@/modules/components/ui/button";
 import { XIcon } from "lucide-react";
+import { uiText } from "@/modules/data/ui-text";
 
 function Dialog({ ...props }: DialogPrimitive.Root.Props) {
   return <DialogPrimitive.Root data-slot="dialog" {...props} />;
@@ -71,7 +72,7 @@ function DialogContent({
             }
           >
             <XIcon />
-            <span className="sr-only">Close</span>
+            <span className="sr-only">{uiText.accessibility.close}</span>
           </DialogPrimitive.Close>
         )}
       </DialogPrimitive.Popup>

@@ -13,6 +13,7 @@ import {
 } from "@/modules/components//ui/alert-dialog";
 import { Button } from "@/modules/components//ui/button";
 import { toast } from "sonner";
+import { uiText } from "@/modules/data/ui-text";
 
 export default function AlertDialogDemo() {
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -21,31 +22,36 @@ export default function AlertDialogDemo() {
     <div className="grid w-full max-w-md items-start gap-4">
       <AlertDialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <AlertDialogTrigger
-          render={<Button variant="outline">Show Dialog</Button>}
+          render={
+            <Button variant="outline">{uiText.demo.alertDialog.show}</Button>
+          }
         />
 
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+            <AlertDialogTitle>{uiText.demo.alertDialog.title}</AlertDialogTitle>
             <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete your
-              account from our servers.
+              {uiText.demo.alertDialog.description}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel onClick={() => toast.info("Action cancelled.")}>
-              Cancel
+            <AlertDialogCancel
+              onClick={() => toast.info(uiText.demo.alertDialog.cancelled)}
+            >
+              {uiText.demo.alertDialog.cancel}
             </AlertDialogCancel>
             <AlertDialogAction
-              onClick={() => toast.success("Action confirmed.")}
+              onClick={() => toast.success(uiText.demo.alertDialog.confirmed)}
             >
-              Continue
+              {uiText.demo.alertDialog.continue}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
 
-      <Button onClick={() => setDialogOpen(true)}>Open Dialog</Button>
+      <Button onClick={() => setDialogOpen(true)}>
+        {uiText.demo.alertDialog.open}
+      </Button>
     </div>
   );
 }

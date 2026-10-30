@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { es } from "date-fns/locale";
 import { Calendar } from "@/modules/components//ui/calendar";
+import { uiText } from "@/modules/data/ui-text";
 
 export default function CalendarDemo() {
   const [date, setDate] = useState<Date | undefined>(new Date());
@@ -46,7 +47,7 @@ export default function CalendarDemo() {
       />
 
       <div>
-        <h1 className="text-3xl">Information</h1>
+        <h1 className="text-3xl">{uiText.demo.calendar.information}</h1>
         <div className="border-b"></div>
         <p>{smallDate}</p>
         <p>
