@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DashboardBottomNav from "@/modules/components/dashboard-bottom-nav";
 import DashboardDrawer from "@/modules/components/dashboard-drawer";
 import DashboardFooter from "@/modules/components/dashboard-footer";
@@ -14,6 +14,17 @@ export default function DashboardShell({
   children: React.ReactNode;
 }) {
   const [drawerOpen, setDrawerOpen] = useState(false);
+
+  useEffect(() => {
+    if (!drawerOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setDrawerOpen(false);
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [drawerOpen]);
 
   return (
     <div className="flex min-h-screen overflow-x-hidden bg-background">

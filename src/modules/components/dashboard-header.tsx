@@ -7,6 +7,7 @@ import {
   Search,
   Settings,
 } from "lucide-react";
+import { toast } from "sonner";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -31,7 +32,11 @@ export default function DashboardHeader({
 
   const handleSignOut = async () => {
     const { error } = await authClient.signOut();
-    if (error) alert("Error al cerrar sesión");
+    if (error) {
+      toast.error("No se pudo cerrar la sesión.");
+      return;
+    }
+
     router.replace("/auth/login");
   };
 

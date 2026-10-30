@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { toast } from "sonner";
 import {
   Calendar,
   Check,
@@ -12,7 +13,6 @@ import {
   Heart,
   History,
   Minus,
-  MoreVertical,
   Play,
   Plus,
   RotateCw,
@@ -191,6 +191,13 @@ export default function DashboardPage() {
   const [hoveredHour, setHoveredHour] = useState<number | null>(7);
   const [donutHover, setDonutHover] = useState<string | null>(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const refreshTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (refreshTimeoutRef.current) clearTimeout(refreshTimeoutRef.current);
+    };
+  }, []);
 
   // Toggle task checkbox
   const toggleTask = (id: number) => {
@@ -235,8 +242,9 @@ export default function DashboardPage() {
 
   // Refresh animation trigger
   const handleRefreshStats = () => {
+    if (refreshTimeoutRef.current) clearTimeout(refreshTimeoutRef.current);
     setIsRefreshing(true);
-    setTimeout(() => setIsRefreshing(false), 600);
+    refreshTimeoutRef.current = setTimeout(() => setIsRefreshing(false), 600);
   };
 
   return (
@@ -337,6 +345,7 @@ export default function DashboardPage() {
                     key={d.month}
                     type="button"
                     onMouseEnter={() => setHoveredMonth(i)}
+                    onFocus={() => setHoveredMonth(i)}
                     className={cn(
                       "cursor-pointer transition-colors hover:text-accent-mint",
                       hoveredMonth === i
@@ -358,9 +367,7 @@ export default function DashboardPage() {
             <button
               type="button"
               aria-label="Add metric"
-              onClick={() =>
-                alert("Financial telemetry updated from primary ledger.")
-              }
+              onClick={() => toast.success("Financial telemetry updated.")}
               className="flex h-7 w-7 md:h-8 md:w-8 items-center justify-center rounded-full bg-emerald-50 text-accent-mint transition duration-200 hover:bg-accent-mint hover:text-white dark:bg-emerald-950 dark:hover:text-primary-foreground"
             >
               <Plus className="h-3.5 w-3.5 md:h-4 md:w-4" />
@@ -402,6 +409,7 @@ export default function DashboardPage() {
                     key={d.time}
                     type="button"
                     onMouseEnter={() => setHoveredHour(i)}
+                    onFocus={() => setHoveredHour(i)}
                     className={cn(
                       "cursor-pointer transition-colors hover:text-accent-coral",
                       hoveredHour === i
@@ -423,7 +431,9 @@ export default function DashboardPage() {
             <button
               type="button"
               aria-label="Play playback"
-              onClick={() => alert("Replaying 7-day subscription lifecycle...")}
+              onClick={() =>
+                toast.success("Replaying the 7-day subscription lifecycle.")
+              }
               className="flex h-7 w-7 md:h-8 md:w-8 items-center justify-center rounded-full bg-orange-50 text-accent-coral transition duration-200 hover:bg-accent-coral hover:text-white dark:bg-orange-950 dark:hover:text-primary-foreground"
             >
               <Play className="h-3 w-3 md:h-3.5 md:w-3.5 fill-current ml-0.5" />
@@ -486,6 +496,8 @@ export default function DashboardPage() {
                   type="button"
                   onMouseEnter={() => setDonutHover(item.label)}
                   onMouseLeave={() => setDonutHover(null)}
+                  onFocus={() => setDonutHover(item.label)}
+                  onBlur={() => setDonutHover(null)}
                   className="flex items-center gap-1.5 transition-transform hover:scale-105"
                 >
                   <span
@@ -506,7 +518,9 @@ export default function DashboardPage() {
             <button
               type="button"
               aria-label="Refresh campaign"
-              onClick={() => alert("Checking incoming webhook deliveries...")}
+              onClick={() =>
+                toast.success("Checking incoming webhook deliveries.")
+              }
               className="flex h-7 w-7 md:h-8 md:w-8 items-center justify-center rounded-full bg-cyan-50 text-accent-teal transition duration-200 hover:bg-accent-teal hover:text-white dark:bg-cyan-950 dark:hover:text-primary-foreground"
             >
               <RotateCw className="h-3.5 w-3.5 md:h-4 md:w-4" />
@@ -545,11 +559,13 @@ export default function DashboardPage() {
               {initialCountries.map((country) => {
                 const isSelected = selectedCountry === country.id;
                 return (
-                  <div
+                  <button
+                    type="button"
                     key={country.name}
                     onClick={() =>
                       setSelectedCountry(isSelected ? null : country.id)
                     }
+                    aria-pressed={isSelected}
                     className={cn(
                       "flex cursor-pointer items-center justify-between rounded-lg px-3 py-2 md:py-2.5 text-xs sm:text-sm md:text-sm lg:text-base font-medium transition-all duration-200 border-b border-border last:border-b-0",
                       isSelected
@@ -580,7 +596,7 @@ export default function DashboardPage() {
                         {country.share}
                       </span>
                     </div>
-                  </div>
+                  </button>
                 );
               })}
             </div>
@@ -631,14 +647,14 @@ export default function DashboardPage() {
                 <button
                   type="button"
                   onClick={() => setMapZoom((z) => Math.min(z + 0.2, 1.8))}
-                  className="flex items-center rounded-md border border-border bg-card px-3 py-1 text-[11px] sm:text-xs md:text-sm font-bold text-foreground shadow-xs transition hover:border-accent-teal hover:text-accent-teal font-heading"
+                  className="flex min-h-11 items-center rounded-md border border-border bg-card px-3 py-1 text-[11px] font-bold text-foreground shadow-xs transition hover:border-accent-teal hover:text-accent-teal font-heading sm:text-xs md:text-sm"
                 >
                   <Plus className="mr-1 h-3 w-3 md:h-3.5 md:w-3.5" /> Zoom In
                 </button>
                 <button
                   type="button"
                   onClick={() => setMapZoom((z) => Math.max(z - 0.2, 0.8))}
-                  className="flex items-center rounded-md border border-border bg-card px-3 py-1 text-[11px] sm:text-xs md:text-sm font-bold text-foreground shadow-xs transition hover:border-accent-teal hover:text-accent-teal font-heading"
+                  className="flex min-h-11 items-center rounded-md border border-border bg-card px-3 py-1 text-[11px] font-bold text-foreground shadow-xs transition hover:border-accent-teal hover:text-accent-teal font-heading sm:text-xs md:text-sm"
                 >
                   <Minus className="mr-1 h-3 w-3 md:h-3.5 md:w-3.5" /> Zoom Out
                 </button>
@@ -718,7 +734,7 @@ export default function DashboardPage() {
                       role="checkbox"
                       aria-checked={task.done}
                       className={cn(
-                        "mt-0.5 flex h-4.5 w-4.5 md:h-5 md:w-5 shrink-0 items-center justify-center rounded-[4px] border transition-all duration-200",
+                        "mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-[4px] border transition-all duration-200",
                         task.done
                           ? "border-transparent bg-accent-teal text-white dark:text-primary-foreground shadow-xs"
                           : "border-input bg-card hover:border-accent-teal",
@@ -734,8 +750,9 @@ export default function DashboardPage() {
                       )}
                     </button>
 
-                    <div
-                      className="flex-1 cursor-pointer"
+                    <button
+                      type="button"
+                      className="flex-1 text-left"
                       onClick={() => toggleTask(task.id)}
                     >
                       <p
@@ -756,13 +773,13 @@ export default function DashboardPage() {
                       >
                         {task.meta}
                       </span>
-                    </div>
+                    </button>
 
                     <button
                       type="button"
                       aria-label="Delete task"
                       onClick={() => removeTask(task.id)}
-                      className="opacity-0 transition-opacity hover:text-accent-coral group-hover:opacity-100 text-muted-foreground p-0.5"
+                      className="flex h-11 w-11 items-center justify-center text-muted-foreground transition-opacity hover:text-accent-coral sm:opacity-0 sm:group-hover:opacity-100"
                     >
                       <X className="h-3.5 w-3.5 md:h-4 md:w-4" />
                     </button>

@@ -62,7 +62,7 @@ function DrawerNav({ onClose }: { onClose: () => void }) {
         return (
           <Link
             key={item.name}
-            href={item.href}
+            href={item.href ?? "/dashboard"}
             onClick={onClose}
             className={cn(
               "flex items-center space-x-3 rounded-lg px-3 py-2.5 text-xs font-semibold tracking-wider uppercase transition-colors",
@@ -106,8 +106,10 @@ export default function DashboardDrawer({
       )}
       aria-hidden={!open}
     >
-      <div
-        className="absolute inset-0 bg-black/60 backdrop-blur-xs transition-opacity"
+      <button
+        type="button"
+        aria-label="Cerrar menú"
+        className="absolute inset-0 cursor-default bg-black/60 backdrop-blur-xs transition-opacity"
         onClick={onClose}
       />
       <aside
@@ -115,6 +117,10 @@ export default function DashboardDrawer({
           "relative flex h-full w-72 max-w-[80vw] flex-col shadow-2xl transition-transform duration-300",
           open ? "translate-x-0" : "-translate-x-full",
         )}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Navegación principal"
+        inert={!open}
         style={{
           backgroundColor: sidebarConfig.bg,
           color: sidebarConfig.text,

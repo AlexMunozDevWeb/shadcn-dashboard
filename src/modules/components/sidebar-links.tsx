@@ -25,7 +25,7 @@ export type NavSubItem = {
 
 export type NavItem = {
   name: string;
-  href: string;
+  href?: string;
   icon: LucideIcon;
   children?: NavSubItem[];
 };
@@ -34,7 +34,6 @@ export const navItems: NavItem[] = [
   { name: "Dashboard", href: "/dashboard", icon: Gauge },
   {
     name: "Pages",
-    href: "#",
     icon: Copy,
     children: [
       { name: "Profile", href: "/dashboard" },
@@ -46,7 +45,6 @@ export const navItems: NavItem[] = [
   },
   {
     name: "Components",
-    href: "#",
     icon: Boxes,
     children: [
       { name: "Buttons", href: "/dashboard/button" },
@@ -64,7 +62,6 @@ export const navItems: NavItem[] = [
   },
   {
     name: "Forms",
-    href: "#",
     icon: PenTool,
     children: [
       { name: "Input OTP", href: "/dashboard/input-opt" },
@@ -75,7 +72,6 @@ export const navItems: NavItem[] = [
   },
   {
     name: "Tables",
-    href: "#",
     icon: Table,
     children: [
       { name: "Command Palette", href: "/dashboard/command" },
@@ -86,7 +82,6 @@ export const navItems: NavItem[] = [
   },
   {
     name: "Maps",
-    href: "#",
     icon: Map,
     children: [
       { name: "Vector Heatmap", href: "/dashboard" },
@@ -107,7 +102,7 @@ export default function SidebarLinks() {
     <nav className="custom-scroll mt-4 max-h-[calc(100vh-215px)] space-y-1.5 overflow-y-auto px-3">
       {navItems.map((item) => {
         const Icon = item.icon;
-        const active = item.href !== "#" && pathname === item.href;
+        const active = Boolean(item.href && pathname === item.href);
         const hasChildren = Boolean(item.children && item.children.length > 0);
         const childIsActive =
           hasChildren &&
@@ -184,7 +179,7 @@ export default function SidebarLinks() {
         return (
           <Link
             key={item.name}
-            href={item.href}
+            href={item.href ?? "/dashboard"}
             aria-current={active ? "page" : undefined}
             className={cn(
               "relative flex items-center gap-3.5 rounded-lg px-4 py-2.5 text-xs md:text-sm font-semibold tracking-wider uppercase transition-all duration-200",
