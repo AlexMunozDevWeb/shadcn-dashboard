@@ -1,7 +1,7 @@
 import type { VariantProps } from "class-variance-authority";
 
 import type { badgeVariants } from "@/modules/components//ui/badge";
-import type { Payment } from "@/modules/data/payment";
+import type { Payment } from "@/modules/dashboard/data/payment";
 
 export type PaymentStatus = Payment["status"];
 export type BadgeVariant = NonNullable<

@@ -2,7 +2,7 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { auth } from "@/modules/auth/lib/auth";
-import DashboardShell from "@/modules/components/dashboard-shell";
+import DashboardShell from "@/modules/dashboard/components/dashboard-shell";
 
 export default async function ProtectedDashboardShell({
   children,

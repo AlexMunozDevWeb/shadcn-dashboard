@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Suspense } from "react";
 
-import ShowcaseIndex from "@/modules/components//showcase-index";
+import ShowcaseIndex from "@/modules/dashboard/components/showcase-index";
 import { Skeleton } from "@/modules/components//ui/skeleton";
 import { uiText } from "@/modules/data/ui-text";
 

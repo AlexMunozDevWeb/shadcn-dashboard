@@ -2,7 +2,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BarChart3, Gauge, Map, Plus, Settings } from "lucide-react";
 import { cn } from "@/modules/lib/utils";
-import { usePaperTheme } from "./theme-provider";
+import { usePaperTheme } from "@/modules/components/theme-provider";
 import { uiText } from "@/modules/data/ui-text";
 
 const bottomTabs = [

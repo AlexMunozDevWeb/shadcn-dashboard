@@ -1,12 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import DashboardBottomNav from "@/modules/components/dashboard-bottom-nav";
-import DashboardDrawer from "@/modules/components/dashboard-drawer";
-import DashboardFooter from "@/modules/components/dashboard-footer";
-import DashboardHeader from "@/modules/components/dashboard-header";
-import DashboardSidebar from "@/modules/components/dashboard-sidebar";
-import SettingsFab from "@/modules/components/settings-fab";
+import DashboardBottomNav from "@/modules/dashboard/components/dashboard-bottom-nav";
+import DashboardDrawer from "@/modules/dashboard/components/dashboard-drawer";
+import DashboardFooter from "@/modules/dashboard/components/dashboard-footer";
+import DashboardHeader from "@/modules/dashboard/components/dashboard-header";
+import DashboardSidebar from "@/modules/dashboard/components/dashboard-sidebar";
+import SettingsFab from "@/modules/dashboard/components/settings-fab";
 
 export default function DashboardShell({
   children,

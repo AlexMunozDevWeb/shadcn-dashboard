@@ -17,8 +17,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/modules/components/ui/dropdown-menu";
-import { authClient } from "../lib/auth-client";
-import { usePaperTheme } from "./theme-provider";
+import { authClient } from "@/modules/lib/auth-client";
+import { usePaperTheme } from "@/modules/components/theme-provider";
 import { uiText } from "@/modules/data/ui-text";
 
 export default function DashboardHeader({

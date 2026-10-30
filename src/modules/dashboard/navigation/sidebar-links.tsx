@@ -10,13 +10,14 @@ import {
   CalendarDays,
   ChevronDown,
   Copy,
+  Database,
   Gauge,
-  Map,
+  MousePointer2,
   PenTool,
-  Table,
+  Wrench,
   type LucideIcon,
 } from "lucide-react";
-import { usePaperTheme } from "./theme-provider";
+import { usePaperTheme } from "@/modules/components/theme-provider";
 import { uiText } from "@/modules/data/ui-text";
 
 export type NavSubItem = {
@@ -50,7 +51,7 @@ export const navItems: NavItem[] = [
     children: [
       { name: uiText.navigation.buttons, href: "/dashboard/button" },
       { name: uiText.navigation.cards, href: "/dashboard/card" },
-      { name: uiText.navigation.badges, href: "/dashboard/badges" },
+      { name: uiText.navigation.badges, href: "/dashboard/badge" },
       { name: uiText.navigation.alerts, href: "/dashboard/alert" },
       { name: uiText.navigation.dialogs, href: "/dashboard/dialog" },
       { name: uiText.navigation.tabs, href: "/dashboard/tabs" },
@@ -72,20 +73,25 @@ export const navItems: NavItem[] = [
     ],
   },
   {
-    name: uiText.navigation.tables,
-    icon: Table,
+    name: uiText.navigation.interactions,
+    icon: MousePointer2,
     children: [
       { name: uiText.navigation.commandPalette, href: "/dashboard/command" },
       { name: uiText.navigation.menubar, href: "/dashboard/menubar" },
       { name: uiText.navigation.contextMenu, href: "/dashboard/context-menu" },
+    ],
+  },
+  {
+    name: uiText.navigation.data,
+    icon: Database,
+    children: [
       { name: uiText.navigation.dataTable, href: "/dashboard/data-table" },
     ],
   },
   {
-    name: uiText.navigation.maps,
-    icon: Map,
+    name: uiText.navigation.utilities,
+    icon: Wrench,
     children: [
-      { name: uiText.navigation.vectorHeatmap, href: "/dashboard" },
       { name: uiText.navigation.skeletonLoader, href: "/dashboard/skeleton" },
     ],
   },

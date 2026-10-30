@@ -25,7 +25,7 @@ import { toast } from "sonner";
 
 import { ArrowDown, ArrowUp, ArrowUpDown, MoreHorizontal } from "lucide-react";
 
-import { Payment } from "@/modules/data/payment";
+import { Payment } from "@/modules/dashboard/data/payment";
 import { uiText } from "@/modules/data/ui-text";
 import {
   type BadgeVariant,

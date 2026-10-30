@@ -2,8 +2,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { X } from "lucide-react";
 import { cn } from "@/modules/lib/utils";
-import { navItems } from "@/modules/components/sidebar-links";
-import { usePaperTheme } from "./theme-provider";
+import { navItems } from "@/modules/dashboard/navigation/sidebar-links";
+import { usePaperTheme } from "@/modules/components/theme-provider";
 import { uiText } from "@/modules/data/ui-text";
 
 function DrawerNav({ onClose }: { onClose: () => void }) {

@@ -15,7 +15,7 @@ import {
   type SidebarTheme,
   accentHexMap,
   usePaperTheme,
-} from "./theme-provider";
+} from "@/modules/components/theme-provider";
 import { cn } from "@/modules/lib/utils";
 import { Switch } from "@/modules/components/ui/switch";
 import { uiText } from "@/modules/data/ui-text";

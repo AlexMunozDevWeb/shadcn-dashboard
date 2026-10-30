@@ -1,4 +1,4 @@
-import { payments } from "@/modules/data/payment";
+import { payments } from "@/modules/dashboard/data/payment";
 import { columns } from "./columns";
 import DataTable from "./data-table";
 

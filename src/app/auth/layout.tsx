@@ -1,6 +1,6 @@
 import AuthHeader from "./header";
 import AuthFooter from "./footer";
-import SettingsFab from "@/modules/components/settings-fab";
+import SettingsFab from "@/modules/dashboard/components/settings-fab";
 
 export default function AuthLayout({
   children,

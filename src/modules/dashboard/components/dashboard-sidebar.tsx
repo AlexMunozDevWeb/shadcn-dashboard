@@ -1,6 +1,6 @@
 import { CheckCircle2, ChevronDown } from "lucide-react";
-import SidebarLinks from "@/modules/components/sidebar-links";
-import { usePaperTheme } from "./theme-provider";
+import SidebarLinks from "@/modules/dashboard/navigation/sidebar-links";
+import { usePaperTheme } from "@/modules/components/theme-provider";
 import { uiText } from "@/modules/data/ui-text";
 
 export default function DashboardSidebar() {
